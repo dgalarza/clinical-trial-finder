@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Run this script from a branch to merge it to master and deploy it to staging
+#
+
+set -e
+
+branch="$(git symbolic-ref HEAD --short)"
+trello_url="$(git log -1 HEAD | grep https://trello.com)"
+
+echo "Did you test again locally that all AC pass since your last code change?
+But seriously...  did you? (y/n)"
+
+read dev_ac_answer
+
+if [ "$dev_ac_answer" != "y" ]; then
+	echo "Tsk-tsk. Test your code!"
+	exit 1
+fi
+
+echo "Shipping now..."
+
+git checkout master
+git pull origin master
+git merge --ff-only $branch
+
+if git push origin master; then
+	git delete-branch $branch
+
+	echo "$branch was shipped and deleted!\n"
+else
+	echo "There was a conflict pushing master"
+fi
