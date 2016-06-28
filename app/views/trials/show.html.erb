@@ -1,0 +1,7 @@
+<h1><%= @trial.title %></h1>
+<p><%= @trial.description %></p>
+<% @trial.sites.each do |site| %>
+  <p><%= site.facility %></p>
+  <p><%= site.street_address %></p>
+<% end %>
+

@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   resources :articles, only: [:index]
   resources :frequently_asked_questions, only: [:index]
-  resources :trials, only: [:index]
+  resources :trials, only: [:index, :show]
 end

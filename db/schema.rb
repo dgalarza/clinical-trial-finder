@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160624020123) do
+ActiveRecord::Schema.define(version: 20160628003957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,4 +32,45 @@ ActiveRecord::Schema.define(version: 20160624020123) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
+  create_table "sites", force: :cascade do |t|
+    t.integer  "trial_id"
+    t.text     "facility"
+    t.text     "street_address"
+    t.text     "street_address2"
+    t.text     "city"
+    t.text     "state"
+    t.text     "country"
+    t.text     "zip_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sites", ["trial_id"], name: "index_sites_on_trial_id", using: :btree
+
+  create_table "trials", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "sponsor"
+    t.string   "country"
+    t.string   "focus"
+    t.string   "nct_id"
+    t.string   "official_title"
+    t.string   "agency_class"
+    t.text     "detailed_description"
+    t.string   "overall_status"
+    t.string   "phase"
+    t.string   "study_type"
+    t.string   "condition"
+    t.string   "inclusion"
+    t.string   "exclusion"
+    t.string   "gender"
+    t.integer  "minimum_age",          default: 0,   null: false
+    t.integer  "maximum_age",          default: 120, null: false
+    t.string   "healthy_volunteers"
+    t.string   "overall_contact_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_foreign_key "sites", "trials"
 end
