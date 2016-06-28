@@ -2,6 +2,24 @@
 
 [![CircleCI](https://circleci.com/gh/mwenger1/trial-match/tree/master.svg?style=svg)](https://circleci.com/gh/mwenger1/trial-match/tree/master)
 
+
+## Project Goal
+
+For individuals interested in participating in a
+clinical trial, the [ClinicalTrials.gov](http://clinicaltrials.gov/) website
+does not fully meet their needs.
+
+* The search functionality is not intuitive
+* There isn't a way to find out about future trials as they become available
+
+This project makes it easy for disease foundations
+such as the [National Brain Tumor Society](http://braintumor.org/) to bring the
+rich clinicaltrials.gov data to their communities.
+
+## Contributing
+
+Pull requests are welcome!
+
 ## Getting Started
 
 After you have cloned this repo, run this setup script to set up your machine
