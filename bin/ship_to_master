@@ -6,7 +6,6 @@
 set -e
 
 branch="$(git symbolic-ref HEAD --short)"
-trello_url="$(git log -1 HEAD | grep https://trello.com)"
 
 echo "Did you test again locally that all AC pass since your last code change?
 But seriously...  did you? (y/n)"
