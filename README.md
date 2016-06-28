@@ -1,5 +1,7 @@
 # Trial-match
 
+[![CircleCI](https://circleci.com/gh/mwenger1/trial-match/tree/master.svg?style=svg)](https://circleci.com/gh/mwenger1/trial-match/tree/master)
+
 ## Getting Started
 
 After you have cloned this repo, run this setup script to set up your machine
