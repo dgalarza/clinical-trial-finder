@@ -1,0 +1,28 @@
+Style/ConditionalAssignment:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false
+
+Style/LineLength:
+  Exclude:
+    - app/admin/*.rb
+  Max: 80
+
+Style/MultilineOperationIndentation:
+  EnforcedStyle: indented
+
+Style/Next:
+  Enabled: false
+
+Style/TrailingComma:
+  Enabled: true
+  EnforcedStyleForMultiline: comma
+
+Style/WordArray:
+  Include:
+    - spec/*.rb
+  Enabled: false

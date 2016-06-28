@@ -1,0 +1,18 @@
+{
+  "expr": true,
+  "predef": [
+    "$",
+    "angular",
+    "beforeEach",
+    "context",
+    "describe",
+    "expect",
+    "id",
+    "inject",
+    "jQuery",
+    "mocha",
+    "module",
+    "setFixtures",
+    "sinon"
+  ]
+}
