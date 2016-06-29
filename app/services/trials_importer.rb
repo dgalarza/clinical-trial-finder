@@ -1,6 +1,10 @@
 require "zip"
 
 class TrialsImporter
+  def initialize
+    clear_import_files
+  end
+
   def import
     File.open(tmp_zipfile, "wb") do |file|
       file.write RestClient.get clinical_trials_gov_url
@@ -8,7 +12,7 @@ class TrialsImporter
 
     Zip::File.open(tmp_zipfile) do |unzipped_folder|
       unzipped_folder.each do |xml_file|
-        tmp_file = "tmp/#{xml_file.name}"
+        tmp_file = directory.join(xml_file.name)
         xml_file.extract(tmp_file)
         TrialImporter.new(tmp_file).import
       end
@@ -17,8 +21,22 @@ class TrialsImporter
 
   private
 
+  def clear_import_files
+    FileUtils.rm_rf Dir.glob("#{directory}/*")
+  end
+
   def tmp_zipfile
-    Rails.root.join("tmp/clinical_trials_download.zip")
+    directory.join("clinical_trials_download.zip")
+  end
+
+  def directory
+    directory = Rails.root.join("tmp", "import_files")
+
+    unless directory.exist?
+      Dir.mkdir(directory)
+    end
+
+    directory
   end
 
   def clinical_trials_gov_url

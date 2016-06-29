@@ -11,6 +11,10 @@ class TrialImporter
       trial.send("#{xml_mapping.first}=", value)
     end
 
+    root.xpath("//location").each do |location|
+      SiteImporter.new(trial: trial, site: location).import
+    end
+
     trial.save
   end
 

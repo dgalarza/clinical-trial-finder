@@ -1,6 +1,22 @@
 require "rails_helper"
 
 RSpec.describe TrialsImporter do
+  describe "#initialize" do
+    it "removes all existing files from tmp folder" do
+      stub_zip_file
+      allow(RestClient).to receive(:get)
+      make_tmp_directory
+      File.new(tmp_file, "w+")
+      file_present = File.exist? tmp_file
+      expect(file_present).to be true
+
+      TrialsImporter.new
+
+      file_present = File.exist? tmp_file
+      expect(file_present).to be false
+    end
+  end
+
   describe "#import" do
     it "gets zip folder from clinicaltrials.gov using config variables" do
       stub_zip_file
@@ -35,17 +51,19 @@ RSpec.describe TrialsImporter do
       expect(Zip::File).to have_received(:open).with(tmp_file)
     end
 
-    it "passes each xml to TrialImporter" do
+    it "passes each xml file to TrialImporter" do
       stub_file
       trial_1 = double(:trial_1_xml_file).as_null_object
+      trial_1_path = directory.join(trial_1)
       trial_2 = double(:trial_2_xml_file).as_null_object
+      trial_2_path = directory.join(trial_2)
       unzipped_folder = [trial_1, trial_2]
       allow(Zip::File).to receive(:open).and_yield(unzipped_folder)
       importer = spy(:importer)
       allow(TrialImporter).to receive(:new)
-        .with("tmp/#{trial_1}").and_return(importer)
+        .with(trial_1_path).and_return(importer)
       allow(TrialImporter).to receive(:new)
-        .with("tmp/#{trial_2}").and_return(importer)
+        .with(trial_2_path).and_return(importer)
 
       TrialsImporter.new.import
 
@@ -58,7 +76,17 @@ RSpec.describe TrialsImporter do
   end
 
   def tmp_file
-    Rails.root.join("tmp/clinical_trials_download.zip")
+    directory.join("clinical_trials_download.zip")
+  end
+
+  def make_tmp_directory
+    unless directory.exist?
+      Dir.mkdir(directory)
+    end
+  end
+
+  def directory
+    Rails.root.join("tmp", "import_files")
   end
 
   def stub_zip_file

@@ -1,0 +1,18 @@
+<location>
+  <facility>
+    <name>Facility Name</name>
+    <address>
+      <city>City</city>
+      <state>State</state>
+      <zip>Zip Code</zip>
+      <country>Country</country>
+    </address>
+  </facility>
+  <status>Status</status>
+  <contact>
+    <last_name>Contact Name</last_name>
+    <phone>Phone</phone>
+    <phone_ext>Phone Ext</phone_ext>
+    <email>Email</email>
+  </contact>
+</location>
