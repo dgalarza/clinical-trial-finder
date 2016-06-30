@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160629230630) do
+ActiveRecord::Schema.define(version: 20160630022532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,11 @@ ActiveRecord::Schema.define(version: 20160629230630) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "import_logs", force: :cascade do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sites", force: :cascade do |t|
     t.integer  "trial_id",          null: false
@@ -74,6 +79,8 @@ ActiveRecord::Schema.define(version: 20160629230630) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "trials", ["nct_id"], name: "index_trials_on_nct_id", unique: true, using: :btree
 
   add_foreign_key "sites", "trials"
 end

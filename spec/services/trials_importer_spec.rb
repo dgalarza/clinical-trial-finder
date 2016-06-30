@@ -69,6 +69,15 @@ RSpec.describe TrialsImporter do
 
       expect(importer).to have_received(:import).twice
     end
+
+    it "creates an Import record" do
+      stub_file
+      stub_zip_file
+
+      TrialsImporter.new.import
+
+      expect(ImportLog.all.count).to eq 1
+    end
   end
 
   def expected_url(condition, remove_unknown)

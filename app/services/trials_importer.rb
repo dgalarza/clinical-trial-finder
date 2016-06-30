@@ -6,10 +6,20 @@ class TrialsImporter
   end
 
   def import
+    retrieve_zip_file
+    import_zip_file
+    create_import_log
+  end
+
+  private
+
+  def retrieve_zip_file
     File.open(tmp_zipfile, "wb") do |file|
       file.write RestClient.get clinical_trials_gov_url
     end
+  end
 
+  def import_zip_file
     Zip::File.open(tmp_zipfile) do |unzipped_folder|
       unzipped_folder.each do |xml_file|
         tmp_file = directory.join(xml_file.name)
@@ -19,7 +29,9 @@ class TrialsImporter
     end
   end
 
-  private
+  def create_import_log
+    ImportLog.create
+  end
 
   def clear_import_files
     FileUtils.rm_rf Dir.glob("#{directory}/*")
