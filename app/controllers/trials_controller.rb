@@ -1,6 +1,7 @@
 class TrialsController < ApplicationController
   def index
     @trials = Trial.all
+    @last_import = ImportLog.last
   end
 
   def show

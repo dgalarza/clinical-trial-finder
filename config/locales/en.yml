@@ -31,7 +31,7 @@ en:
         "%b %-d, %Y"
       short:
         "%B %d"
-
+      timestamp: "%b %d, %Y %I:%M %p"
   titles:
     application: Trial-match
     articles:
@@ -42,3 +42,6 @@ en:
       index: "Overview & Frequently Asked Questions"
     trials:
       index: "Search Trials"
+  trials:
+    clinicaltrials_gov_logo:
+      trials_imported: "Trials imported on %{timestamp} from:"

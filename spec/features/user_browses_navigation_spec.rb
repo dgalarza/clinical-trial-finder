@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.feature "User browses navigation" do
   scenario "User browses navigation" do
+    ImportLog.create
     visit root_path
 
     expect(page).to have_content t("homepage.show.overview")

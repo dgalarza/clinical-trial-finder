@@ -1,0 +1,7 @@
+<p>
+  <%= t(
+    ".trials_imported",
+    timestamp: l(@last_import.created_at.in_time_zone, format: :timestamp)
+  ) %>
+</p>
+<%= image_tag("logo-clinicaltrials") %>
