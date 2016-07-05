@@ -10,13 +10,20 @@
     https://github.com/calebthompson/title#usage
   %>
   <title><%= title %></title>
+
+  <%= render "site_header" %>
+
   <%= stylesheet_link_tag :application, media: "all" %>
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= body_class %>">
+  <%= render "site_html_top_half" %>
   <%= render "navigation" %>
   <%= render "flashes" -%>
-  <%= yield %>
+  <div id="trial-match">
+    <%= yield %>
+  </div>
+  <%= render "site_html_bottom_half" %>
   <%= render "javascript" %>
   <%= render "css_overrides" %>
 </body>

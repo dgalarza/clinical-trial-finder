@@ -50,4 +50,4 @@ en:
         one: "Displaying 1 trial"
         other: "Displaying %{count} trials"
     search_filter:
-      submit: "Submit"
+      submit: "Search Trials"
