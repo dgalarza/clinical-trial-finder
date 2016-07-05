@@ -1,6 +1,6 @@
 class TrialsController < ApplicationController
   def index
-    @trials = Trial.all
+    @trials = Trial.search_for(trial_filter_params[:keyword])
     @last_import = ImportLog.last
   end
 
@@ -9,6 +9,10 @@ class TrialsController < ApplicationController
   end
 
   private
+
+  def trial_filter_params
+    params.permit(:keyword, :utf8, :commit)
+  end
 
   def trial_id
     params.require(:id)

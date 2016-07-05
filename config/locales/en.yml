@@ -45,3 +45,5 @@ en:
   trials:
     clinicaltrials_gov_logo:
       trials_imported: "Trials imported on %{timestamp} from:"
+    search_filter:
+      submit: "Submit"

@@ -18,4 +18,25 @@ RSpec.feature "User views trial list and trial" do
     expect(page).to have_content trial_description
     expect(page).to have_content site_zip
   end
+
+  scenario "User searches by keyword" do
+    create(:import_log)
+    first_trial_title = "First Trial"
+    create(:trial, title: first_trial_title)
+    second_trial_title = "Second Trial"
+    create(:trial, title: second_trial_title)
+    visit trials_path
+
+    expect(page).to have_content first_trial_title
+    expect(page).to have_content second_trial_title
+
+    fill_form(
+      :trial_search,
+      keyword: "first"
+    )
+    click_button t("trials.search_filter.submit")
+
+    expect(page).to have_content first_trial_title
+    expect(page).not_to have_content second_trial_title
+  end
 end
