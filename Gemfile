@@ -25,6 +25,7 @@ gem "sprockets-es6"
 gem "suspenders"
 gem "title"
 gem "uglifier"
+gem "will_paginate"
 
 group :development do
   gem "quiet_assets"

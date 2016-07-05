@@ -1,6 +1,10 @@
 require "rails_helper"
 
 RSpec.feature "User views trial list and trial" do
+  before do
+    create(:import_log)
+  end
+
   scenario "User views trial list and trial" do
     trial_title = "Trial Title"
     trial_description = "Overview of trial"
@@ -20,7 +24,6 @@ RSpec.feature "User views trial list and trial" do
   end
 
   scenario "User searches by keyword" do
-    create(:import_log)
     first_trial_title = "First Trial"
     create(:trial, title: first_trial_title)
     second_trial_title = "Second Trial"
@@ -38,5 +41,19 @@ RSpec.feature "User views trial list and trial" do
 
     expect(page).to have_content first_trial_title
     expect(page).not_to have_content second_trial_title
+  end
+
+  scenario "User browses trials on second page of results" do
+    trial_count = 15
+    1.upto(trial_count) { |number| create(:trial, title: "Trial #{number}") }
+
+    visit trials_path
+
+    expect(page).to have_content "Displaying #{trial_count} trials"
+    expect(page).not_to have_content "Trial #{trial_count}"
+
+    click_link "Next"
+
+    expect(page).to have_content "Trial #{trial_count}"
   end
 end
