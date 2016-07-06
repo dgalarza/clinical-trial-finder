@@ -58,7 +58,10 @@ class TrialImporter
       [:title, "brief_title"],
       [:nct_id, nct_id_xml_lookup],
       [:description, "detailed_description/textblock"],
-      [:sponsor, "sponsors/lead_sponsor/agency"]
+      [:sponsor, "sponsors/lead_sponsor/agency"],
+      [:gender, "//gender"],
+      [:minimum_age_original, "//minimum_age"],
+      [:maximum_age_original, "//maximum_age"]
     ]
   end
 

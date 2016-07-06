@@ -13,11 +13,18 @@ class TrialsController < ApplicationController
   def build_trials_list
     Trial
       .search_for(filtered_params[:keyword])
+      .age(filtered_params[:age])
       .paginate(page: filtered_params[:page])
   end
 
   def filtered_params
-    params.permit(:keyword, :utf8, :commit, :page)
+    params.permit(
+      :age,
+      :commit,
+      :keyword,
+      :page,
+      :utf8
+    )
   end
 
   def trial_id

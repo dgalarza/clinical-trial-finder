@@ -5,8 +5,6 @@ if Rails.env.development? || Rails.env.test?
     desc "Seed data for local development environment"
     task prime: "db:setup" do
       include FactoryGirl::Syntax::Methods
-
-      TrialsImporter.new.import
     end
   end
 end

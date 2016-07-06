@@ -6,7 +6,7 @@ RSpec.describe TrialImporter, type: :service do
       it "maps attributes to create a Trial" do
         spy_on_site_importer
 
-        TrialImporter.new(trial_xml_file).import
+        TrialImporter.new(trial_xml).import
 
         expect(Trial.all.count).to eq 1
         trial = Trial.first
@@ -14,12 +14,15 @@ RSpec.describe TrialImporter, type: :service do
         expect(trial.nct_id).to eq trial_nct_id
         expect(trial.description).to include "Detailed Description"
         expect(trial.sponsor).to eq "Sponsor Agency"
+        expect(trial.gender).to eq "Both"
+        expect(trial.minimum_age_original).to eq "3 Years"
+        expect(trial.maximum_age_original).to eq "70 Years"
       end
 
       it "imports sites from '//locations'" do
         site_importer_spy = spy_on_site_importer
 
-        TrialImporter.new(trial_xml_file).import
+        TrialImporter.new(trial_xml).import
 
         expect(site_importer_spy).to have_received(:import).twice
       end
@@ -31,7 +34,7 @@ RSpec.describe TrialImporter, type: :service do
         site_importer_spy = spy_on_site_importer
         ImportLog.create(created_at: trial_last_changed_date + 1.day)
 
-        TrialImporter.new(trial_xml_file).import
+        TrialImporter.new(trial_xml).import
 
         expect(Trial.all.count).to eq 1
         trial = Trial.first
@@ -46,7 +49,7 @@ RSpec.describe TrialImporter, type: :service do
         site_importer_spy = spy_on_site_importer
         ImportLog.create(created_at: trial_last_changed_date - 1.day)
 
-        TrialImporter.new(trial_xml_file).import
+        TrialImporter.new(trial_xml).import
 
         expect(Trial.all.count).to eq 1
         trial = Trial.first
@@ -61,7 +64,7 @@ RSpec.describe TrialImporter, type: :service do
         site_importer_spy = spy_on_site_importer
         ImportLog.create(created_at: trial_last_changed_date)
 
-        TrialImporter.new(trial_xml_file).import
+        TrialImporter.new(trial_xml).import
 
         expect(Trial.all.count).to eq 1
         trial = Trial.first
@@ -79,8 +82,12 @@ RSpec.describe TrialImporter, type: :service do
     Date.new(2016, 5, 13)
   end
 
-  def trial_xml_file
+  def trial_xml
     Rails.root.join("spec", "fixtures", "trial_with_two_sites_import.xml")
+  end
+
+  def trial_xml_without_ages
+    Rails.root.join("spec", "fixtures", "trial_without_ages.xml")
   end
 
   def spy_on_site_importer

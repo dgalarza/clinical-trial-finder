@@ -33,10 +33,7 @@ RSpec.feature "User views trial list and trial" do
     expect(page).to have_content first_trial_title
     expect(page).to have_content second_trial_title
 
-    fill_form(
-      :trial_search,
-      keyword: "first"
-    )
+    fill_form(:trial_search, keyword: "first")
     click_button t("trials.search_filter.submit")
 
     expect(page).to have_content first_trial_title
@@ -55,5 +52,32 @@ RSpec.feature "User views trial list and trial" do
     click_link "Next"
 
     expect(page).to have_content "Trial #{trial_count}"
+  end
+
+  scenario "User filters by age" do
+    trial_matches_age = create(
+      :trial,
+      minimum_age_original: "20 years",
+      maximum_age_original: "35 years"
+    )
+    create(
+      :trial,
+      minimum_age_original: "36 months",
+      maximum_age_original: "29 years"
+    )
+    create(
+      :trial,
+      minimum_age_original: "31 years",
+      maximum_age_original: "N/A"
+    )
+    visit trials_path
+
+    expect(page).to have_content "Displaying 3 trials"
+
+    fill_form(:trial_search, age: 30)
+    click_button t("trials.search_filter.submit")
+
+    expect(page).to have_content "Displaying 1 trial"
+    expect(page).to have_content trial_matches_age.title
   end
 end
