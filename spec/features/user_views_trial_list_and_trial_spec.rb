@@ -43,15 +43,16 @@ RSpec.feature "User views trial list and trial" do
   scenario "User browses trials on second page of results" do
     trial_count = 15
     1.upto(trial_count) { |number| create(:trial, title: "Trial #{number}") }
+    last_trial_title = Trial.last.title
 
     visit trials_path
 
-    expect(page).to have_content "Displaying #{trial_count} trials"
-    expect(page).not_to have_content "Trial #{trial_count}"
+    expect(page).to have_content displaying_multiple_trials(trial_count)
+    expect(page).not_to have_content last_trial_title
 
     click_link "Next"
 
-    expect(page).to have_content "Trial #{trial_count}"
+    expect(page).to have_content last_trial_title
   end
 
   scenario "User filters by age" do
@@ -72,12 +73,45 @@ RSpec.feature "User views trial list and trial" do
     )
     visit trials_path
 
-    expect(page).to have_content "Displaying 3 trials"
+    expect(page).to have_content displaying_multiple_trials(3)
 
     fill_form(:trial_search, age: 30)
     click_button t("trials.search_filter.submit")
 
-    expect(page).to have_content "Displaying 1 trial"
+    expect(page).to have_content displaying_one_trial
     expect(page).to have_content trial_matches_age.title
+  end
+
+  scenario "User filters by gender" do
+    trial_for_everyone = create(:trial, gender: "Both")
+    trial_for_men = create(:trial, gender: "Male")
+    trial_for_women = create(:trial, gender: "Female")
+    visit trials_path
+
+    expect(page).to have_content displaying_multiple_trials(3)
+
+    fill_form(:trial_search, gender: "Female")
+    click_button t("trials.search_filter.submit")
+
+    expect(page).to have_content displaying_multiple_trials(2)
+    expect(page).to have_content trial_for_everyone.title
+    expect(page).to have_content trial_for_women.title
+    expect(page).not_to have_content trial_for_men.title
+
+    fill_form(:trial_search, gender: "Male")
+    click_button t("trials.search_filter.submit")
+
+    expect(page).to have_content displaying_multiple_trials(2)
+    expect(page).to have_content trial_for_everyone.title
+    expect(page).not_to have_content trial_for_women.title
+    expect(page).to have_content trial_for_men.title
+  end
+
+  def displaying_one_trial
+    t("trials.trial_count.displaying.one")
+  end
+
+  def displaying_multiple_trials(count)
+    t("trials.trial_count.displaying.other", count: count)
   end
 end

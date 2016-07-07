@@ -1,4 +1,5 @@
 class Trial < ActiveRecord::Base
+  ALL_GENDERS = "Both".freeze
   MINIMUM_AGE = 0
   MAXIMUM_AGE = 120
   NOT_APPLICABLE = "N/A".freeze
@@ -8,6 +9,10 @@ class Trial < ActiveRecord::Base
 
   scope :search_for, lambda { |query|
     where("title ILIKE :query OR description ILIKE :query", query: "%#{query}%")
+  }
+
+  scope :gender, lambda { |sex|
+    where("gender IN (?)", [sex, ALL_GENDERS]) unless sex.blank?
   }
 
   scope :age, lambda { |age|

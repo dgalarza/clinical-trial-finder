@@ -1,6 +1,6 @@
 class TrialsController < ApplicationController
   def index
-    @trials = build_trials_list
+    @trials = build_trials
     @last_import = ImportLog.last
   end
 
@@ -10,10 +10,11 @@ class TrialsController < ApplicationController
 
   private
 
-  def build_trials_list
+  def build_trials
     Trial
       .search_for(filtered_params[:keyword])
       .age(filtered_params[:age])
+      .gender(filtered_params[:gender])
       .paginate(page: filtered_params[:page])
   end
 
@@ -21,6 +22,7 @@ class TrialsController < ApplicationController
     params.permit(
       :age,
       :commit,
+      :gender,
       :keyword,
       :page,
       :utf8

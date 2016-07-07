@@ -64,27 +64,77 @@ RSpec.describe Trial, type: :model do
       end
     end
 
+    describe ".gender" do
+      context "gender is filtered by male" do
+        it "returns male and both" do
+          trial_for_everyone = create(:trial, gender: "Both")
+          trial_for_men = create(:trial, gender: "Male")
+          _trial_for_women = create(:trial, gender: "Female")
+
+          trials = Trial.gender("Male")
+
+          expect(trials).to eq [trial_for_everyone, trial_for_men]
+        end
+      end
+
+      context "gender is filtered by female" do
+        it "returns female and both" do
+          trial_for_everyone = create(:trial, gender: "Both")
+          trial_for_women = create(:trial, gender: "Female")
+          _trial_for_men = create(:trial, gender: "Male")
+
+          trials = Trial.gender("Female")
+
+          expect(trials).to eq [trial_for_everyone, trial_for_women]
+        end
+      end
+
+      context "gender is NOT filtered" do
+        it "does NOT filter" do
+          trial_1 = create(:trial)
+          trial_2 = create(:trial)
+
+          trials = Trial.gender(nil)
+
+          expect(trials).to eq [trial_1, trial_2]
+        end
+      end
+    end
+
     describe ".age" do
-      it "queries patient age between minimum and maximum" do
-        trial_matches_age = create(
-          :trial,
-          minimum_age_original: "25 years",
-          maximum_age_original: "35 years"
-        )
-        create(
-          :trial,
-          minimum_age_original: "20 years",
-          maximum_age_original: "29 years"
-        )
-        create(
-          :trial,
-          minimum_age_original: "31 years",
-          maximum_age_original: "35 years"
-        )
+      context "age is present" do
+        it "queries patient age between minimum and maximum" do
+          trial_matches_age = create(
+            :trial,
+            minimum_age_original: "25 years",
+            maximum_age_original: "35 years"
+          )
+          create(
+            :trial,
+            minimum_age_original: "20 years",
+            maximum_age_original: "29 years"
+          )
+          create(
+            :trial,
+            minimum_age_original: "31 years",
+            maximum_age_original: "35 years"
+          )
 
-        trials = Trial.age(30)
+          trials = Trial.age(30)
 
-        expect(trials).to eq [trial_matches_age]
+          expect(trials).to eq [trial_matches_age]
+        end
+      end
+
+      context "age is NOT present" do
+        it "does NOT filter" do
+          trial_1 = create(:trial)
+          trial_2 = create(:trial)
+
+          trials = Trial.age(nil)
+
+          expect(trials).to eq [trial_1, trial_2]
+        end
       end
     end
   end
