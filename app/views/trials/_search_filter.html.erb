@@ -1,6 +1,12 @@
-<%= form_tag({}, method: :get) do %>
-  <%= text_field_tag :keyword, params[:keyword] %>
-  <%= text_field_tag :age, params[:age] %>
-  <%= text_field_tag :gender, params[:gender] %>
-  <%= submit_tag t(".submit") %>
+<%= simple_form_for :trial_filter, method: :get do |f| %>
+  <%= f.input :keyword, filter_input_default(:keyword) %>
+  <%= f.input :age, filter_input_default(:age) %>
+  <%= f.input(
+    :gender,
+    filter_radio_default(:gender).merge(
+      as: :radio_buttons,
+      collection: ["Male", "Female"]
+    )
+  ) %>
+  <%= f.submit t(".submit") %>
 <% end %>

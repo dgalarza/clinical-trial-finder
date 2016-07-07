@@ -33,7 +33,7 @@ RSpec.feature "User views trial list and trial" do
     expect(page).to have_content first_trial_title
     expect(page).to have_content second_trial_title
 
-    fill_form(:trial_search, keyword: "first")
+    fill_in("trial_filter[keyword]", with: "first")
     click_button t("trials.search_filter.submit")
 
     expect(page).to have_content first_trial_title
@@ -75,7 +75,7 @@ RSpec.feature "User views trial list and trial" do
 
     expect(page).to have_content displaying_multiple_trials(3)
 
-    fill_form(:trial_search, age: 30)
+    fill_in("trial_filter[age]", with: "30")
     click_button t("trials.search_filter.submit")
 
     expect(page).to have_content displaying_one_trial
@@ -90,17 +90,19 @@ RSpec.feature "User views trial list and trial" do
 
     expect(page).to have_content displaying_multiple_trials(3)
 
-    fill_form(:trial_search, gender: "Female")
+    choose "Female"
     click_button t("trials.search_filter.submit")
 
+    expect(find_field("Female")).to be_checked
     expect(page).to have_content displaying_multiple_trials(2)
     expect(page).to have_content trial_for_everyone.title
     expect(page).to have_content trial_for_women.title
     expect(page).not_to have_content trial_for_men.title
 
-    fill_form(:trial_search, gender: "Male")
+    choose "Male"
     click_button t("trials.search_filter.submit")
 
+    expect(find_field("Male")).to be_checked
     expect(page).to have_content displaying_multiple_trials(2)
     expect(page).to have_content trial_for_everyone.title
     expect(page).not_to have_content trial_for_women.title
