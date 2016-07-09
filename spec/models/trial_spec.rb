@@ -6,46 +6,48 @@ RSpec.describe Trial, type: :model do
   end
 
   describe "before_save" do
-    it "persists original values as stripped integers" do
-      trial = build(
-        :trial,
-        minimum_age_original: "20 Years",
-        maximum_age_original: "30 Years"
-      )
-
-      trial.save
-
-      expect(trial.minimum_age).to eq 20
-      expect(trial.maximum_age).to eq 30
-    end
-
-    context "age is NOT applicable" do
-      it "use age defaults" do
+    describe "#convert_ages" do
+      it "persists original values as stripped integers" do
         trial = build(
           :trial,
-          minimum_age_original: "N/A",
-          maximum_age_original: "N/A"
+          minimum_age_original: "20 Years",
+          maximum_age_original: "30 Years"
         )
 
         trial.save
 
-        expect(trial.minimum_age).to eq Trial::MINIMUM_AGE
-        expect(trial.maximum_age).to eq Trial::MAXIMUM_AGE
+        expect(trial.minimum_age).to eq 20
+        expect(trial.maximum_age).to eq 30
       end
-    end
 
-    context "age is in month increments" do
-      it "transforms months to years" do
-        trial = build(
-          :trial,
-          minimum_age_original: "1 Month",
-          maximum_age_original: "18 Months"
-        )
+      context "age is NOT applicable" do
+        it "use age defaults" do
+          trial = build(
+            :trial,
+            minimum_age_original: "N/A",
+            maximum_age_original: "N/A"
+          )
 
-        trial.save
+          trial.save
 
-        expect(trial.minimum_age).to eq 0
-        expect(trial.maximum_age).to eq 1
+          expect(trial.minimum_age).to eq Trial::MINIMUM_AGE
+          expect(trial.maximum_age).to eq Trial::MAXIMUM_AGE
+        end
+      end
+
+      context "age is in month increments" do
+        it "transforms months to years" do
+          trial = build(
+            :trial,
+            minimum_age_original: "1 Month",
+            maximum_age_original: "18 Months"
+          )
+
+          trial.save
+
+          expect(trial.minimum_age).to eq 0
+          expect(trial.maximum_age).to eq 1
+        end
       end
     end
   end

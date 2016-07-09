@@ -18,8 +18,18 @@ class TrialImporter
 
   def update_trial(trial)
     xml_mappings.each do |xml_mapping|
-      value = root.xpath(xml_mapping.second).text
+      value = fetch_field_value(xml_mapping)
       trial.send("#{xml_mapping.first}=", value)
+    end
+  end
+
+  def fetch_field_value(xml_mapping)
+    xpath_tag = root.xpath(xml_mapping.second)
+
+    if database_attribute_is_array?(xml_mapping.first)
+      xpath_tag.map(&:text)
+    else
+      xpath_tag.text
     end
   end
 
@@ -35,6 +45,10 @@ class TrialImporter
 
   def unchanged_since_last_import?
     last_import_at > trial_last_changed_at
+  end
+
+  def database_attribute_is_array?(key)
+    Trial.columns_hash[key.to_s].array
   end
 
   def last_import_at
@@ -55,13 +69,33 @@ class TrialImporter
 
   def xml_mappings
     [
-      [:title, "brief_title"],
-      [:nct_id, nct_id_xml_lookup],
+      [:agency_class, "//agency_class"],
+      [:conditions, "condition"],
+      [:countries, "location_countries/country"],
+      [:criteria, "//criteria/textblock"],
       [:description, "detailed_description/textblock"],
-      [:sponsor, "sponsors/lead_sponsor/agency"],
+      [:detailed_description, "detailed_description/textblock"],
+      [:first_received_date, "firstreceived_date"],
       [:gender, "//gender"],
+      [:has_expanded_access, "has_expanded_access"],
+      [:healthy_volunteers, "//healthy_volunteers"],
+      [:is_fda_regulated, "is_fda_regulated"],
+      [:keywords, "keyword"],
+      [:last_changed_date, "lastchanged_date"],
+      [:link_description, "//link/description"],
+      [:link_url, "//link/url"],
+      [:maximum_age_original, "//maximum_age"],
       [:minimum_age_original, "//minimum_age"],
-      [:maximum_age_original, "//maximum_age"]
+      [:nct_id, nct_id_xml_lookup],
+      [:official_title, "official_title"],
+      [:overall_contact_name, "//overall_contact/last_name"],
+      [:overall_contact_phone, "//overall_contact/phone"],
+      [:overall_status, "//overall_status"],
+      [:phase, "//phase"],
+      [:sponsor, "sponsors/lead_sponsor/agency"],
+      [:study_type, "//study_type"],
+      [:title, "brief_title"],
+      [:verification_date, "verification_date"]
     ]
   end
 

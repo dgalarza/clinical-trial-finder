@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706014823) do
+ActiveRecord::Schema.define(version: 20160709022738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,8 +59,6 @@ ActiveRecord::Schema.define(version: 20160706014823) do
     t.string   "title"
     t.text     "description"
     t.string   "sponsor"
-    t.string   "country"
-    t.string   "focus"
     t.string   "nct_id"
     t.string   "official_title"
     t.string   "agency_class"
@@ -68,18 +66,28 @@ ActiveRecord::Schema.define(version: 20160706014823) do
     t.string   "overall_status"
     t.string   "phase"
     t.string   "study_type"
-    t.string   "condition"
-    t.string   "inclusion"
-    t.string   "exclusion"
     t.string   "gender"
-    t.integer  "minimum_age",          default: 0,   null: false
-    t.integer  "maximum_age",          default: 120, null: false
+    t.integer  "minimum_age",           default: 0,   null: false
+    t.integer  "maximum_age",           default: 120, null: false
     t.string   "healthy_volunteers"
     t.string   "overall_contact_name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "minimum_age_original"
     t.string   "maximum_age_original"
+    t.string   "conditions",            default: [],               array: true
+    t.text     "criteria"
+    t.string   "countries",             default: [],               array: true
+    t.string   "overall_contact_phone"
+    t.string   "overall_contact_email"
+    t.string   "link_url"
+    t.string   "link_description"
+    t.string   "first_received_date"
+    t.string   "last_changed_date"
+    t.string   "verification_date"
+    t.string   "keywords",              default: [],               array: true
+    t.string   "is_fda_regulated"
+    t.string   "has_expanded_access"
   end
 
   add_index "trials", ["nct_id"], name: "index_trials_on_nct_id", unique: true, using: :btree

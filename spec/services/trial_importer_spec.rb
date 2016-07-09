@@ -10,13 +10,33 @@ RSpec.describe TrialImporter, type: :service do
 
         expect(Trial.all.count).to eq 1
         trial = Trial.first
-        expect(trial.title).to eq "Brief Title"
-        expect(trial.nct_id).to eq trial_nct_id
+        expect(trial.agency_class).to eq "Agency Class"
+        expect(trial.conditions).to eq ["Condition1", "Condition2"]
+        expect(trial.countries).to eq ["Country"]
+        expect(trial.criteria).to include "Criteria"
         expect(trial.description).to include "Detailed Description"
+        expect(trial.detailed_description).to include "Detailed Description"
+        expect(trial.first_received_date).to eq "First Received Date"
+        expect(trial.gender).to eq "Gender"
+        expect(trial.has_expanded_access).to eq "Has Expanded Access"
+        expect(trial.healthy_volunteers).to eq "Healthy Volunteers"
+        expect(trial.is_fda_regulated).to eq "Is Fda Regulated"
+        expect(trial.keywords).to eq ["Keyword1", "Keyword2"]
+        expect(trial.last_changed_date).to eq "May 13, 2016"
+        expect(trial.link_description).to eq "Link Description"
+        expect(trial.link_url).to eq "Link Url"
+        expect(trial.maximum_age_original).to eq "Maximum Age"
+        expect(trial.minimum_age_original).to eq "Minimum Age"
+        expect(trial.nct_id).to eq trial_nct_id
+        expect(trial.official_title).to eq "Official Title"
+        expect(trial.overall_contact_name).to eq "Overall Contact Name"
+        expect(trial.overall_contact_phone).to eq "Overall Contact Phone"
+        expect(trial.overall_status).to eq "Overall Status"
+        expect(trial.phase).to eq "Phase"
         expect(trial.sponsor).to eq "Sponsor Agency"
-        expect(trial.gender).to eq "Both"
-        expect(trial.minimum_age_original).to eq "3 Years"
-        expect(trial.maximum_age_original).to eq "70 Years"
+        expect(trial.study_type).to eq "Study Type"
+        expect(trial.title).to eq "Brief Title"
+        expect(trial.verification_date).to eq "Verification Date"
       end
 
       it "imports sites from '//locations'" do
