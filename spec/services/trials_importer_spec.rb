@@ -1,11 +1,15 @@
 require "rails_helper"
 
 RSpec.describe TrialsImporter do
+  before do
+    make_tmp_directory
+  end
+
   describe "#initialize" do
     it "removes all existing files from tmp folder" do
       stub_zip_file
       allow(RestClient).to receive(:get)
-      make_tmp_directory
+      make_import_files_directory
       File.new(tmp_file, "w+")
       file_present = File.exist? tmp_file
       expect(file_present).to be true
@@ -88,14 +92,24 @@ RSpec.describe TrialsImporter do
     directory.join("clinical_trials_download.zip")
   end
 
-  def make_tmp_directory
+  def make_import_files_directory
     unless directory.exist?
       Dir.mkdir(directory)
     end
   end
 
+  def make_tmp_directory
+    unless tmp_directory.exist?
+      Dir.mkdir(tmp_directory)
+    end
+  end
+
   def directory
-    Rails.root.join("tmp", "import_files")
+    tmp_directory.join("import_files")
+  end
+
+  def tmp_directory
+    Rails.root.join("tmp")
   end
 
   def stub_zip_file

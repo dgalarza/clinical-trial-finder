@@ -139,5 +139,60 @@ RSpec.describe Trial, type: :model do
         end
       end
     end
+
+    describe ".control" do
+      context "control is true" do
+        it "queries trials that only take healthy volunteers" do
+          trial_for_controls_and_patients =
+            create(:trial, healthy_volunteers: Trial::CONTROL_NEEDED)
+          trial_without_setting =
+            create(:trial, healthy_volunteers: Trial::CONTROL_NOT_SPECIFIED)
+          _trial_for_patients_only = create(:trial, healthy_volunteers: "No")
+
+          trials = Trial.control("true")
+
+          expect(trials).to eq [
+            trial_for_controls_and_patients,
+            trial_without_setting
+          ]
+        end
+      end
+
+      context "control is false" do
+        it "returns all trials" do
+          trial_for_controls_and_patients =
+            create(:trial, healthy_volunteers: Trial::CONTROL_NEEDED)
+          trial_without_setting =
+            create(:trial, healthy_volunteers: Trial::CONTROL_NOT_SPECIFIED)
+          trial_for_patients_only = create(:trial, healthy_volunteers: "No")
+
+          trials = Trial.control("false")
+
+          expect(trials).to eq [
+            trial_for_controls_and_patients,
+            trial_without_setting,
+            trial_for_patients_only
+          ]
+        end
+      end
+
+      context "control is NOT provided" do
+        it "returns all trials" do
+          trial_for_controls_and_patients =
+            create(:trial, healthy_volunteers: Trial::CONTROL_NEEDED)
+          trial_without_setting =
+            create(:trial, healthy_volunteers: Trial::CONTROL_NOT_SPECIFIED)
+          trial_for_patients_only = create(:trial, healthy_volunteers: "No")
+
+          trials = Trial.control(nil)
+
+          expect(trials).to eq [
+            trial_for_controls_and_patients,
+            trial_without_setting,
+            trial_for_patients_only
+          ]
+        end
+      end
+    end
   end
 end

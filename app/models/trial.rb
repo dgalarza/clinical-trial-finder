@@ -1,5 +1,7 @@
 class Trial < ActiveRecord::Base
   ALL_GENDERS = "Both".freeze
+  CONTROL_NEEDED = "Accepts Healthy Volunteers".freeze
+  CONTROL_NOT_SPECIFIED = "".freeze
   MINIMUM_AGE = 0
   MAXIMUM_AGE = 120
   NOT_APPLICABLE = "N/A".freeze
@@ -19,6 +21,11 @@ class Trial < ActiveRecord::Base
     where("minimum_age <= ? and maximum_age >= ?", age, age) unless age.blank?
   }
 
+  scope :control, lambda { |control|
+    if control == "true"
+      where(healthy_volunteers: [CONTROL_NEEDED, CONTROL_NOT_SPECIFIED])
+    end
+  }
   private
 
   def convert_ages

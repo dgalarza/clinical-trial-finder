@@ -34,7 +34,7 @@ RSpec.feature "User views trial list and trial" do
     expect(page).to have_content second_trial_title
 
     fill_in("trial_filter[keyword]", with: "first")
-    click_button t("trials.search_filter.submit")
+    apply_search_filter
 
     expect(page).to have_content first_trial_title
     expect(page).not_to have_content second_trial_title
@@ -76,7 +76,7 @@ RSpec.feature "User views trial list and trial" do
     expect(page).to have_content displaying_multiple_trials(3)
 
     fill_in("trial_filter[age]", with: "30")
-    click_button t("trials.search_filter.submit")
+    apply_search_filter
 
     expect(page).to have_content displaying_one_trial
     expect(page).to have_content trial_matches_age.title
@@ -91,7 +91,7 @@ RSpec.feature "User views trial list and trial" do
     expect(page).to have_content displaying_multiple_trials(3)
 
     choose "Female"
-    click_button t("trials.search_filter.submit")
+    apply_search_filter
 
     expect(find_field("Female")).to be_checked
     expect(page).to have_content displaying_multiple_trials(2)
@@ -100,13 +100,54 @@ RSpec.feature "User views trial list and trial" do
     expect(page).not_to have_content trial_for_men.title
 
     choose "Male"
-    click_button t("trials.search_filter.submit")
+    apply_search_filter
 
     expect(find_field("Male")).to be_checked
     expect(page).to have_content displaying_multiple_trials(2)
     expect(page).to have_content trial_for_everyone.title
     expect(page).not_to have_content trial_for_women.title
     expect(page).to have_content trial_for_men.title
+  end
+
+  scenario "User filters by control" do
+    trial_for_controls_and_patients =
+      create(:trial, healthy_volunteers: Trial::CONTROL_NEEDED)
+    trial_without_setting =
+      create(:trial, healthy_volunteers: Trial::CONTROL_NOT_SPECIFIED)
+    trial_for_patients_only = create(:trial, healthy_volunteers: "No")
+    visit trials_path
+
+    expect(page).to have_content displaying_multiple_trials(3)
+
+    choose am_control_field
+    apply_search_filter
+
+    expect(find_field(am_control_field)).to be_checked
+    expect(page).to have_content displaying_multiple_trials(2)
+    expect(page).to have_content trial_for_controls_and_patients.title
+    expect(page).to have_content trial_without_setting.title
+    expect(page).not_to have_content trial_for_patients_only.title
+
+    choose am_patient_field
+    apply_search_filter
+
+    expect(find_field(am_patient_field)).to be_checked
+    expect(page).to have_content displaying_multiple_trials(3)
+    expect(page).to have_content trial_for_controls_and_patients.title
+    expect(page).to have_content trial_without_setting.title
+    expect(page).to have_content trial_for_patients_only.title
+  end
+
+  def apply_search_filter
+    click_button t("trials.search_filter.submit")
+  end
+
+  def am_control_field
+    t("helpers.search_filter.am_control")
+  end
+
+  def am_patient_field
+    t("helpers.search_filter.am_patient")
   end
 
   def displaying_one_trial

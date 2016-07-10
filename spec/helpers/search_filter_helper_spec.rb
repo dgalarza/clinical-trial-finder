@@ -48,4 +48,15 @@ RSpec.describe SearchFilterHelper, type: :helper do
       end
     end
   end
+
+  describe "#control_options" do
+    it "returns options for control input" do
+      options = helper.control_options
+
+      expect(options).to eq [
+        [t("helpers.search_filter.am_patient"), false],
+        [t("helpers.search_filter.am_control"), true]
+      ]
+    end
+  end
 end

@@ -7,6 +7,13 @@ module SearchFilterHelper
     { checked: filter_params[input] }
   end
 
+  def control_options
+    [
+      [t("helpers.search_filter.am_patient"), false],
+      [t("helpers.search_filter.am_control"), true]
+    ]
+  end
+
   private
 
   def filter_params

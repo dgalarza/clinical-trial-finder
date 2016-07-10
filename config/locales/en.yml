@@ -11,6 +11,10 @@ en:
         "%m/%d/%Y"
       with_weekday:
         "%a %m/%d/%y"
+  helpers:
+    search_filter:
+      am_control: "I am a control"
+      am_patient: "I have a brain tumor"
   homepage:
     show:
       overview: "Clinical trials are an important treatment option for cancer

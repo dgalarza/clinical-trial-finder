@@ -14,6 +14,7 @@ class TrialsController < ApplicationController
     Trial
       .search_for(filter_params[:keyword])
       .age(filter_params[:age])
+      .control(filter_params[:control])
       .gender(filter_params[:gender])
       .paginate(page: all_params[:page])
   end
@@ -29,6 +30,7 @@ class TrialsController < ApplicationController
       :utf8,
       trial_filter: [
         :age,
+        :control,
         :gender,
         :keyword
       ]

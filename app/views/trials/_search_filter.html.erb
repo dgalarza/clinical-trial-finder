@@ -8,5 +8,13 @@
       collection: ["Male", "Female"]
     )
   ) %>
+  <%= f.input(
+    :control,
+    filter_radio_default(:control).merge(
+      as: :radio_buttons,
+      collection: control_options,
+      label: false
+    )
+  ) %>
   <%= f.submit t(".submit") %>
 <% end %>
