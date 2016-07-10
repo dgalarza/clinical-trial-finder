@@ -49,6 +49,10 @@ en:
   trials:
     clinicaltrials_gov_logo:
       trials_imported: "Trials imported on %{timestamp} from:"
+    closest_site:
+      miles_away:
+        one: "1 mile away"
+        other: "%{count} miles away"
     trial_count:
       displaying:
         one: "Displaying 1 trial"

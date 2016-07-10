@@ -138,6 +138,53 @@ RSpec.feature "User views trial list and trial" do
     expect(page).to have_content trial_for_patients_only.title
   end
 
+  scenario "User filters by zip code" do
+    seed_new_york_zip_code
+    new_york_site = build(:site, latitude: 40.7728432, longitude: -73.9558204)
+    new_york_trial = create(:trial, sites: [new_york_site])
+    newark_site = build(:site, latitude: 40.7132136, longitude: -75.7496572)
+    newark_trial = create(:trial, sites: [newark_site])
+    san_fransicso_site =
+      build(:site, latitude: 37.7642093, longitude: -122.4571623)
+    san_francisco_trial = create(:trial, sites: [san_fransicso_site])
+    visit trials_path
+
+    expect(page).to have_content displaying_multiple_trials(3)
+    expect(page).not_to have_content new_york_site.facility
+    expect(page).not_to have_content newark_site.facility
+
+    fill_in("trial_filter[zip_code]", with: new_york_zip_code)
+    apply_search_filter
+
+    expect(page).to have_content displaying_multiple_trials(2)
+
+    expect(page).to have_content new_york_trial.title
+    expect(page).to have_content new_york_site.facility
+    expect(page).to have_content miles_away(0)
+
+    expect(page).to have_content newark_trial.title
+    expect(page).to have_content newark_site.facility
+    expect(page).to have_content miles_away(94)
+
+    expect(page).not_to have_content san_francisco_trial.title
+  end
+
+  def miles_away(count)
+    t("trials.closest_site.miles_away", count: count)
+  end
+
+  def seed_new_york_zip_code
+    ZipCode.create(
+      zip_code: new_york_zip_code,
+      latitude: 40.7728432,
+      longitude: -73.9558204
+    )
+  end
+
+  def new_york_zip_code
+    "10065"
+  end
+
   def apply_search_filter
     click_button t("trials.search_filter.submit")
   end

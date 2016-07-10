@@ -16,6 +16,7 @@ class TrialsController < ApplicationController
       .age(filter_params[:age])
       .control(filter_params[:control])
       .gender(filter_params[:gender])
+      .close_to(filter_params[:zip_code])
       .paginate(page: all_params[:page])
   end
 
@@ -32,7 +33,8 @@ class TrialsController < ApplicationController
         :age,
         :control,
         :gender,
-        :keyword
+        :keyword,
+        :zip_code
       ]
     )
   end

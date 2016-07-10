@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160709022738) do
+ActiveRecord::Schema.define(version: 20160710221404) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(version: 20160709022738) do
     t.string   "contact_phone"
     t.string   "contact_phone_ext"
     t.string   "contact_email"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "sites", ["trial_id"], name: "index_sites_on_trial_id", using: :btree
@@ -91,6 +93,12 @@ ActiveRecord::Schema.define(version: 20160709022738) do
   end
 
   add_index "trials", ["nct_id"], name: "index_trials_on_nct_id", unique: true, using: :btree
+
+  create_table "zip_codes", force: :cascade do |t|
+    t.string "zip_code"
+    t.float  "latitude"
+    t.float  "longitude"
+  end
 
   add_foreign_key "sites", "trials"
 end

@@ -194,5 +194,100 @@ RSpec.describe Trial, type: :model do
         end
       end
     end
+
+    describe ".close_to" do
+      context "zip code is NOT provided" do
+        it "returns all trials" do
+          seed_new_york_zip_code
+          new_york_site =
+            build(:site, latitude: 40.7728432, longitude: -73.9558204)
+          new_york_trial = create(:trial, sites: [new_york_site])
+          san_fransicso_site =
+            build(:site, latitude: 37.7642093, longitude: -122.4571623)
+          san_francisco_trial = create(:trial, sites: [san_fransicso_site])
+
+          trials = Trial.close_to("")
+
+          expect(trials).to eq [
+            new_york_trial,
+            san_francisco_trial
+          ]
+        end
+      end
+
+      context "zip code is provided" do
+        it "returns trials w/ sites inside radius ordered by distance" do
+          seed_new_york_zip_code
+          newark_site = build(
+            :site,
+            facility: "Newark Site",
+            latitude: 40.7132136,
+            longitude: -75.7496572
+          )
+          newark_trial = create(:trial, sites: [newark_site])
+          new_york_site = build(
+            :site,
+            facility: "New York Site",
+            latitude:
+            40.7728432,
+            longitude: -73.9558204
+          )
+          new_york_trial = create(:trial, sites: [new_york_site])
+          san_fransicso_site =
+            build(:site, latitude: 37.7642093, longitude: -122.4571623)
+          _san_francisco_trial = create(:trial, sites: [san_fransicso_site])
+
+          trials = Trial.close_to(new_york_zip_code)
+
+          expect(trials).to eq [
+            new_york_trial,
+            newark_trial
+          ]
+        end
+      end
+    end
+  end
+
+  describe "#closest_site" do
+    it "returns collection of closest site to zip code with distance" do
+      seed_new_york_zip_code
+      zip_code = "10065"
+      different_trial = create(:trial)
+      _closest_site_belonging_to_different_trial = create(
+        :site,
+        latitude: 40.7728432,
+        longitude: -73.9558204,
+        trial: different_trial
+      )
+      trial = create(:trial)
+      closest_site_for_trial = create(
+        :site,
+        latitude: 40.7132136,
+        longitude: -75.7496572,
+        trial: trial
+      )
+      _further_site_for_trial = create(
+        :site,
+        latitude: 37.7642093,
+        longitude: -122.4571623,
+        trial: trial
+      )
+
+      closest_site = trial.closest_site(zip_code)
+
+      expect(closest_site).to eq [closest_site_for_trial, 94]
+    end
+  end
+
+  def seed_new_york_zip_code
+    ZipCode.create(
+      zip_code: new_york_zip_code,
+      latitude: 40.7728432,
+      longitude: -73.9558204
+    )
+  end
+
+  def new_york_zip_code
+    "10065"
   end
 end

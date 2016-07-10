@@ -1,4 +1,6 @@
 class Trial < ActiveRecord::Base
+  extend OrderAsSpecified
+
   ALL_GENDERS = "Both".freeze
   CONTROL_NEEDED = "Accepts Healthy Volunteers".freeze
   CONTROL_NOT_SPECIFIED = "".freeze
@@ -26,7 +28,31 @@ class Trial < ActiveRecord::Base
       where(healthy_volunteers: [CONTROL_NEEDED, CONTROL_NOT_SPECIFIED])
     end
   }
+
+  scope :close_to, lambda { |zip_code|
+    if zip_code.present?
+      site_pin_point = build_site_pin_point(zip_code)
+      nearby_sites = site_pin_point.nearbys(100)
+      trial_ids = nearby_sites.map(&:trial_id).uniq
+      where(id: trial_ids).order_as_specified(id: trial_ids)
+    end
+  }
+
+  def closest_site(zip_code)
+    zip_code = ZipCode.find_by(zip_code: zip_code)
+    site = Site.where(trial_id: id).near(zip_code.coordinates, 100).first
+    distance = site.distance_from(zip_code.coordinates).round
+
+    [site, distance]
+  end
+
   private
+
+  def self.build_site_pin_point(zip_code)
+    zip_code = ZipCode.find_by(zip_code: zip_code)
+    Site.new(latitude: zip_code.latitude, longitude: zip_code.longitude)
+  end
+  private_class_method :build_site_pin_point
 
   def convert_ages
     self.minimum_age = converted_minimum_age_original

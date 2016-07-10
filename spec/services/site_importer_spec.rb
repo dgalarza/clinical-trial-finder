@@ -1,6 +1,10 @@
 require "rails_helper"
 
 RSpec.describe SiteImporter, type: :service do
+  before do
+    stub_geocoder
+  end
+
   describe "#import" do
     it "creates Site associated with Trial" do
       trial = build(:trial)
@@ -35,5 +39,10 @@ RSpec.describe SiteImporter, type: :service do
 
   def site_fixture
     Rails.root.join("spec", "fixtures", "site_import.xml")
+  end
+
+  def stub_geocoder
+    Geocoder.configure(lookup: :test)
+    Geocoder::Lookup::Test.set_default_stub([])
   end
 end

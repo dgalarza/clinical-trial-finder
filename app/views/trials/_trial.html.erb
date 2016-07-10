@@ -1,4 +1,7 @@
 <div>
   <%= link_to trial.title, trial_path(trial) %>
   <div><%= "#{trial.minimum_age_original} - #{trial.maximum_age_original}" %></div>
+  <% if zip_code_param.present? %>
+    <%= render "closest_site", closest_site: trial.closest_site(zip_code_param) %>
+  <% end %>
 </div>
