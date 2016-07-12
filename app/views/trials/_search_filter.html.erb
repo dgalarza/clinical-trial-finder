@@ -1,6 +1,12 @@
 <%= simple_form_for :trial_filter, method: :get do |f| %>
   <%= f.input :keyword, filter_input_default(:keyword) %>
   <%= f.input :zip_code, filter_input_default(:zip_code) %>
+  <%= f.input(
+    :distance_radius,
+    as: :select,
+    collection: distance_radius_options,
+    selected: distance_radius_selected_value
+  ) %>
   <%= f.input :age, filter_input_default(:age) %>
   <%= f.input(
     :gender,

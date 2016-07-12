@@ -58,7 +58,7 @@ RSpec.describe TrialListHelper, type: :helper do
       end
     end
 
-    context "params are not present" do
+    context "params are NOT present" do
       it "sets default to nil" do
         empty_params = {}
         allow(helper).to receive(:params).and_return(empty_params)
@@ -78,6 +78,41 @@ RSpec.describe TrialListHelper, type: :helper do
         [t("helpers.search_filter.am_patient"), false],
         [t("helpers.search_filter.am_control"), true]
       ]
+    end
+  end
+
+  describe "#distance_radius_options" do
+    it "returns options for distance_radius" do
+      options = helper.distance_radius_options
+
+      expect(options).to eq [
+        [t("helpers.search_filter.distance_radius", radius: 25), 25],
+        [t("helpers.search_filter.distance_radius", radius: 50), 50],
+        [t("helpers.search_filter.distance_radius", radius: 100), 100],
+        [t("helpers.search_filter.distance_radius", radius: 300), 300],
+        [t("helpers.search_filter.distance_radius", radius: 500), 500]
+      ]
+    end
+  end
+
+  describe "#distance_radius_selected_value" do
+    context "params are NOT present" do
+      it "returns default distance radius" do
+        empty_params = {}
+        allow(helper).to receive(:params).and_return(empty_params)
+
+        expect(helper.distance_radius_selected_value)
+          .to eq Trial::DEFAULT_DISTANCE_RADIUS
+      end
+    end
+
+    context "params are present" do
+      it "returns distance radius from param as integer" do
+        stubbed_params = { "trial_filter" => { "distance_radius" => "50" } }
+        allow(helper).to receive(:params).and_return(stubbed_params)
+
+        expect(helper.distance_radius_selected_value).to eq 50
+      end
     end
   end
 end

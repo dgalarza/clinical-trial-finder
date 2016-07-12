@@ -206,7 +206,7 @@ RSpec.describe Trial, type: :model do
             build(:site, latitude: 37.7642093, longitude: -122.4571623)
           san_francisco_trial = create(:trial, sites: [san_fransicso_site])
 
-          trials = Trial.close_to("")
+          trials = Trial.close_to(zip_code: "", radius: "")
 
           expect(trials).to eq [
             new_york_trial,
@@ -216,33 +216,62 @@ RSpec.describe Trial, type: :model do
       end
 
       context "zip code is provided" do
-        it "returns trials w/ sites inside radius ordered by distance" do
-          seed_new_york_zip_code
-          newark_site = build(
-            :site,
-            facility: "Newark Site",
-            latitude: 40.7132136,
-            longitude: -75.7496572
-          )
-          newark_trial = create(:trial, sites: [newark_site])
-          new_york_site = build(
-            :site,
-            facility: "New York Site",
-            latitude:
-            40.7728432,
-            longitude: -73.9558204
-          )
-          new_york_trial = create(:trial, sites: [new_york_site])
-          san_fransicso_site =
-            build(:site, latitude: 37.7642093, longitude: -122.4571623)
-          _san_francisco_trial = create(:trial, sites: [san_fransicso_site])
+        context "radius is 100 miles" do
+          it "returns trials w/ sites inside 100m radius ordered by distance" do
+            radius = 100
+            seed_new_york_zip_code
+            newark_site = build(
+              :site,
+              facility: "Newark Site",
+              latitude: 40.7132136,
+              longitude: -75.7496572
+            )
+            newark_trial = create(:trial, sites: [newark_site])
+            new_york_site = build(
+              :site,
+              facility: "New York Site",
+              latitude:
+              40.7728432,
+              longitude: -73.9558204
+            )
+            new_york_trial = create(:trial, sites: [new_york_site])
+            san_fransicso_site =
+              build(:site, latitude: 37.7642093, longitude: -122.4571623)
+            _san_francisco_trial = create(:trial, sites: [san_fransicso_site])
 
-          trials = Trial.close_to(new_york_zip_code)
+            trials = Trial.close_to(zip_code: new_york_zip_code, radius: radius)
 
-          expect(trials).to eq [
-            new_york_trial,
-            newark_trial
-          ]
+            expect(trials).to eq [new_york_trial, newark_trial]
+          end
+        end
+
+        context "radius is 50 miles" do
+          it "returns trial w/ sites inside 50m radius ordered by distance" do
+            radius = 50
+            seed_new_york_zip_code
+            newark_site = build(
+              :site,
+              facility: "Newark Site",
+              latitude: 40.7132136,
+              longitude: -75.7496572
+            )
+            _newark_trial = create(:trial, sites: [newark_site])
+            new_york_site = build(
+              :site,
+              facility: "New York Site",
+              latitude:
+              40.7728432,
+              longitude: -73.9558204
+            )
+            new_york_trial = create(:trial, sites: [new_york_site])
+            san_fransicso_site =
+              build(:site, latitude: 37.7642093, longitude: -122.4571623)
+            _san_francisco_trial = create(:trial, sites: [san_fransicso_site])
+
+            trials = Trial.close_to(zip_code: new_york_zip_code, radius: radius)
+
+            expect(trials).to eq [new_york_trial]
+          end
         end
       end
     end

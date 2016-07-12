@@ -15,6 +15,7 @@ en:
     search_filter:
       am_control: "I am a control"
       am_patient: "I have a brain tumor"
+      distance_radius: "Will travel %{radius} miles"
   homepage:
     show:
       overview: "Clinical trials are an important treatment option for cancer

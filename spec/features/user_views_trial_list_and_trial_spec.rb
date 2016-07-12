@@ -167,6 +167,29 @@ RSpec.feature "User views trial list and trial" do
     expect(page).to have_content miles_away(94)
 
     expect(page).not_to have_content san_francisco_trial.title
+
+    select distance_radius(50)
+    apply_search_filter
+
+    expect(page).to have_select(
+      "trial_filter[distance_radius]",
+      selected: distance_radius(50)
+    )
+    expect(page).to have_content displaying_one_trial
+
+    expect(page).to have_content new_york_trial.title
+    expect(page).to have_content new_york_site.facility
+    expect(page).to have_content miles_away(0)
+
+    expect(page).not_to have_content newark_trial.title
+    expect(page).not_to have_content newark_site.facility
+    expect(page).not_to have_content miles_away(94)
+
+    expect(page).not_to have_content san_francisco_trial.title
+  end
+
+  def distance_radius(radius)
+    t("helpers.search_filter.distance_radius", radius: radius)
   end
 
   def miles_away(count)

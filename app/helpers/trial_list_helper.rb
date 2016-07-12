@@ -18,7 +18,21 @@ module TrialListHelper
     ]
   end
 
+  def distance_radius_options
+    [25, 50, 100, 300, 500].map do |distance|
+      [distance_radius(distance), distance]
+    end
+  end
+
+  def distance_radius_selected_value
+    filter_params.fetch("distance_radius", Trial::DEFAULT_DISTANCE_RADIUS).to_i
+  end
+
   private
+
+  def distance_radius(radius)
+    t("helpers.search_filter.distance_radius", radius: radius)
+  end
 
   def filter_params
     params.fetch("trial_filter", {})

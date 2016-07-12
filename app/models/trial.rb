@@ -4,6 +4,7 @@ class Trial < ActiveRecord::Base
   ALL_GENDERS = "Both".freeze
   CONTROL_NEEDED = "Accepts Healthy Volunteers".freeze
   CONTROL_NOT_SPECIFIED = "".freeze
+  DEFAULT_DISTANCE_RADIUS = 100
   MINIMUM_AGE = 0
   MAXIMUM_AGE = 120
   NOT_APPLICABLE = "N/A".freeze
@@ -29,10 +30,10 @@ class Trial < ActiveRecord::Base
     end
   }
 
-  scope :close_to, lambda { |zip_code|
+  scope :close_to, lambda { |zip_code:, radius:|
     if zip_code.present?
       site_pin_point = build_site_pin_point(zip_code)
-      nearby_sites = site_pin_point.nearbys(100)
+      nearby_sites = site_pin_point.nearbys(radius)
       trial_ids = nearby_sites.map(&:trial_id).uniq
       where(id: trial_ids).order_as_specified(id: trial_ids)
     end
