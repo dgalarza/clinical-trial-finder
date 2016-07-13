@@ -1,10 +1,4 @@
 en:
-  application:
-    navigation:
-      blog: "Blog"
-      faq: "FAQ"
-      overview: "Overview"
-      trial_connector: "Trial Connector"
   date:
     formats:
       default:
