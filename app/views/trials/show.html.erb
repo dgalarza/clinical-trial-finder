@@ -1,3 +1,5 @@
+<%= link_to t(".back_button"), url_for(:back) %>
+
 <h1><%= @trial.title %></h1>
 <p><%= @trial.description %></p>
 <% @trial.sites.each do |site| %>

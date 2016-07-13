@@ -188,6 +188,36 @@ RSpec.feature "User views trial list and trial" do
     expect(page).not_to have_content san_francisco_trial.title
   end
 
+  scenario "User filters views trial and returns back to same filtered list" do
+    _non_filtered_trial = create(:trial)
+    keyword = "special word"
+    gender = "Female"
+    filtered_trial = create(
+      :trial,
+      title: "This trial has a #{keyword}",
+      healthy_volunteers: Trial::CONTROL_NEEDED,
+      gender: gender,
+    )
+    visit trials_path
+
+    expect(page).to have_content displaying_multiple_trials(2)
+
+    choose am_patient_field
+    choose gender
+    fill_in("trial_filter[keyword]", with: keyword)
+    apply_search_filter
+
+    expect(page).to have_content displaying_one_trial
+
+    click_link filtered_trial.title
+    click_link t("trials.show.back_button")
+
+    expect(page).to have_content displaying_one_trial
+    expect(find_field(am_patient_field)).to be_checked
+    expect(find_field(gender)).to be_checked
+    expect(page).to have_field("trial_filter[keyword]", with: keyword)
+  end
+
   def distance_radius(radius)
     t("helpers.search_filter.distance_radius", radius: radius)
   end

@@ -48,9 +48,11 @@ en:
       miles_away:
         one: "1 mile away"
         other: "%{count} miles away"
+    search_filter:
+      submit: "Search Trials"
+    show:
+      back_button: "Return to Search"
     trial_count:
       displaying:
         one: "Displaying 1 trial"
         other: "Displaying %{count} trials"
-    search_filter:
-      submit: "Search Trials"
