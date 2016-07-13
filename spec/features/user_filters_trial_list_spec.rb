@@ -1,26 +1,10 @@
 require "rails_helper"
 
-RSpec.feature "User views trial list and trial" do
+RSpec.feature "User filters trial list" do
+  include TrialListHelpers
+
   before do
     create(:import_log)
-  end
-
-  scenario "User views trial list and trial" do
-    trial_title = "Trial Title"
-    trial_description = "Overview of trial"
-    site_facility = "Site Facility"
-    site_zip = "12345"
-    import = create(:import_log)
-    trial = create(:trial, title: trial_title, description: trial_description)
-    create(:site, facility: site_facility, zip_code: site_zip, trial: trial)
-    visit trials_path
-
-    expect(page).to have_content l(import.created_at, format: :timestamp)
-
-    click_link trial_title
-
-    expect(page).to have_content trial_description
-    expect(page).to have_content site_zip
   end
 
   scenario "User searches by keyword" do
@@ -238,23 +222,7 @@ RSpec.feature "User views trial list and trial" do
     "10065"
   end
 
-  def apply_search_filter
-    click_button t("trials.search_filter.submit")
-  end
-
   def am_control_field
     t("helpers.search_filter.am_control")
-  end
-
-  def am_patient_field
-    t("helpers.search_filter.am_patient")
-  end
-
-  def displaying_one_trial
-    t("trials.trial_count.displaying.one")
-  end
-
-  def displaying_multiple_trials(count)
-    t("trials.trial_count.displaying.other", count: count)
   end
 end

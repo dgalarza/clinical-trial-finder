@@ -48,6 +48,10 @@ en:
       miles_away:
         one: "1 mile away"
         other: "%{count} miles away"
+    navigation:
+      next_trial: "Next Trial"
+      previous_trial: "Previous Trial"
+      return_to_search: "Return to Search"
     search_filter:
       submit: "Search Trials"
     show:

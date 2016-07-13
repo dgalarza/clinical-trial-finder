@@ -1,5 +1,6 @@
 class TrialsController < ApplicationController
   def index
+    cache_filters
     @trials = build_trials
     @last_import = ImportLog.last
   end
@@ -10,14 +11,21 @@ class TrialsController < ApplicationController
 
   private
 
+  def cache_filters
+    session[:search_params] = all_params
+  end
+
   def build_trials
-    Trial
+    trials = Trial
       .search_for(filter_params[:keyword])
       .age(filter_params[:age])
       .control(filter_params[:control])
       .gender(filter_params[:gender])
       .close_to(close_to_arguments)
-      .paginate(page: all_params[:page])
+
+    session[:search_results] = trials.pluck(:id)
+
+    trials.paginate(page: all_params[:page])
   end
 
   def filter_params

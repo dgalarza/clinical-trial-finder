@@ -1,4 +1,4 @@
-<%= link_to t(".back_button"), url_for(:back) %>
+<%= render "navigation" %>
 
 <h1><%= @trial.title %></h1>
 <p><%= @trial.description %></p>
@@ -6,4 +6,3 @@
   <p><%= site.facility %></p>
   <p><%= site.zip_code %></p>
 <% end %>
-
