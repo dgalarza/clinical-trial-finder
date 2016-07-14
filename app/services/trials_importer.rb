@@ -30,7 +30,11 @@ class TrialsImporter
   end
 
   def create_import_log
-    ImportLog.create
+    ImportLog.create(counts)
+  end
+
+  def counts
+    { trial_count: Trial.all.count, site_count: Site.all.count }
   end
 
   def clear_import_files

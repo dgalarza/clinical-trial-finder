@@ -22,6 +22,11 @@ en:
         you can keep informed of trials opening in your area. Also, visit the
         Clinical Trial Blog for updates on existing trials and the openings of
         new trials."
+  import_logs:
+    index:
+      imported_at: "Imported At"
+      site_count: "Site Count"
+      trial_count: "Trial Count"
   time:
     formats:
       default:

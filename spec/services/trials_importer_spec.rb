@@ -74,13 +74,19 @@ RSpec.describe TrialsImporter do
       expect(importer).to have_received(:import).twice
     end
 
-    it "creates an Import record" do
+    it "creates an Import record with trial and site count" do
+      trial = create(:trial)
+      3.times { create(:site, trial: trial) }
       stub_file
       stub_zip_file
 
       TrialsImporter.new.import
 
       expect(ImportLog.all.count).to eq 1
+      import_log = ImportLog.first
+
+      expect(import_log.site_count).to eq 3
+      expect(import_log.trial_count).to eq 1
     end
   end
 

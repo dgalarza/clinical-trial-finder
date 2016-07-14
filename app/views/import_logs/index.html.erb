@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th><%= t(".imported_at") %></th>
+    <th><%= t(".trial_count") %></th>
+    <th><%= t(".site_count") %></th>
+  </tr>
+  <% @import_logs.each do |import_log| %>
+    <tr>
+      <td><%= import_log.created_at %></td>
+      <td><%= import_log.trial_count %></td>
+      <td><%= import_log.site_count %></td>
+    </tr>
+  <% end %>
+</table>
