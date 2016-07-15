@@ -202,6 +202,20 @@ RSpec.feature "User filters trial list" do
     expect(page).to have_field("trial_filter[keyword]", with: keyword)
   end
 
+  scenario "User filters and gets 0 results" do
+    create(:trial)
+    visit trials_path
+
+    fill_in("trial_filter[keyword]", with: "does not exist")
+    apply_search_filter
+
+    expect(page).to have_content no_trials_flash
+  end
+
+  def no_trials_flash
+    t("trials.empty_results.no_results")
+  end
+
   def distance_radius(radius)
     t("helpers.search_filter.distance_radius", radius: radius)
   end

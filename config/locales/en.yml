@@ -53,6 +53,10 @@ en:
       miles_away:
         one: "1 mile away"
         other: "%{count} miles away"
+    empty_results:
+      no_results: "Your search returned no results."
+      no_results_instructions: "To match to trials, widen your search or expand
+        your travel distance."
     navigation:
       next_trial: "Next Trial"
       previous_trial: "Previous Trial"
