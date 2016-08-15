@@ -47,8 +47,6 @@ en:
     trials:
       index: "Filters"
   trials:
-    clinicaltrials_gov_logo:
-      trials_imported: "Trials imported on %{timestamp} from:"
     closest_site:
       miles_away:
         one: "1 mile away"
