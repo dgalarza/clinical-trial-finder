@@ -18,8 +18,10 @@
 </head>
 <body class="<%= body_class %>">
   <%= render "site_html_top_half" %>
-  <div id="trial-match">
-    <%= yield %>
+  <div id="trial-match" class="columns wrapper">
+    <div class="trial-base-container">
+      <%= yield %>
+    </div>
   </div>
   <%= render "site_html_bottom_half" %>
   <%= render "javascript" %>

@@ -6,4 +6,5 @@ html {
 *::before,
 *::after {
   box-sizing: inherit;
+  line-height: $base-line-height;
 }

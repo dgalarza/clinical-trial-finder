@@ -1,16 +1,18 @@
-<h1><%= title %></h1>
-
 <%= render "search_filter" %>
 
-<% if @trials.empty? %>
-  <%= render "empty_results" %>
-<% else %>
+<main class="trial-results">
+  <% if @trials.empty? %>
+    <%= render "empty_results" %>
+  <% else %>
 
-  <%= render "trial_count" %>
+    <%= render "trial_count" %>
 
-  <%= render @trials %>
+    <ol class="trial-list feature-list">
+      <%= render @trials %>
+    </ol>
 
-  <%= render "pagination" %>
+    <%= render "pagination" %>
 
-  <%= render "clinicaltrials_gov_logo" %>
-<% end %>
+    <%= render "clinicaltrials_gov_logo" %>
+  <% end %>
+</main>

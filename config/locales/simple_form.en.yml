@@ -11,7 +11,10 @@ en:
     error_notification:
       default_message: "Please review the problems below:"
     # Examples
-    # labels:
+    labels:
+      trials:
+        index:
+          control: "Patient or control?"
     #   defaults:
     #     password: 'Password'
     #   user:

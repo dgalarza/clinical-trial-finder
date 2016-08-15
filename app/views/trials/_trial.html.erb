@@ -1,7 +1,11 @@
-<div>
-  <%= link_to trial.title, trial_path(trial) %>
-  <div><%= "#{trial.minimum_age_original} - #{trial.maximum_age_original}" %></div>
-  <% if zip_code_param.present? %>
-    <%= render "closest_site", closest_site: trial.closest_site(zip_code_param) %>
-  <% end %>
-</div>
+<li>
+  <article>
+    <h3><%= link_to trial.title, trial_path(trial) %></h3>
+    <p><%= trial.description %></p>
+    <p><%= "#{trial.minimum_age_original} - #{trial.maximum_age_original}" %></p>
+    <% if zip_code_param.present? %>
+      <%= render "closest_site", closest_site: trial.closest_site(zip_code_param) %>
+    <% end %>
+    <p><%= link_to "Learn More", trial_path(trial), class: "more" %></p>
+  </article>
+</li>

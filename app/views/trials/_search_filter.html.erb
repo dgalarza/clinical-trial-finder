@@ -1,27 +1,39 @@
-<%= simple_form_for :trial_filter, method: :get do |f| %>
-  <%= f.input :keyword, filter_input_default(:keyword) %>
-  <%= f.input :zip_code, filter_input_default(:zip_code) %>
-  <%= f.input(
-    :distance_radius,
-    as: :select,
-    collection: distance_radius_options,
-    selected: distance_radius_selected_value
-  ) %>
-  <%= f.input :age, filter_input_default(:age) %>
-  <%= f.input(
-    :gender,
-    filter_radio_default(:gender).merge(
-      as: :radio_buttons,
-      collection: ["Male", "Female"]
-    )
-  ) %>
-  <%= f.input(
-    :control,
-    filter_radio_default(:control).merge(
-      as: :radio_buttons,
-      collection: control_options,
-      label: false
-    )
-  ) %>
-  <%= f.submit t(".submit") %>
-<% end %>
+<div class="trial-sidebar">
+  <section class="trial-sidebar-search-parameters">
+    <h2><%= title %></h2>
+    <%= simple_form_for :trial_filter, method: :get do |f| %>
+      <%= f.input :keyword, filter_input_default(:keyword) %>
+      <%= f.input :zip_code, filter_input_default(:zip_code) %>
+
+      <%= f.input(
+        :distance_radius,
+        as: :select,
+        collection: distance_radius_options,
+        selected: distance_radius_selected_value
+      ) %>
+
+      <%= f.input :age, filter_input_default(:age) %>
+
+      <%= f.input(
+        :gender,
+        filter_radio_default(:gender).merge(
+          as: :radio_buttons,
+          collection: ["Male", "Female"]
+        )
+      ) %>
+
+      <%= f.input(
+        :control,
+        filter_radio_default(:control).merge(
+          as: :radio_buttons,
+          collection: control_options,
+          label: t("simple_form.labels.trials.index.control"),
+        )
+      ) %>
+
+      <div class="form-actions">
+        <%= f.submit t(".submit"), class: "donate-link btn btn-orange" %>
+      </div>
+    <% end %>
+  </section>
+</div>

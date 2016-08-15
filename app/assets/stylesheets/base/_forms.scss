@@ -13,7 +13,6 @@ legend {
 
 label {
   display: block;
-  font-weight: 600;
   margin-bottom: $small-spacing / 2;
 }
 
@@ -23,6 +22,7 @@ textarea {
   display: block;
   font-family: $base-font-family;
   font-size: $base-font-size;
+  height: $large-spacing;
 }
 
 #{$all-text-inputs},
@@ -72,7 +72,13 @@ textarea {
 [type="checkbox"],
 [type="radio"] {
   display: inline;
-  margin-right: $small-spacing / 2;
+  margin-right: $small-spacing;
+}
+
+.radio {
+  align-items: center;
+  display: flex;
+  margin-left: $small-spacing;
 }
 
 [type="file"] {
@@ -84,4 +90,9 @@ select {
   margin-bottom: $small-spacing;
   max-width: 100%;
   width: auto;
+}
+
+abbr[title] {
+  border: 0;
+  color: $alert-color;
 }

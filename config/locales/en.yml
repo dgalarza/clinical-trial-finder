@@ -45,7 +45,7 @@ en:
     frequently_asked_questions:
       index: "Overview & Frequently Asked Questions"
     trials:
-      index: "Search Trials"
+      index: "Filters"
   trials:
     clinicaltrials_gov_logo:
       trials_imported: "Trials imported on %{timestamp} from:"

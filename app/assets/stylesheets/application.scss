@@ -1,9 +1,43 @@
 @charset "utf-8";
-
-@import "normalize-rails";
-
 @import "bourbon";
-@import "neat";
 
-@import "base/base";
-@import "refills/flashes";
+#trial-match {
+  @import "base/base";
+
+  .trial-base-container {
+    display: flex;
+  }
+
+  .trial-sidebar {
+    background-color: $light-gray;
+    border: $base-border;
+    flex: 1;
+    padding: $large-spacing;
+
+    &::before {
+      content: "";
+      display: none;
+    }
+  }
+
+  .trial-sidebar-search-parameters {
+    padding: 0;
+  }
+
+  .form-actions {
+    @include margin($base-spacing null);
+  }
+
+  .trial-results {
+    @include padding($large-spacing);
+    flex: 2;
+  }
+
+  .trial-count {
+    text-align: right;
+  }
+
+  .trial-list li {
+    border-bottom: $base-border;
+  }
+}
