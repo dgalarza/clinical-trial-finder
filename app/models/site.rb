@@ -1,5 +1,5 @@
 class Site < ActiveRecord::Base
-  belongs_to :trial
+  belongs_to :trial, counter_cache: true
 
   geocoded_by :address
   after_validation(

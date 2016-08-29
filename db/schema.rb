@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160714021131) do
+ActiveRecord::Schema.define(version: 20160829041507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,13 @@ ActiveRecord::Schema.define(version: 20160714021131) do
     t.datetime "updated_at"
     t.integer  "site_count"
     t.integer  "trial_count"
+  end
+
+  create_table "imports", force: :cascade do |t|
+    t.integer  "valid_trials"
+    t.integer  "valid_sites"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -102,6 +109,7 @@ ActiveRecord::Schema.define(version: 20160714021131) do
     t.string   "keywords",              default: [],               array: true
     t.string   "is_fda_regulated"
     t.string   "has_expanded_access"
+    t.integer  "sites_count"
   end
 
   add_index "trials", ["nct_id"], name: "index_trials_on_nct_id", unique: true, using: :btree

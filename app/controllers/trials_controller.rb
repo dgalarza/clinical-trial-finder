@@ -17,6 +17,7 @@ class TrialsController < ApplicationController
 
   def build_trials
     trials = Trial
+      .sites_present
       .search_for(filter_params[:keyword])
       .age(filter_params[:age])
       .control(filter_params[:control])

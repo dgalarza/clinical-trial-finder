@@ -12,6 +12,10 @@ class Trial < ActiveRecord::Base
   has_many :sites
   before_save :convert_ages
 
+  scope :sites_present, lambda {
+    where("sites_count >= ?", 1 )
+  }
+
   scope :search_for, lambda { |query|
     where("title ILIKE :query OR description ILIKE :query", query: "%#{query}%")
   }
