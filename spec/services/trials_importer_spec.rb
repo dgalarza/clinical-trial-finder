@@ -75,7 +75,7 @@ RSpec.describe TrialsImporter do
     end
 
     it "creates an Import record with trial and site count" do
-      trial = create(:trial)
+      trial = create(:trial, :without_sites)
       3.times { create(:site, trial: trial) }
       stub_file
       stub_zip_file

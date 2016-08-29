@@ -18,6 +18,7 @@ gem "puma"
 gem "rack-canonical-host"
 gem "rails", "~> 4.2.0"
 gem "recipient_interceptor"
+gem "refills"
 gem "rest-client"
 gem "rubyzip"
 gem "sass-rails", "~> 5.0"
@@ -31,6 +32,8 @@ gem "uglifier"
 gem "will_paginate"
 
 group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
   gem "quiet_assets"
   gem "spring"
   gem "spring-commands-rspec"
@@ -45,7 +48,6 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "pry-byebug"
   gem "pry-rails"
-  gem "refills"
   gem "rspec-rails", "~> 3.4.0"
 end
 

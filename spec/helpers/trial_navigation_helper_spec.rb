@@ -22,8 +22,9 @@ RSpec.describe TrialNavigationHelper, type: :helper do
         link = helper.previous_trial_link(trial_id)
 
         expect(link).to eq link_to(
-          t("trials.navigation.previous_trial"),
-          trial_path(previous_trial_id)
+          raw("&#10094; #{t('trials.navigation.previous_trial')}"),
+          trial_path(previous_trial_id),
+          class: "previous-trial"
         )
       end
     end
@@ -50,8 +51,9 @@ RSpec.describe TrialNavigationHelper, type: :helper do
         link = helper.next_trial_link(trial_id)
 
         expect(link).to eq link_to(
-          t("trials.navigation.next_trial"),
-          trial_path(next_trial_id)
+          raw("#{t('trials.navigation.next_trial')} &#10095;"),
+          trial_path(next_trial_id),
+          class: "next-trial"
         )
       end
     end

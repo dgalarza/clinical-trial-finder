@@ -6,7 +6,7 @@ class TrialsController < ApplicationController
   end
 
   def show
-    @trial = Trial.find(trial_id)
+    @trial = Trial.joins(:sites).find(trial_id)
   end
 
   private

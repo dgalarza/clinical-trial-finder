@@ -1,8 +1,172 @@
-<%= render "navigation" %>
+<div class="trial-results">
+  <%= render "navigation" %>
 
-<h1><%= @trial.title %></h1>
-<p><%= @trial.description %></p>
-<% @trial.sites.each do |site| %>
-  <p><%= site.facility %></p>
-  <p><%= site.zip_code %></p>
-<% end %>
+  <h1><%= @trial.title %></h1>
+
+  <div class="section">
+    <h2>Study Purpose:</h2>
+    <p><%= @trial.description %></p>
+  </div>
+
+  <div class="section">
+    <h2>Recruitment Criteria:</h2>
+    <table class="tables">
+      <tbody>
+        <tr>
+          <td>
+            Accepts Controls:
+          </td>
+          <td>
+            <%= @trial.healthy_volunteers %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Study Type:
+          </td>
+          <td>
+            <%= @trial.study_type %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Eligible Ages:
+          </td>
+          <td>
+            <%= @trial.minimum_age %> - <%= @trial.maximum_age %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Gender:
+          </td>
+          <td>
+            <%= @trial.gender %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <% if @trial.criteria.present? %>
+      <div class="expander">
+        <div class="js-expander-trigger expander-trigger expander-hidden">More Inclusion & Exclusion Criteria</div>
+        <div class="expander-content">
+          <p><%= @trial.criteria %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="section">
+    <h2>Trial Details</h2>
+    <table class="tables">
+      <tr>
+        <td>
+          Trial ID:
+        </td>
+        <td>
+          <%= @trial.nct_id %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Phase:
+        </td>
+        <td>
+          <%= @trial.phase %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Lead Sponsor:
+        </td>
+        <td>
+          <%= @trial.sponsor %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Agency Class:
+        </td>
+        <td>
+          <%= @trial.agency_class %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Overall Status:
+        </td>
+        <td>
+          <%= @trial.overall_status %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Countries:
+        </td>
+        <td>
+          <%= @trial.countries.join(", ") %>
+        </td>
+      </tr>
+      <% if @trial.link_url.present? %>
+        <tr>
+          <td>
+            Study Website:
+          </td>
+          <td>
+            <a href="<%= @trial.link_url %>" target="_blank"><%= @trial.link_url %></a>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <% if @trial.detailed_description.present? %>
+      <div class="expander">
+        <div class="js-expander-trigger expander-trigger expander-hidden">Additional Details</div>
+        <div class="expander-content">
+          <p><%= @trial.detailed_description %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="section">
+    <h2>Contact a Trial Team</h2>
+    <p>If you are interested in learning more about this trial, find the trial site nearest  to your location and contact the site coordinator via email or phone.</p>
+
+    <% @trial.sites.each do |site| %>
+      <div class="expander border">
+        <div class="js-expander-trigger expander-trigger expander-hidden"><%= "#{site.city}, #{site.state}" %></div>
+        <div class="expander-content site-details">
+          <p>
+            <b>Status:</b>
+            <%=  "#{site.status}" %>
+          </p>
+          <p>
+            <b>Address:</b>
+            <br>
+            <%= "#{site.facility}" %>
+            <br>
+            <%= "#{site.city}, #{site.state}, #{site.zip_code}" %>
+          </p>
+          <p>
+            <b>Site Contact:</b>
+            <br>
+            <%= "#{site.contact_name}" %>
+            <br>
+            <a href="mailto:<%=  "#{site.contact_email}" %>">
+              <%=  "#{site.contact_email}" %></a>
+            <%=  "#{site.contact_phone} #{site.contact_phone_ext}" %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="trial-sidebar">
+  <div class="textwidget">
+    <p>Clinical Outcomes Assessments in Brain Tumor Clinical Trials: Proceedings of the October 15, 2014 Workshop</p>
+    <p><a href="http://neuro-oncology.oxfordjournals.org/content/18/suppl_2.toc" onclick="__gaTracker('send', 'event', 'outbound-widget', 'http://neuro-oncology.oxfordjournals.org/content/18/suppl_2.toc', '');" alt="Imaging Endpoints in Brain Tumor Clinical Trials: Proceedings of the January 30, 2014 Workshop" target="_blank"><img src="http://36nxpf1hdwoc46at6o2wxom8.wpengine.netdna-cdn.com/wp-content/assets/Supplement-2-Cover-Image-250.jpg" style="width:100%;"></a></p>
+
+    <p>Proceedings of the January 30, 2014 Jumpstarting Brain Tumor Drug Development Coalition Workshop: Imaging Endpoints in Brain Tumor Clinical Trials</p>
+    <p><a href="http://neuro-oncology.oxfordjournals.org/content/16/suppl_7.toc" onclick="__gaTracker('send', 'event', 'outbound-widget', 'http://neuro-oncology.oxfordjournals.org/content/16/suppl_7.toc', '');" alt="Imaging Endpoints in Brain Tumor Clinical Trials: Proceedings of the January 30, 2014 Workshop" target="_blank"><img src="http://36nxpf1hdwoc46at6o2wxom8.wpengine.netdna-cdn.com/wp-content/assets/endpoints-supplement.jpg" style="width:100%;"></a></p>
+  </div>
+</div>

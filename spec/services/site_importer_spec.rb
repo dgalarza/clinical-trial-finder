@@ -7,7 +7,7 @@ RSpec.describe SiteImporter, type: :service do
 
   describe "#import" do
     it "creates Site associated with Trial" do
-      trial = build(:trial)
+      trial = build(:trial, :without_sites)
 
       SiteImporter.new(trial: trial, site: site_in_nokogiri).import
 
@@ -15,7 +15,7 @@ RSpec.describe SiteImporter, type: :service do
     end
 
     it "maps attributes to create Site" do
-      trial = build(:trial)
+      trial = build(:trial, :without_sites)
 
       SiteImporter.new(trial: trial, site: site_in_nokogiri).import
 
