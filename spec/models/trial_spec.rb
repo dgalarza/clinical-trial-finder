@@ -98,7 +98,7 @@ RSpec.describe Trial, type: :model do
 
           trials = Trial.gender(nil)
 
-          expect(trials).to eq [trial_1, trial_2]
+          expect(trials).to match_array [trial_1, trial_2]
         end
       end
     end
@@ -124,7 +124,7 @@ RSpec.describe Trial, type: :model do
 
           trials = Trial.age(30)
 
-          expect(trials).to eq [trial_matches_age]
+          expect(trials).to match_array [trial_matches_age]
         end
       end
 
@@ -135,7 +135,7 @@ RSpec.describe Trial, type: :model do
 
           trials = Trial.age(nil)
 
-          expect(trials).to eq [trial_1, trial_2]
+          expect(trials).to match_array [trial_1, trial_2]
         end
       end
     end
@@ -151,7 +151,7 @@ RSpec.describe Trial, type: :model do
 
           trials = Trial.control("true")
 
-          expect(trials).to eq [
+          expect(trials).to match_array [
             trial_for_controls_and_patients,
             trial_without_setting
           ]
@@ -168,7 +168,7 @@ RSpec.describe Trial, type: :model do
 
           trials = Trial.control("false")
 
-          expect(trials).to eq [
+          expect(trials).to match_array [
             trial_for_controls_and_patients,
             trial_without_setting,
             trial_for_patients_only
@@ -186,7 +186,7 @@ RSpec.describe Trial, type: :model do
 
           trials = Trial.control(nil)
 
-          expect(trials).to eq [
+          expect(trials).to match_array [
             trial_for_controls_and_patients,
             trial_without_setting,
             trial_for_patients_only
@@ -197,20 +197,20 @@ RSpec.describe Trial, type: :model do
 
     describe ".close_to" do
       context "zip code is NOT provided" do
-        it "returns all trials" do
+        it "returns all trials in abc order" do
           seed_new_york_zip_code
           new_york_site =
             build(:site, latitude: 40.7728432, longitude: -73.9558204)
-          new_york_trial = create(:trial, sites: [new_york_site])
+          new_york_trial = create(:trial, title: "B Trial", sites: [new_york_site])
           san_fransicso_site =
             build(:site, latitude: 37.7642093, longitude: -122.4571623)
-          san_francisco_trial = create(:trial, sites: [san_fransicso_site])
+          san_francisco_trial = create(:trial, title: "A Trial", sites: [san_fransicso_site])
 
           trials = Trial.close_to(zip_code: "", radius: "")
 
           expect(trials).to eq [
+            san_francisco_trial,
             new_york_trial,
-            san_francisco_trial
           ]
         end
       end
@@ -241,7 +241,7 @@ RSpec.describe Trial, type: :model do
 
             trials = Trial.close_to(zip_code: new_york_zip_code, radius: radius)
 
-            expect(trials).to eq [new_york_trial, newark_trial]
+            expect(trials).to match_array [new_york_trial, newark_trial]
           end
         end
 
@@ -270,7 +270,7 @@ RSpec.describe Trial, type: :model do
 
             trials = Trial.close_to(zip_code: new_york_zip_code, radius: radius)
 
-            expect(trials).to eq [new_york_trial]
+            expect(trials).to match_array [new_york_trial]
           end
         end
       end

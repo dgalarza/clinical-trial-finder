@@ -40,6 +40,8 @@ class Trial < ActiveRecord::Base
       nearby_sites = site_pin_point.nearbys(radius)
       trial_ids = nearby_sites.map(&:trial_id).uniq
       where(id: trial_ids).order_as_specified(id: trial_ids)
+    else
+      order(:title)
     end
   }
 

@@ -25,13 +25,15 @@ RSpec.feature "User filters trial list" do
   end
 
   scenario "User browses trials on second page of results" do
-    trial_count = 15
-    1.upto(trial_count) { |number| create(:trial, title: "Trial #{number}") }
+    number_of_trials = 15
+    ("A".."Z").first(number_of_trials).each do |letter|
+      create(:trial, title: "#{letter} Trial")
+    end
     last_trial_title = Trial.last.title
 
     visit trials_path
 
-    expect(page).to have_content displaying_multiple_trials(trial_count)
+    expect(page).to have_content displaying_multiple_trials(number_of_trials)
     expect(page).not_to have_content last_trial_title
 
     click_link "Next"
