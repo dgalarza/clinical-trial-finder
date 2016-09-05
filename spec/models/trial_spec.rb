@@ -62,7 +62,7 @@ RSpec.describe Trial, type: :model do
 
         trials = Trial.search_for("special")
 
-        expect(trials).to eq [trial_with_keyword, description_with_keyword]
+        expect(trials).to match_array [trial_with_keyword, description_with_keyword]
       end
     end
 
@@ -75,7 +75,7 @@ RSpec.describe Trial, type: :model do
 
           trials = Trial.gender("Male")
 
-          expect(trials).to eq [trial_for_everyone, trial_for_men]
+          expect(trials).to match_array [trial_for_everyone, trial_for_men]
         end
       end
 
@@ -87,7 +87,7 @@ RSpec.describe Trial, type: :model do
 
           trials = Trial.gender("Female")
 
-          expect(trials).to eq [trial_for_everyone, trial_for_women]
+          expect(trials).to match_array [trial_for_everyone, trial_for_women]
         end
       end
 
@@ -305,6 +305,41 @@ RSpec.describe Trial, type: :model do
       closest_site = trial.closest_site(zip_code)
 
       expect(closest_site).to eq [closest_site_for_trial, 94]
+    end
+  end
+
+  describe "#ordered_sites" do
+    context "provded nil for coordinates" do
+      it "returns all sites" do
+        site1 = build(:site)
+        site2 = build(:site)
+        site3 = build(:site)
+        site4 = build(:site)
+        sites = [site3, site2, site4, site1]
+        trial = build(:trial, sites: sites)
+
+        expect(trial.ordered_sites(nil)).to eq sites
+      end
+    end
+
+    context "provded valid coordinates" do
+      it "returns all sites" do
+        coordinates = [ 40.7728432, -73.9558204]
+        closest_site = build(:site, latitude: 40.77, longitude: -73)
+        second_closest_site = build(:site, latitude: 30.77, longitude: -73)
+        furthest_site = build(:site, latitude: 10.77, longitude: -73)
+        site_without_coordinates = build(:site, latitude: nil, longitude: nil)
+
+        sites = [site_without_coordinates, second_closest_site, furthest_site, closest_site]
+        trial = build(:trial, sites: sites)
+
+        expect(trial.ordered_sites(coordinates)).to eq [
+          closest_site,
+          second_closest_site,
+          furthest_site,
+          site_without_coordinates,
+        ]
+      end
     end
   end
 

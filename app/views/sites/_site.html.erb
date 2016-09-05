@@ -1,0 +1,28 @@
+<div class="expander border site">
+  <div class="js-expander-trigger expander-trigger expander-hidden">
+    <%= "#{site.city}, #{site.state}" %>
+    <%= distance_from_site(site) %>
+  </div>
+  <div class="expander-content site-details">
+    <p>
+      <b>Status:</b>
+      <%=  "#{site.status}" %>
+    </p>
+    <p>
+      <b>Address:</b>
+      <br>
+      <%= "#{site.facility}" %>
+      <br>
+      <%= "#{site.city}, #{site.state}, #{site.zip_code}" %>
+    </p>
+    <p>
+      <b>Site Contact:</b>
+      <br>
+      <%= "#{site.contact_name}" %>
+      <br>
+      <a href="mailto:<%=  "#{site.contact_email}" %>">
+        <%=  "#{site.contact_email}" %></a>
+      <%=  "#{site.contact_phone} #{site.contact_phone_ext}" %>
+    </p>
+  </div>
+</div>

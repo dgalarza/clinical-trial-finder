@@ -115,4 +115,42 @@ RSpec.describe TrialListHelper, type: :helper do
       end
     end
   end
+
+  describe "#distance_from_site" do
+    context "zip code coordinates session is nil" do
+      it "returns nil" do
+        site = double(:site)
+        session[:zip_code_coordinates] = nil
+
+        expect(helper.distance_from_site(site)).to eq nil
+      end
+    end
+
+    context "zip code coordinates session is set" do
+      it "returns miles away with count" do
+        site = build(:site)
+        coordinates = [123, 456]
+        miles_away = 12.3456
+        session[:zip_code_coordinates] = coordinates
+        allow(site).to receive(:distance_from).with(coordinates).
+          and_return(miles_away)
+
+        expected_response = helper.distance_from_site(site)
+
+        expect(expected_response).to eq t("trials.miles_away", count: 12)
+      end
+
+      context "site does not have latitude longitude" do
+        it "returns nil" do
+          site = build(:site, latitude: nil, longitude: nil)
+          coordinates = [123, 456]
+          session[:zip_code_coordinates] = coordinates
+
+          expected_response = helper.distance_from_site(site)
+
+          expect(expected_response).to eq nil
+        end
+      end
+    end
+  end
 end

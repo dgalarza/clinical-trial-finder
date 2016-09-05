@@ -132,33 +132,7 @@
     <h2>Contact a Trial Team</h2>
     <p>If you are interested in learning more about this trial, find the trial site nearest  to your location and contact the site coordinator via email or phone.</p>
 
-    <% @trial.sites.each do |site| %>
-      <div class="expander border">
-        <div class="js-expander-trigger expander-trigger expander-hidden"><%= "#{site.city}, #{site.state}" %></div>
-        <div class="expander-content site-details">
-          <p>
-            <b>Status:</b>
-            <%=  "#{site.status}" %>
-          </p>
-          <p>
-            <b>Address:</b>
-            <br>
-            <%= "#{site.facility}" %>
-            <br>
-            <%= "#{site.city}, #{site.state}, #{site.zip_code}" %>
-          </p>
-          <p>
-            <b>Site Contact:</b>
-            <br>
-            <%= "#{site.contact_name}" %>
-            <br>
-            <a href="mailto:<%=  "#{site.contact_email}" %>">
-              <%=  "#{site.contact_email}" %></a>
-            <%=  "#{site.contact_phone} #{site.contact_phone_ext}" %>
-          </p>
-        </div>
-      </div>
-    <% end %>
+    <%= render @trial.ordered_sites(session[:zip_code_coordinates]) %>
   </div>
 </div>
 <div class="trial-sidebar">

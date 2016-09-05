@@ -13,6 +13,17 @@ class TrialsController < ApplicationController
 
   def cache_filters
     session[:search_params] = all_params
+    set_zip_code_coordinates
+  end
+
+  def set_zip_code_coordinates
+    if zip_code_filter.present?
+      coordinates = ZipCode.find_by(zip_code: zip_code_filter).coordinates
+    else
+      coordinates = nil
+    end
+
+    session[:zip_code_coordinates] = coordinates
   end
 
   def build_trials
@@ -51,9 +62,13 @@ class TrialsController < ApplicationController
 
   def close_to_arguments
     {
-      zip_code: filter_params[:zip_code],
+      zip_code: zip_code_filter,
       radius: filter_params[:distance_radius]
     }
+  end
+
+  def zip_code_filter
+    filter_params[:zip_code]
   end
 
   def trial_id

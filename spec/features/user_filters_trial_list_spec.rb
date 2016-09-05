@@ -196,7 +196,7 @@ RSpec.feature "User filters trial list" do
     expect(page).to have_content displaying_one_trial
 
     click_link filtered_trial.title
-    click_link t("trials.show.back_button")
+    click_link t("trials.navigation.return_to_search")
 
     expect(page).to have_content displaying_one_trial
     expect(find_field(am_patient_field)).to be_checked
@@ -223,7 +223,7 @@ RSpec.feature "User filters trial list" do
   end
 
   def miles_away(count)
-    t("trials.closest_site.miles_away", count: count)
+    t("trials.miles_away", count: count)
   end
 
   def seed_new_york_zip_code

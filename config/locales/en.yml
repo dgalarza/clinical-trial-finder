@@ -1,69 +1,49 @@
+---
 en:
   date:
     formats:
-      default:
-        "%m/%d/%Y"
-      with_weekday:
-        "%a %m/%d/%y"
+      default: "%m/%d/%Y"
+      with_weekday: "%a %m/%d/%y"
   helpers:
     search_filter:
-      am_control: "I am a control"
-      am_patient: "I have a brain tumor"
-      distance_radius: "Will travel %{radius} miles"
-  homepage:
-    show:
-      overview: "Clinical trials are an important treatment option for cancer
-        patients of all ages. Clinical trials can offer patients the most
-        cutting-edge treatment, and can help bring new therapies to market.
-        National Brain Tumor Society's Clinical Trial Connector is an online
-        tool to help patients find clinical trials that are right for them. You
-        can browse brain tumor trials and filter these based on medical history,
-        location, and age. Coming soon - you will be able to register so that
-        you can keep informed of trials opening in your area. Also, visit the
-        Clinical Trial Blog for updates on existing trials and the openings of
-        new trials."
+      am_control: I am a control
+      am_patient: I have a brain tumor
+      distance_radius: Will travel %{radius} miles
   import_logs:
     index:
-      imported_at: "Imported At"
-      site_count: "Site Count"
-      trial_count: "Trial Count"
+      imported_at: Imported At
+      site_count: Site Count
+      trial_count: Trial Count
+  simple_form:
+    labels:
+      trials:
+        index:
+          control: Control
   time:
     formats:
-      default:
-        "%a, %b %-d, %Y at %r"
-      date:
-        "%b %-d, %Y"
-      short:
-        "%B %d"
+      date: "%b %-d, %Y"
+      default: "%a, %b %-d, %Y at %r"
+      short: "%B %d"
       timestamp: "%b %d, %Y %I:%M %p"
   titles:
     application: Trial-match
-    articles:
-      index: "Clinical Trial Updates"
-    homepage:
-      show: "Overview"
-    frequently_asked_questions:
-      index: "Overview & Frequently Asked Questions"
     trials:
-      index: "Filters"
+      index: Filters
   trials:
-    closest_site:
-      miles_away:
-        one: "1 mile away"
-        other: "%{count} miles away"
     empty_results:
-      no_results: "Your search returned no results."
-      no_results_instructions: "To match to trials, widen your search or expand
-        your travel distance."
+      no_results: Your search returned no results.
+      no_results_instructions: To match to trials, widen your search or expand your
+        travel distance.
+    miles_away:
+      one: 1 mile away
+      other: "%{count} miles away"
     navigation:
-      next_trial: "Next Trial"
-      previous_trial: "Previous Trial"
-      return_to_search: "Return to Search"
+      next_trial: Next Trial
+      previous_trial: Previous Trial
+      return_to_search: Return to Search
     search_filter:
-      submit: "Search Trials"
-    show:
-      back_button: "Return to Search"
+      submit: Search Trials
     trial_count:
       displaying:
-        one: "Displaying 1 trial"
-        other: "Displaying %{count} trials"
+        one: Displaying 1 trial
+        other: Displaying %{count} trials

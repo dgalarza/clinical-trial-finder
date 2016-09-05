@@ -53,6 +53,20 @@ class Trial < ActiveRecord::Base
     [site, distance]
   end
 
+  def ordered_sites(coordinates)
+    if coordinates.present?
+      sites.sort_by do |site|
+        if distance = site.distance_from(coordinates)
+          distance
+        else
+          Float::INFINITY
+        end
+      end
+    else
+      sites
+    end
+  end
+
   private
 
   def self.build_site_pin_point(zip_code)

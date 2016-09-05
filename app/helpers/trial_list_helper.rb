@@ -28,6 +28,14 @@ module TrialListHelper
     filter_params.fetch("distance_radius", Trial::DEFAULT_DISTANCE_RADIUS).to_i
   end
 
+  def distance_from_site(site)
+    if zip_code_coordinates = session[:zip_code_coordinates]
+      if distance = site.distance_from(zip_code_coordinates)
+        t("trials.miles_away", count: distance.round())
+      end
+    end
+  end
+
   private
 
   def distance_radius(radius)
