@@ -38,6 +38,20 @@ After setting up, you can run the application using [Heroku Local]:
 
 [Heroku Local]: https://devcenter.heroku.com/articles/heroku-local
 
+Geocoding and importing trials is time intensive. The best way to seed your
+database is grabbing a snapshot of production. You can do this by:
+
+```
+heroku pg:backups capture --app trial-match-staging
+
+curl -o latest.dump `heroku pg:backups public-url --app trial-match-staging`
+
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -d
+trial-match_development latest.dump
+
+rm latest.dump
+```
+
 ## Guidelines
 
 Use the following guides for getting things done, programming well, and
