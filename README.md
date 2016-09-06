@@ -46,8 +46,7 @@ heroku pg:backups capture --app trial-match-staging
 
 curl -o latest.dump `heroku pg:backups public-url --app trial-match-staging`
 
-pg_restore --verbose --clean --no-acl --no-owner -h localhost -d
-trial-match_development latest.dump
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -d trial-match_development latest.dump
 
 rm latest.dump
 ```
