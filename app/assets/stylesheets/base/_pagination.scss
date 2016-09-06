@@ -1,0 +1,35 @@
+.apple-pagination {
+  background: $light-gray;
+  border: $base-border-width solid $medium-gray;
+  padding: 1em;
+  text-align: center;
+
+  a,
+  span {
+    padding: $small-spacing;
+  }
+
+  .disabled {
+    color: $disabled-color;
+  }
+
+  .current {
+    background-color: $dark-gray;
+    border-radius: $base-spacing;
+    color: $white;
+    display: inline-block;
+    font-style: normal;
+    height: 1.4em;
+    line-height: $base-line-height * 1.2;
+    width: 1.4em;
+  }
+
+  a {
+    color: $black;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 @charset "utf-8";
+
 @import "bourbon";
 
 #trial-match {
@@ -40,7 +41,7 @@
   }
 
   .trial-list li {
-    border-bottom: $base-border;
+    @include margin($large-spacing null);
   }
 
   .previous-trial {

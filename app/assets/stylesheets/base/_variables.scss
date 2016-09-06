@@ -22,19 +22,23 @@ $heading-line-height: 1.2;
 
 // Colors
 $blue: #1565c0;
-$dark-gray: #333;
 $light-gray: #f6f6f6;
-$medium-gray: #999;
+$medium-gray: shade($light-gray, 20%);
+$dark-gray: shade($medium-gray, 20%);
 $red: #f00;
+$white: #fff;
+$black: #000;
 
 // Font Colors
 $base-font-color: $dark-gray;
 $action-color: $blue;
 $alert-color: $red;
+$disabled-color: $medium-gray;
 
 // Border
 $base-border-color: $light-gray;
-$base-border: 1px solid $base-border-color;
+$base-border-width: 1px;
+$base-border: $base-border-width solid $base-border-color;
 
 // Background Colors
 $base-background-color: #fff;
