@@ -35,8 +35,8 @@ en:
       no_results_instructions: To match to trials, widen your search or expand your
         travel distance.
     miles_away:
-      one: 1 mile away
-      other: "%{count} miles away"
+      one: "1 mi away"
+      other: "%{count} mi away"
     navigation:
       next_trial: Next Trial
       previous_trial: Previous Trial

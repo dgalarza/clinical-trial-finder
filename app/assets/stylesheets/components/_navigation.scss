@@ -1,0 +1,21 @@
+.form-actions {
+  @include margin($base-spacing null);
+}
+
+.previous-trial {
+  display: inline-block;
+  margin-right: $base-spacing;
+}
+
+.next-trial {
+  display: inline-block;
+}
+
+.search-result-links {
+  @include margin($base-spacing null $large-spacing);
+}
+
+.navigation-links {
+  display: inline-block;
+  float: right;
+}

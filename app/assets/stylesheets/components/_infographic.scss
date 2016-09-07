@@ -1,0 +1,26 @@
+$icon-human: "data:image/svg+xml;charset=utf-8,<svg width='18' height='12' viewBox='0 0 18 12' xmlns='http://www.w3.org/2000/svg'><title>people</title><path d='M5.727 6.546C3.818 6.546 0 7.5 0 9.409v2.045h11.456V9.41c0-1.908-3.818-2.863-5.728-2.863m6.547 0c-.238 0-.505.014-.79.044.947.685 1.607 1.606 1.607 2.82v2.044H18V9.41c0-1.908-3.817-2.863-5.726-2.863M5.727-.001a2.456 2.456 0 0 0 0 4.91 2.449 2.449 0 0 0 2.448-2.454A2.45 2.45 0 0 0 5.727-.001m6.547.818a2.456 2.456 0 0 0 0 4.91 2.448 2.448 0 0 0 2.446-2.454A2.449 2.449 0 0 0 12.274.817' fill='#419BF9' fill-rule='evenodd'/></svg>";
+$icon-location: "data:image/svg+xml;charset=utf-8,<svg width='14' height='17' viewBox='0 0 14 17' xmlns='http://www.w3.org/2000/svg'><title>Group</title><g fill='none' fill-rule='evenodd'><path d='M7 .001c3.878 0 7 3.143 7 7.034 0 1.972-1.077 4.05-3.93 6.874L7 17l-3.122-3.091C1.078 11.032 0 8.955 0 7.036 0 3.144 3.122 0 7 0v.001z' fill='#117CE6'/><circle fill='#FFF' cx='7' cy='7' r='4'/></g></svg>";
+
+.infographic-group {
+  display: block;
+}
+
+.infographic-item {
+  display: inline-block;
+
+  &::before {
+    content: "";
+    display: inline-block;
+    height: 2em;
+    vertical-align: middle;
+    width: 2em;
+  }
+
+  &.icon-location::before {
+    background: url($icon-location) no-repeat center center;
+  }
+
+  &.icon-human::before {
+    background: url($icon-human) no-repeat center center;
+  }
+}

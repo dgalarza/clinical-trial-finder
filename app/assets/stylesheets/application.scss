@@ -7,28 +7,12 @@
   @import "refills/tables";
   @import "refills/expander";
 
+  @import "components/sidebar";
+  @import "components/navigation";
+  @import "components/infographic";
+
   .trial-base-container {
     display: flex;
-  }
-
-  .trial-sidebar {
-    background-color: $light-gray;
-    border: $base-border;
-    flex: 1;
-    padding: $large-spacing;
-
-    &::before {
-      content: "";
-      display: none;
-    }
-  }
-
-  .trial-sidebar-search-parameters {
-    padding: 0;
-  }
-
-  .form-actions {
-    @include margin($base-spacing null);
   }
 
   .trial-results {
@@ -42,24 +26,6 @@
 
   .trial-list li {
     @include margin($large-spacing null);
-  }
-
-  .previous-trial {
-    margin-right: $base-spacing;
-    display: inline-block;
-  }
-
-  .next-trial {
-    display: inline-block;
-  }
-
-  .search-result-links {
-    @include margin($base-spacing null $large-spacing);
-  }
-
-  .navigation-links {
-    float: right;
-    display: inline-block;
   }
 
   .section {

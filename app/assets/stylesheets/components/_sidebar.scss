@@ -1,0 +1,15 @@
+.trial-sidebar {
+  background-color: $light-gray;
+  border: $base-border;
+  flex: 1;
+  padding: $large-spacing;
+
+  &::before {
+    content: "";
+    display: none;
+  }
+}
+
+.trial-sidebar-search-parameters {
+  padding: 0;
+}
