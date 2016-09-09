@@ -2,7 +2,6 @@
   <section class="trial-sidebar-search-parameters">
     <h2><%= title %></h2>
     <%= simple_form_for :trial_filter, method: :get do |f| %>
-      <%= f.input :keyword, filter_input_default(:keyword) %>
       <%= f.input :zip_code, filter_input_default(:zip_code) %>
 
       <%= f.input(
@@ -30,6 +29,8 @@
           label: t("simple_form.labels.trials.index.control"),
         )
       ) %>
+
+      <%= f.input :keyword, filter_input_default(:keyword) %>
 
       <div class="form-actions">
         <%= f.submit t(".submit"), class: "donate-link btn btn-orange" %>
