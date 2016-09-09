@@ -137,11 +137,15 @@
 </div>
 
 <div class="trial-sidebar">
-  <div class="textwidget">
-    <p>Clinical Outcomes Assessments in Brain Tumor Clinical Trials: Proceedings of the October 15, 2014 Workshop</p>
+  <% if session[:zip_code_coordinates] %>
+    <h3>Nearest location</h3>
+    <iframe width="275" height="200" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=<%= ENV.fetch("GOOGLE_EMBED_KEY") %>&q=<%= @trial.ordered_sites(session[:zip_code_coordinates]).first.facility %>"></iframe>
+  <% else %>
+    <h3>Clinical Outcomes Assessments in Brain Tumor Clinical Trials:</h3>
+    <p>Proceedings of the October 15, 2014 Workshop</p>
     <p><a href="http://neuro-oncology.oxfordjournals.org/content/18/suppl_2.toc" onclick="__gaTracker('send', 'event', 'outbound-widget', 'http://neuro-oncology.oxfordjournals.org/content/18/suppl_2.toc', '');" alt="Imaging Endpoints in Brain Tumor Clinical Trials: Proceedings of the January 30, 2014 Workshop" target="_blank"><img src="http://36nxpf1hdwoc46at6o2wxom8.wpengine.netdna-cdn.com/wp-content/assets/Supplement-2-Cover-Image-250.jpg" style="width:100%;"></a></p>
-
-    <p>Proceedings of the January 30, 2014 Jumpstarting Brain Tumor Drug Development Coalition Workshop: Imaging Endpoints in Brain Tumor Clinical Trials</p>
+    <h3>Imaging Endpoints in Brain Tumor Clinical Trials</h3>
+    <p>Proceedings of the January 30, 2014 Jumpstarting Brain Tumor Drug Development Coalition Workshop:</p>
     <p><a href="http://neuro-oncology.oxfordjournals.org/content/16/suppl_7.toc" onclick="__gaTracker('send', 'event', 'outbound-widget', 'http://neuro-oncology.oxfordjournals.org/content/16/suppl_7.toc', '');" alt="Imaging Endpoints in Brain Tumor Clinical Trials: Proceedings of the January 30, 2014 Workshop" target="_blank"><img src="http://36nxpf1hdwoc46at6o2wxom8.wpengine.netdna-cdn.com/wp-content/assets/endpoints-supplement.jpg" style="width:100%;"></a></p>
-  </div>
+  <% end %>
 </div>
