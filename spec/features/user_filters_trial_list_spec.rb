@@ -68,6 +68,37 @@ RSpec.feature "User filters trial list" do
     expect(page).to have_content trial_matches_age.title
   end
 
+  scenario "User filters by observational/interventional" do
+    interventional_trial = create(
+      :trial,
+      study_type: "Interventional"
+    )
+    observational_trial = create(
+      :trial,
+      study_type: "Observational",
+    )
+    observational_registry_trial = create(
+      :trial,
+      study_type: "Observational [Patient Registry]",
+    )
+    visit trials_path
+
+    expect(page).to have_content displaying_multiple_trials(3)
+
+    choose "Interventional"
+    apply_search_filter
+
+    expect(page).to have_content displaying_one_trial
+    expect(page).to have_content interventional_trial.title
+
+    choose "Observational"
+    apply_search_filter
+
+    expect(page).to have_content displaying_multiple_trials(2)
+    expect(page).to have_content observational_trial.title
+    expect(page).to have_content observational_registry_trial.title
+  end
+
   scenario "User filters by gender" do
     trial_for_everyone = create(:trial, gender: "Both")
     trial_for_men = create(:trial, gender: "Male")

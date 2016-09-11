@@ -81,6 +81,17 @@ RSpec.describe TrialListHelper, type: :helper do
     end
   end
 
+  describe "#study_type_options" do
+    it "returns options for study_type input" do
+      options = helper.study_type_options
+
+      expect(options).to eq [
+        [t("helpers.search_filter.observational"), "Observational"],
+        [t("helpers.search_filter.interventional"), "Interventional"]
+      ]
+    end
+  end
+
   describe "#distance_radius_options" do
     it "returns options for distance_radius" do
       options = helper.distance_radius_options

@@ -33,6 +33,7 @@ class TrialsController < ApplicationController
       .age(filter_params[:age])
       .control(filter_params[:control])
       .gender(filter_params[:gender])
+      .study_type(filter_params[:study_type])
       .close_to(close_to_arguments)
 
     session[:search_results] = trials.pluck(:id)
@@ -55,6 +56,7 @@ class TrialsController < ApplicationController
         :distance_radius,
         :gender,
         :keyword,
+        :study_type,
         :zip_code
       ]
     )

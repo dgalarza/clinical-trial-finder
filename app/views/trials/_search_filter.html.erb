@@ -30,6 +30,15 @@
         )
       ) %>
 
+      <%= f.input(
+        :study_type,
+        filter_radio_default(:study_type).merge(
+          as: :radio_buttons,
+          collection: study_type_options,
+          label: t("simple_form.labels.trials.index.study_type"),
+        )
+      ) %>
+
       <%= f.input :keyword, filter_input_default(:keyword) %>
 
       <div class="form-actions">

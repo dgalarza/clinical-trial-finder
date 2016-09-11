@@ -24,6 +24,14 @@ class Trial < ActiveRecord::Base
     where("gender IN (?)", [sex, ALL_GENDERS]) unless sex.blank?
   }
 
+  scope :study_type, lambda { |study_type|
+    if study_type == "Interventional"
+      where("study_type = 'Interventional'")
+    elsif study_type == "Observational"
+      where("study_type IN ('Observational', 'Observational [Patient Registry]')")
+    end
+  }
+
   scope :age, lambda { |age|
     where("minimum_age <= ? and maximum_age >= ?", age, age) unless age.blank?
   }

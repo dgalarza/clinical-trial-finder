@@ -11,3 +11,4 @@ en:
       trials:
         index:
           control: "Patient or control?"
+          study_type: "Type of trial?"

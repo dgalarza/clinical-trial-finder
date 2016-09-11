@@ -18,6 +18,13 @@ module TrialListHelper
     ]
   end
 
+  def study_type_options
+    [
+      [t("helpers.search_filter.observational"), "Observational"],
+      [t("helpers.search_filter.interventional"), "Interventional"]
+    ]
+  end
+
   def distance_radius_options
     [25, 50, 100, 300, 500].map do |distance|
       [distance_radius(distance), distance]

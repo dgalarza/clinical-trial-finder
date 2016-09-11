@@ -103,6 +103,45 @@ RSpec.describe Trial, type: :model do
       end
     end
 
+    describe ".study_type" do
+      context "study_type is filtered by interventional" do
+        it "returns interventional only" do
+          _observational = create(:trial, study_type: "Observational")
+          _observational_registry =
+            create(:trial, study_type: "Observational [Patient Registry]")
+          interventional = create(:trial, study_type: "Interventional")
+
+          trials = Trial.study_type("Interventional")
+
+          expect(trials).to match_array [interventional]
+        end
+      end
+
+      context "study_type is filtered by observational" do
+        it "returns observational and observational registry" do
+          observational = create(:trial, study_type: "Observational")
+          observational_registry =
+            create(:trial, study_type: "Observational [Patient Registry]")
+          _interventional = create(:trial, study_type: "Interventional")
+
+          trials = Trial.study_type("Observational")
+
+          expect(trials).to match_array [observational_registry, observational]
+        end
+      end
+
+      context "study_type is NOT filtered" do
+        it "does NOT filter" do
+          trial_1 = create(:trial)
+          trial_2 = create(:trial)
+
+          trials = Trial.study_type(nil)
+
+          expect(trials).to match_array [trial_1, trial_2]
+        end
+      end
+    end
+
     describe ".age" do
       context "age is present" do
         it "queries patient age between minimum and maximum" do
