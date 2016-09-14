@@ -7,6 +7,10 @@ class Site < ActiveRecord::Base
     if: ->(site) { site.address.present? }
   )
 
+  def facility_address
+    "#{facility} #{address}"
+  end
+
   def address
     if city.present? && state.present? && country.present? && zip_code.present?
       "#{city}, #{state} #{country} #{zip_code}"
