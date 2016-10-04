@@ -1,0 +1,71 @@
+<div class="section">
+  <h2><%= t(".trial_details") %></h2>
+  <table class="tables">
+    <tr>
+      <td>
+        <%= t(".trial_id") %>
+      </td>
+      <td>
+        <%= trial.nct_id %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= t(".phase") %>
+      </td>
+      <td>
+        <%= trial.phase %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= t(".sponsor") %>
+      </td>
+      <td>
+        <%= trial.sponsor %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= t(".agency") %>
+      </td>
+      <td>
+        <%= trial.agency_class %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= t(".status") %>
+      </td>
+      <td>
+        <%= trial.overall_status %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= t(".countries") %>
+      </td>
+      <td>
+        <%= trial.countries.join(", ") %>
+      </td>
+    </tr>
+    <% if trial.link_url.present? %>
+      <tr>
+        <td>
+          <%= t(".website") %>
+        </td>
+        <td>
+          <a href="<%= trial.link_url %>" target="_blank"><%= trial.link_url %></a>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <% if trial.detailed_description.present? %>
+    <div class="expander">
+      <div class="js-expander-trigger expander-trigger expander-hidden"><%= t(".additional_details") %></div>
+      <div class="expander-content">
+        <p><%= trial.detailed_description %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

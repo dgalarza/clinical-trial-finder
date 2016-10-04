@@ -6,21 +6,21 @@ en:
       with_weekday: "%a %m/%d/%y"
   helpers:
     search_filter:
-      am_control: I am a control
-      am_patient: I have a brain tumor
-      distance_radius: Will travel %{radius} miles
-      interventional: Interventional
-      observational: Observational
+      am_control: "I am a control"
+      am_patient: "I have a brain tumor"
+      distance_radius: "Will travel %{radius} miles"
+      interventional: "Interventional"
+      observational: "Observational"
   import_logs:
     index:
-      imported_at: Imported At
-      site_count: Site Count
-      trial_count: Trial Count
+      imported_at: "Imported At"
+      site_count: "Site Count"
+      trial_count: "Trial Count"
   simple_form:
     labels:
       trials:
         index:
-          control: Control
+          control: "Control"
   time:
     formats:
       date: "%b %-d, %Y"
@@ -28,24 +28,49 @@ en:
       short: "%B %d"
       timestamp: "%b %d, %Y %I:%M %p"
   titles:
-    application: Trial-match
+    application: "Trial-match"
     trials:
-      index: Filters
+      index: "Filters"
   trials:
+    details_table:
+      additional_details: "Additional Details"
+      agency: "Agency Class"
+      countries: "Countries"
+      phase: "Phase"
+      sponsor: "Lead Sponsor"
+      status: "Overall Status"
+      trial_id: "Trial ID:"
+      trial_details: "Trial Details"
+      website: "Study Website:"
     empty_results:
-      no_results: Your search returned no results.
-      no_results_instructions: To match to trials, widen your search or expand your
-        travel distance.
+      no_results: "Your search returned no results."
+      no_results_instructions: "To match to trials, widen your search or expand your
+        travel distance."
     miles_away:
       one: "1 mi away"
       other: "%{count} mi away"
     navigation:
-      next_trial: Next Trial
-      previous_trial: Previous Trial
-      return_to_search: Return to Search
+      next_trial: "Next Trial"
+      previous_trial: "Previous Trial"
+      return_to_search: "Return to Search"
+    recruitment_table:
+      accepts_controls: "Accepts Volunteers"
+      criteria: "Recuitment Criteria"
+      eligible_ages: "Eligible Ages"
+      gender: "Gender"
+      more_criteria: "More Inclusion & Exclusion Criteria"
+      study_type: "Study Type"
     search_filter:
-      submit: Search Trials
+      submit: "Search Trials"
+    show:
+      contact_instructions: "If you are interested in learning more about this
+        trial, find the trial site nearest to your location and contact the site
+        coordinator via email or phone."
+      contact_trial_team: "Contact a Trial Team"
+      study_purpose: "Study Purpose"
     trial_count:
       displaying:
-        one: Displaying 1 trial
-        other: Displaying %{count} trials
+        one: "Displaying 1 trial"
+        other: "Displaying %{count} trials"
+    trial_sidebar:
+      nearest_location: "Nearest Location"

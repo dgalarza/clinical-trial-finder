@@ -1,0 +1,47 @@
+<div class="section">
+  <h2><%= t(".criteria") %></h2>
+  <table class="tables">
+    <tbody>
+      <tr>
+        <td>
+          <%= t(".accepts_controls") %>
+        </td>
+        <td>
+          <%= trial.healthy_volunteers %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= t(".study_type") %>
+        </td>
+        <td>
+          <%= trial.study_type %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= t(".eligible_ages") %>
+        </td>
+        <td>
+          <%= trial.minimum_age %> - <%= trial.maximum_age %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= t(".gender") %>
+        </td>
+        <td>
+          <%= trial.gender %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <% if trial.criteria.present? %>
+    <div class="expander">
+      <div class="js-expander-trigger expander-trigger expander-hidden"><%= t(".more_criteria") %></div>
+      <div class="expander-content">
+        <p><%= trial.criteria %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

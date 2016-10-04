@@ -1,0 +1,6 @@
+<div class="trial-sidebar">
+  <% if session[:zip_code_coordinates] || (trial.sites.count == 1) %>
+    <h3><%= t(".nearest_location") %></h3>
+    <iframe width="275" height="200" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?key=<%= ENV.fetch("GOOGLE_EMBED_KEY") %>&q=<%= trial.ordered_sites(session[:zip_code_coordinates]).first.facility_address %>"></iframe>
+  <% end %>
+</div>
