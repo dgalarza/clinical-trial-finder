@@ -1,5 +1,5 @@
-<% if @trials.count > 10 %>
+<% if @trials.count > WillPaginate.per_page %>
   <div class="pagination-panel apple-pagination">
-    <%= will_paginate @trials, :container =>false %>
+    <%= will_paginate @trials, container: false, inner_window: 3, outer_window: 0 %>
   </div>
 <% end %>

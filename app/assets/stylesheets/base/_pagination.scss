@@ -1,7 +1,7 @@
 .apple-pagination {
   background: $light-gray;
   border: $base-border-width solid $medium-gray;
-  padding: 1em;
+  padding: $base-spacing $small-spacing;
   text-align: center;
 
   a,
