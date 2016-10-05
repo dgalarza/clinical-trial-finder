@@ -41,6 +41,7 @@ en:
       status: "Overall Status"
       trial_id: "Trial ID:"
       trial_details: "Trial Details"
+      view_website: "View Trial Website"
       website: "Study Website:"
     empty_results:
       no_results: "Your search returned no results."

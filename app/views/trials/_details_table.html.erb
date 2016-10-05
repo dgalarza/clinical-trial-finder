@@ -55,7 +55,7 @@
           <%= t(".website") %>
         </td>
         <td>
-          <a href="<%= trial.link_url %>" target="_blank"><%= trial.link_url %></a>
+          <%= link_to t(".view_website"), trial.link_url, target: "_blank" %>
         </td>
       </tr>
     <% end %>
