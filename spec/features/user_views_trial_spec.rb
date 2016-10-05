@@ -8,18 +8,26 @@ RSpec.feature "User views trial" do
   end
 
   scenario "User views trial list and trial w/ site" do
-    trial_title = "Trial Title"
-    trial_description = "Overview of trial"
-    site_facility = "Site Facility"
-    site_zip = "12345"
-    trial = create(:trial, title: trial_title, description: trial_description)
-    create(:site, facility: site_facility, zip_code: site_zip, trial: trial)
-    visit trials_path
+    with_environment "GOOGLE_EMBED_KEY" => "ABC123" do
+      trial_title = "Trial Title"
+      trial_description = "Overview of trial"
+      site_facility = "Site Facility"
+      site_zip = "12345"
+      site = build(:site, facility: site_facility, zip_code: site_zip)
+      create(:trial, title: trial_title, description: trial_description, sites: [site])
+      visit trials_path
 
-    click_link trial_title
+      click_link trial_title
 
-    expect(page).to have_content trial_description
-    expect(page).to have_content site_zip
+      within ".trial-results" do
+        expect(page).to have_content trial_description
+        expect(page).to have_content site_zip
+        expect(page).to have_content site_facility
+      end
+      within ".trial-sidebar" do
+        expect(page).to have_css google_map_for_site(site)
+      end
+    end
   end
 
   scenario "User filters, views trial, and returns back to filtered list" do
@@ -117,5 +125,9 @@ RSpec.feature "User views trial" do
 
   def previous_trial
     t("trials.navigation.previous_trial")
+  end
+
+  def google_map_for_site(site)
+    "iframe[src='https://www.google.com/maps/embed/v1/place?key=#{ENV.fetch("GOOGLE_EMBED_KEY")}&q=#{site.facility_address}']"
   end
 end
