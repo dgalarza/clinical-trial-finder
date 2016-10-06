@@ -3,10 +3,7 @@
 
   <h1><%= @trial.title %></h1>
 
-  <div class="section">
-    <h2><%= t(".study_purpose") %></h2>
-    <p><%= @trial.description %></p>
-  </div>
+  <%= render "study_purpose", trial: @trial %>
 
   <%= render "recruitment_table", trial: @trial %>
 
