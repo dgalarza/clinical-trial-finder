@@ -16,6 +16,7 @@ RSpec.describe "trials/_trial_sidebar", type: :view do
   context "show_nearest_site? is true" do
     it "does show nearest site" do
       trial = build(:trial)
+      allow(trial).to receive(:ordered_sites).and_return(trial.sites)
       allow(view).to receive(:show_nearest_site?).
         with(count: trial.sites.count).and_return(true)
 

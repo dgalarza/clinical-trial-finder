@@ -1,22 +1,24 @@
 <div class="expander border site">
   <div class="js-expander-trigger expander-trigger expander-hidden">
-    <%= "#{site.city}, #{site.state}" %>
-    <%= distance_from_site(site) %>
+    <span class="infographic-item icon-location pull-right">
+      <%= distance_from_site(site) %>
+    </span>
+    <%= "#{site.display_location}" %>
   </div>
   <div class="expander-content site-details">
     <p>
-      <b>Status:</b>
+      <b><%= t(".status") %></b>
       <%=  "#{site.status}" %>
     </p>
     <p>
-      <b>Address:</b>
+      <b><%= t(".address") %></b>
       <br>
       <%= "#{site.facility}" %>
       <br>
       <%= "#{site.city}, #{site.state}, #{site.zip_code}" %>
     </p>
     <p>
-      <b>Site Contact:</b>
+      <b><%= t(".site_contact") %></b>
       <br>
       <%= "#{site.contact_name}" %>
       <br>

@@ -1,0 +1,13 @@
+<div class="section">
+  <h2><%= t(".contact_trial_team") %></h2>
+  <p><%= t(".contact_instructions") %></p>
+
+  <%= render united_states_sites(trial) %>
+
+  <% if non_united_states_sites(trial).present? %>
+    <div class="section">
+      <h3><%= t(".international_sites") %></h3>
+      <%= render non_united_states_sites(trial) %>
+    </div>
+  <% end %>
+</div>

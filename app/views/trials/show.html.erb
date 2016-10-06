@@ -9,13 +9,7 @@
 
   <%= render "details_table", trial: @trial %>
 
-
-  <div class="section">
-    <h2><%= t(".contact_trial_team") %></h2>
-    <p><%= t(".contact_instructions") %></p>
-
-    <%= render @trial.ordered_sites(session[:zip_code_coordinates]) %>
-  </div>
+  <%= render "contact_trial_team", trial: @trial %>
 </div>
 
 <%= render "trial_sidebar", trial: @trial %>

@@ -348,36 +348,95 @@ RSpec.describe Trial, type: :model do
   end
 
   describe "#ordered_sites" do
-    context "provded nil for coordinates" do
+    context "provided nil for coordinates" do
       it "returns all sites" do
-        site1 = build(:site)
-        site2 = build(:site)
-        site3 = build(:site)
-        site4 = build(:site)
+        site1 = build(:site, :us_based)
+        site2 = build(:site, :us_based)
+        site3 = build(:site, :us_based)
+        site4 = build(:site, :us_based)
         sites = [site3, site2, site4, site1]
         trial = build(:trial, sites: sites)
 
-        expect(trial.ordered_sites(nil)).to eq sites
+        expect(trial.ordered_sites(coordinates: nil)).to eq sites
       end
     end
 
-    context "provded valid coordinates" do
-      it "returns all sites" do
+    context "provided valid coordinates" do
+      it "returns all sites in distance order" do
         coordinates = [ 40.7728432, -73.9558204]
-        closest_site = build(:site, latitude: 40.77, longitude: -73)
-        second_closest_site = build(:site, latitude: 30.77, longitude: -73)
-        furthest_site = build(:site, latitude: 10.77, longitude: -73)
-        site_without_coordinates = build(:site, latitude: nil, longitude: nil)
-
-        sites = [site_without_coordinates, second_closest_site, furthest_site, closest_site]
+        closest_site = build(:site, :us_based, latitude: 40.77, longitude: -73)
+        second_closest_site =
+          build(:site, :us_based, latitude: 30.77, longitude: -73)
+        furthest_site = build(:site, :us_based, latitude: 10.77, longitude: -73)
+        site_without_coordinates =
+          build(:site, :us_based, latitude: nil, longitude: nil)
+        sites = [
+          site_without_coordinates,
+          second_closest_site,
+          furthest_site,
+          closest_site,
+        ]
         trial = build(:trial, sites: sites)
 
-        expect(trial.ordered_sites(coordinates)).to eq [
+        expect(trial.ordered_sites(coordinates: coordinates)).to eq [
           closest_site,
           second_closest_site,
           furthest_site,
           site_without_coordinates,
         ]
+      end
+    end
+
+    context "united_states is true" do
+      it "only returns sites based in the US" do
+        usa_1 = build(:site, country: "United States")
+        usa_2 = build(:site, country: "United States")
+        france = build(:site, country: "France")
+        germany = build(:site, country: "Germany")
+        sites = [
+          usa_1,
+          usa_2,
+          france,
+          germany,
+        ]
+        trial = build(:trial, sites: sites)
+
+        expect(trial.ordered_sites(united_states: true)).to eq [usa_1, usa_2]
+      end
+    end
+
+    context "united_states is false" do
+      it "only returns sites outside of the US" do
+        usa_1 = build(:site, country: "United States")
+        usa_2 = build(:site, country: "United States")
+        france = build(:site, country: "France")
+        germany = build(:site, country: "Germany")
+        sites = [
+          usa_1,
+          usa_2,
+          france,
+          germany,
+        ]
+        trial = build(:trial, sites: sites)
+
+        expect(trial.ordered_sites(united_states: false)).
+          to eq [france, germany]
+      end
+    end
+
+    context "united_states is NOT set" do
+      it "returns allsites regardless of country" do
+        usa = build(:site, country: "United States")
+        france = build(:site, country: "France")
+        germany = build(:site, country: "Germany")
+        sites = [
+          usa,
+          france,
+          germany,
+        ]
+        trial = build(:trial, sites: sites)
+
+        expect(trial.ordered_sites).to eq [usa, france, germany]
       end
     end
   end

@@ -61,17 +61,12 @@ class Trial < ActiveRecord::Base
     [site, distance]
   end
 
-  def ordered_sites(coordinates)
+  def ordered_sites(coordinates: nil, united_states: nil)
+    filtered_sites = filter_sites_by_country(united_states)
     if coordinates.present?
-      sites.sort_by do |site|
-        if distance = site.distance_from(coordinates)
-          distance
-        else
-          Float::INFINITY
-        end
-      end
+      sort_by_distance(filtered_sites, coordinates)
     else
-      sites
+      filtered_sites
     end
   end
 
@@ -82,6 +77,25 @@ class Trial < ActiveRecord::Base
     Site.new(latitude: zip_code.latitude, longitude: zip_code.longitude)
   end
   private_class_method :build_site_pin_point
+
+  def filter_sites_by_country(united_states)
+    if united_states.nil?
+      filtered_sites = sites
+    else
+      filter_type = united_states ? "select" : "reject"
+      filtered_sites = sites.send(filter_type, &:in_united_states?)
+    end
+  end
+
+  def sort_by_distance(sites, coordinates)
+    sites.sort_by do |site|
+      if distance = site.distance_from(coordinates)
+        distance
+      else
+        Float::INFINITY
+      end
+    end
+  end
 
   def convert_ages
     self.minimum_age = converted_minimum_age_original

@@ -1,6 +1,6 @@
 <div class="trial-sidebar">
   <% if show_nearest_site?(count: trial.sites.count) %>
     <h3><%= t(".nearest_location") %></h3>
-    <%= content_tag("iframe", '', class: "google-map", src: "https://www.google.com/maps/embed/v1/place?key=#{ENV.fetch("GOOGLE_EMBED_KEY")}&q=#{trial.ordered_sites(session[:zip_code_coordinates]).first.facility_address}") %>
+    <%= content_tag("iframe", '', class: "google-map", src: "https://www.google.com/maps/embed/v1/place?key=#{ENV.fetch("GOOGLE_EMBED_KEY")}&q=#{trial.ordered_sites(coordinates: coordinates).first.facility_address}") %>
   <% end %>
 </div>
