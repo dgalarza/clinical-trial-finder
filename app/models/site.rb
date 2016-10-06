@@ -12,8 +12,6 @@ class Site < ActiveRecord::Base
   end
 
   def address
-    if city.present? && state.present? && country.present? && zip_code.present?
-      "#{city}, #{state} #{country} #{zip_code}"
-    end
+    [city, state, country, zip_code].select(&:present?).join(", ")
   end
 end

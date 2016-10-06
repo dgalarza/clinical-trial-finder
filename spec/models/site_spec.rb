@@ -16,12 +16,26 @@ RSpec.describe Site, type: :model do
           zip_code: "Zip Code"
         )
 
-        expect(site.address).to eq "City, State Country Zip Code"
+        expect(site.address).to eq "City, State, Country, Zip Code"
+      end
+    end
+
+    context "some address fields exist" do
+      it "returns available fields" do
+        site = build(
+          :site,
+          city: "City",
+          state: "",
+          country: "Country",
+          zip_code: "Zip Code"
+        )
+
+        expect(site.address).to eq "City, Country, Zip Code"
       end
     end
 
     context "address fields do NOT exist" do
-      it "returns nil" do
+      it "returns empty string" do
         site = build(
           :site,
           city: "",
@@ -30,7 +44,7 @@ RSpec.describe Site, type: :model do
           zip_code: ""
         )
 
-        expect(site.address).to eq nil
+        expect(site.address).to eq ""
       end
     end
   end
