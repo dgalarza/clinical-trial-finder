@@ -16,9 +16,24 @@ This project makes it easy for disease foundations
 such as the [National Brain Tumor Society](http://braintumor.org/) to bring the
 rich clinicaltrials.gov data to their communities.
 
+## Import Service
+
+To make sure the trials displayed are accurate, the platform downloads and syncs
+with ClinicalTrials.gov multiple times per day. [View Import
+Logs](http://trial-match-staging.herokuapp.com/import_logs)
+
 ## Contributing
 
 Pull requests are welcome!
+
+## Guidelines
+
+Use the following guides for getting things done, programming well, and
+programming in style.
+
+* [Protocol](http://github.com/thoughtbot/guides/blob/master/protocol)
+* [Best Practices](http://github.com/thoughtbot/guides/blob/master/best-practices)
+* [Style](http://github.com/thoughtbot/guides/blob/master/style)
 
 ## Getting Started
 
@@ -42,28 +57,6 @@ Geocoding and importing trials is time intensive. The best way to seed your
 database is grabbing a snapshot of production. You can do this by:
 
 ```
-heroku pg:backups capture --app trial-match-staging
-
-curl -o latest.dump `heroku pg:backups public-url --app trial-match-staging`
-
-pg_restore --verbose --clean --no-acl --no-owner -h localhost -d trial-match_development latest.dump
-
-rm latest.dump
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -d trial-match_development db/seeder_database.dump
 ```
 
-## Guidelines
-
-Use the following guides for getting things done, programming well, and
-programming in style.
-
-* [Protocol](http://github.com/thoughtbot/guides/blob/master/protocol)
-* [Best Practices](http://github.com/thoughtbot/guides/blob/master/best-practices)
-* [Style](http://github.com/thoughtbot/guides/blob/master/style)
-
-## Deploying
-
-If you have previously run the `./bin/setup` script,
-you can deploy to staging and production with:
-
-    $ ./bin/deploy staging
-    $ ./bin/deploy production
