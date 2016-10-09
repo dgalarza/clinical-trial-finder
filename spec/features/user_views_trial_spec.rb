@@ -12,8 +12,7 @@ RSpec.feature "User views trial" do
       trial_title = "Trial Title"
       trial_description = "Overview of trial"
       site_facility = "Site Facility"
-      site_zip = "12345"
-      site = build(:site, facility: site_facility, zip_code: site_zip)
+      site = build(:site, facility: site_facility)
       create(:trial, title: trial_title, description: trial_description, sites: [site])
       visit trials_path
 
@@ -21,7 +20,6 @@ RSpec.feature "User views trial" do
 
       within ".trial-results" do
         expect(page).to have_content trial_description
-        expect(page).to have_content site_zip
         expect(page).to have_content site_facility
       end
       within ".trial-sidebar" do
