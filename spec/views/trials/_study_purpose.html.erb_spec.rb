@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "trials/_study_purpose", type: :view do
   context "description is present" do
     it "displays study purpose" do
-      trial = build(:trial, description: "Purpose of trial")
+      trial = double(:trial, description_as_markup: true)
 
       render "trials/study_purpose", trial: trial
 
@@ -13,7 +13,7 @@ RSpec.describe "trials/_study_purpose", type: :view do
 
   context "description is NOT present" do
     it "does NOT display study purpose" do
-      trial = build(:trial, description: "")
+      trial = double(:trial, description_as_markup: "")
 
       render "trials/study_purpose", trial: trial
 

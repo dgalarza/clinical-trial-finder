@@ -1,6 +1,6 @@
-<% if trial.description.present? %>
+<% if trial.description_as_markup.present? %>
   <div class="section">
     <h2><%= t(".study_purpose") %></h2>
-    <p><%= trial.description %></p>
+    <p><%= raw(trial.description_as_markup) %></p>
   </div>
 <% end %>

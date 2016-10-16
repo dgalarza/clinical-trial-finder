@@ -6,10 +6,15 @@ RSpec.feature "User views trial" do
   scenario "User views trial list and trial w/ site" do
     with_environment "GOOGLE_EMBED_KEY" => "ABC123" do
       trial_title = "Trial Title"
-      trial_description = "Overview of trial"
+      trial_description = "Trial Description"
       site_facility = "Site Facility"
       site = build(:site, facility: site_facility)
-      create(:trial, title: trial_title, description: trial_description, sites: [site])
+      create(
+        :trial,
+        title: trial_title,
+        description: trial_description,
+        sites: [site]
+      )
       visit trials_path
 
       click_link trial_title

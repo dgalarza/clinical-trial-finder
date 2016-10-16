@@ -9,10 +9,14 @@ class TrialsController < ApplicationController
   end
 
   def show
-    @trial = Trial.joins(:sites).find(trial_id)
+    @trial = TrialPresenter.new(trial_with_sites)
   end
 
   private
+
+  def trial_with_sites
+    Trial.joins(:sites).find(trial_id)
+  end
 
   def cache_filters
     session[:search_params] = all_params
