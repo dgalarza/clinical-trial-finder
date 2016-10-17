@@ -1,6 +1,7 @@
 # Trial-match
 
 [![CircleCI](https://circleci.com/gh/mwenger1/trial-match/tree/master.svg?style=svg)](https://circleci.com/gh/mwenger1/trial-match/tree/master)
+[![Code Climate](https://codeclimate.com/github/mwenger1/trial-match/badges/gpa.svg)](https://codeclimate.com/github/mwenger1/trial-match)
 
 
 ## Project Goal
