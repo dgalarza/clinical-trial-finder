@@ -1,5 +1,9 @@
 <div class="search-result-links">
-  <%= link_to raw("&#8679; #{t(".return_to_search")}"), trials_path(session[:search_params]) %>
+  <%= link_to trials_path(session[:search_params]) do %>
+    <span class="infographic-item icon-back">
+      <%= t(".return_to_search") %>
+    </span>
+  <% end %>
 
   <% if search_results.present? %>
     <div class="navigation-links">

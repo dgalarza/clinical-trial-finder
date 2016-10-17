@@ -64,7 +64,7 @@ en:
     navigation:
       next_trial: "Next Trial"
       previous_trial: "Previous Trial"
-      return_to_search: "Return to Search"
+      return_to_search: "Back to Search"
     recruitment_table:
       accepts_controls: "Accepts Volunteers"
       criteria: "Recuitment Criteria"
