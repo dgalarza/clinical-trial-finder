@@ -1,8 +1,7 @@
-# Trial-match
+# Clinical Trial Finder
 
-[![CircleCI](https://circleci.com/gh/mwenger1/trial-match/tree/master.svg?style=svg)](https://circleci.com/gh/mwenger1/trial-match/tree/master)
-[![Code Climate](https://codeclimate.com/github/mwenger1/trial-match/badges/gpa.svg)](https://codeclimate.com/github/mwenger1/trial-match)
-
+[![CircleCI](https://circleci.com/gh/mwenger1/clinical-trial-finder/tree/master.svg?style=svg)](https://circleci.com/gh/mwenger1/clinical-trial-finder/tree/master)
+[![Code Climate](https://codeclimate.com/repos/580ce59aefbc1b5742003dfd/badges/bd0e46bb5202ab1376bf/gpa.svg)](https://codeclimate.com/repos/580ce59aefbc1b5742003dfd/feed)
 
 ### Project Goal
 
@@ -42,7 +41,7 @@ and their loved ones. This open-source platform makes it easy for any disease
 foundation or nonprofit to bring the rich clinicaltrials.gov data to their
 communities.
 
-Organizations like the [National Brain Tumor Society](http://trial-match-staging.herokuapp.com/)
+Organizations like the [National Brain Tumor Society](http://clinical-trial-finder-staging.herokuapp.com/)
 have already started using the platform to promote trial participation to their
 communities.
 
@@ -50,19 +49,19 @@ communities.
 
 To make sure the trials displayed are accurate, the platform downloads and syncs
 with ClinicalTrials.gov multiple times per day via a scheduled
-[rake task](https://github.com/mwenger1/trial-match/blob/master/lib/tasks/scheduler.rake)
-that [logs changes](http://trial-match-staging.herokuapp.com/import_logs).
+[rake task](https://github.com/mwenger1/clinical-trial-finder/blob/master/lib/tasks/scheduler.rake)
+that [logs changes](http://clinical-trial-finder-staging.herokuapp.com/import_logs).
 
 
 ## Contributing
 
 Join our
-[contributors](https://github.com/mwenger1/trial-match/graphs/contributors) and
+[contributors](https://github.com/mwenger1/clinical-trial-finder/graphs/contributors) and
 help accelerate drug development!
 
 ### Guidelines
 
-The [Issue Backlog](https://github.com/mwenger1/trial-match/issues) is a great
+The [Issue Backlog](https://github.com/mwenger1/clinical-trial-finder/issues) is a great
 place to start to see the roadmap and what needs to be worked on.
 
 Use the following guides for getting things done, programming well, and
@@ -94,11 +93,11 @@ Geocoding and importing trials is time intensive. The best way to seed your
 database is grabbing a snapshot of production. You can do this by:
 
 ```
-pg_restore --verbose --clean --no-acl --no-owner -h localhost -d trial-match_development db/seeder_database.dump
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -d clinical-trial-finder_development db/seeder_database.dump
 ```
 
 ## License
 
-trial-match is Copyright © 2016 Michael Wenger. It is free
+Clinical Trial Finder is Copyright © 2016 Michael Wenger. It is free
 software, and may be redistributed under the terms specified in the [LICENSE
 file](/LICENSE).

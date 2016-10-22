@@ -1,5 +1,5 @@
 {
-  "name":"trial-match",
+  "name":"clinical-trial-finder",
   "scripts":{},
   "env":{
     "APPLICATION_HOST":{

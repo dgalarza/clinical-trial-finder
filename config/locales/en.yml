@@ -33,7 +33,7 @@ en:
       short: "%B %d"
       timestamp: "%b %d, %Y %I:%M %p"
   titles:
-    application: "Trial-match"
+    application: "Clinical Trial Finder"
     trials:
       index: "Filters"
   trials:
