@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Exit if any subcommand fails
+set -e
+
+# Seed database with test data already geocoded
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -d clinical-trial-finder_development db/test_data_to_seed.dump

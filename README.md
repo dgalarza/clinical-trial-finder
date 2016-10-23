@@ -76,25 +76,44 @@ programming in style.
 After you have cloned this repo, run this setup script to set up your machine
 with the necessary dependencies to run and test this app:
 
-    % ./bin/setup
+```
+  % ./bin/setup
+```
 
 It assumes you have a machine equipped with Ruby, Postgres, etc. If not, set up
 your machine with [this script].
 
 [this script]: https://github.com/thoughtbot/laptop
 
-After setting up, you can run the application using [Heroku Local]:
+Running the importer for trials requires geocoding thousands of sites. This
+takes time and exceeds the free account. If you wish to avoid this and use test
+data, run:
 
-    % heroku local
+```
+  % ./bin/seed_database
+```
+
+If you are interested in seeding the database with real trials from
+clinicaltrials.gov:
+
+* Create a Developer Account with [Google](https://developers.google.com/maps/documentation/geocoding/intro)
+* Update the GOOGLE_GEOCODING_API_KEY environment value with your new API Key
+* Run the importer by running:
+
+```
+  % rake scheduler:import_trials_from_clinicaltrials_gov
+```
+
+After importing data, you can run the application using [Heroku Local]:
+
+```
+  % heroku local
+```
 
 [Heroku Local]: https://devcenter.heroku.com/articles/heroku-local
 
-Geocoding and importing trials is time intensive. The best way to seed your
-database is grabbing a snapshot of production. You can do this by:
-
-```
-pg_restore --verbose --clean --no-acl --no-owner -h localhost -d clinical-trial-finder_development db/seeder_database.dump
-```
+You can now view the application at
+[http://localhost:5000/](http://localhost:5000/)
 
 ## License
 

@@ -10,6 +10,11 @@ set -e
 gem install bundler --conservative
 bundle check || bundle install
 
+# Set up configurable environment variables
+if [ ! -f .env ]; then
+  cp .sample.env .env
+fi
+
 # Set up database and add any development seed data
 bin/rake dev:prime
 
@@ -19,7 +24,7 @@ mkdir -p .git/safe
 # Only if this isn't CI
 # if [ -z "$CI" ]; then
 # fi
-          
+
 if heroku join --app clinical-trial-finder-staging &> /dev/null; then
   git remote add staging git@heroku.com:clinical-trial-finder-staging.git || true
   printf 'You are a collaborator on the "clinical-trial-finder-staging" Heroku app
@@ -29,7 +34,6 @@ else
 '
 fi
 
-          
 if heroku join --app clinical-trial-finder-production &> /dev/null; then
   git remote add production git@heroku.com:clinical-trial-finder-production.git || true
   printf 'You are a collaborator on the "clinical-trial-finder-production" Heroku app
@@ -40,4 +44,4 @@ else
 fi
 
 
-          git config heroku.remote staging
+git config heroku.remote staging
