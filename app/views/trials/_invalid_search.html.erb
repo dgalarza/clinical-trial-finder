@@ -1,0 +1,6 @@
+<div class="flash-notice">
+  <h2><%= t(".header") %></h2>
+  <% @trial_filter_form.errors.full_messages.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+</div>

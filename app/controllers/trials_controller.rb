@@ -1,8 +1,11 @@
 class TrialsController < ApplicationController
   def index
-    cache_filters
-    @trials = build_trials
-    @last_import = ImportLog.last
+    @trial_filter_form = TrialFilterForm.new(filter_form_params)
+
+    if @trial_filter_form.valid?
+      cache_filters
+      session[:search_results] = @trial_filter_form.trials.pluck(:id)
+    end
   end
 
   def show
@@ -26,23 +29,16 @@ class TrialsController < ApplicationController
     session[:zip_code_coordinates] = coordinates
   end
 
-  def build_trials
-    trials = Trial
-      .sites_present
-      .search_for(filter_params[:keyword])
-      .age(filter_params[:age])
-      .control(filter_params[:control])
-      .gender(filter_params[:gender])
-      .study_type(filter_params[:study_type])
-      .close_to(close_to_arguments)
+  def filter_form_params
+    filter_params.merge(page_params)
+  end
 
-    session[:search_results] = trials.pluck(:id)
-
-    trials.paginate(page: all_params[:page])
+  def page_params
+    Hash[*all_params.assoc("page")]
   end
 
   def filter_params
-    all_params.fetch(:trial_filter, {})
+    all_params.fetch(:trial_filter_form, {})
   end
 
   def all_params
@@ -50,7 +46,7 @@ class TrialsController < ApplicationController
       :commit,
       :page,
       :utf8,
-      trial_filter: [
+      trial_filter_form: [
         :age,
         :control,
         :distance_radius,
@@ -60,13 +56,6 @@ class TrialsController < ApplicationController
         :zip_code
       ]
     )
-  end
-
-  def close_to_arguments
-    {
-      zip_code: zip_code_filter,
-      radius: filter_params[:distance_radius]
-    }
   end
 
   def zip_code_filter

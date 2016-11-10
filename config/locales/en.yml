@@ -58,6 +58,8 @@ en:
       no_results: "Your search returned no results."
       no_results_instructions: "To match to trials, widen your search or expand your
         travel distance."
+    invalid_search:
+      header: "Your search filters are invalid."
     miles_away:
       one: "1 mi away"
       other: "%{count} mi away"

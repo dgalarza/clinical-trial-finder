@@ -1,3 +1,6 @@
+Style/NumericLiterals:
+  Enabled: false
+
 Style/ConditionalAssignment:
   Enabled: false
 
@@ -7,25 +10,17 @@ Style/FrozenStringLiteralComment:
 Style/NumericLiterals:
   Enabled: false
 
-Style/LineLength:
-  Exclude:
-    - app/admin/*.rb
-  Max: 80
-
 Style/MultilineOperationIndentation:
   EnforcedStyle: indented
 
 Style/Next:
   Enabled: false
 
-Style/TrailingComma:
+Style/TrailingCommaInLiteral:
   Enabled: true
-  EnforcedStyleForMultiline: comma
 
-Style/WordArray:
-  Include:
-    - spec/*.rb
-  Enabled: false
+Style/TrailingCommaInArguments:
+  Enabled: true
 
 Style/StringLiteralsInInterpolation:
   Enabled: false
@@ -35,11 +30,3 @@ Style/StringLiterals:
 
 Style/Documentation:
   Enabled: false
-
-Metrics/AbcSize:
-  Exclude:
-    - db/migrate/*.rb
-
-Metrics/MethodLength:
-  Exclude:
-    - db/migrate/*.rb

@@ -1,16 +1,16 @@
 <%= render "search_filter" %>
 
 <main class="trial-results">
-  <% if @trials.empty? %>
+  <% if @trial_filter_form.invalid? %>
+
+    <%= render "invalid_search" %>
+
+  <% elsif @trial_filter_form.trials.empty? %>
+
     <%= render "empty_results" %>
+
   <% else %>
 
-    <%= render "trial_count" %>
-
-    <ol class="trial-list">
-      <%= render @trials %>
-    </ol>
-
-    <%= render "pagination" %>
+    <%= render "trial_results", trials: @trial_filter_form.trials %>
   <% end %>
 </main>

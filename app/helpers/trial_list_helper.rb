@@ -50,6 +50,6 @@ module TrialListHelper
   end
 
   def filter_params
-    params.fetch("trial_filter", {})
+    params.fetch("trial_filter_form", {})
   end
 end

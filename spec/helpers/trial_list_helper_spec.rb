@@ -5,7 +5,8 @@ RSpec.describe TrialListHelper, type: :helper do
     context "zip code is a filter parameter" do
       it "returns param" do
         zip_code_param = double(:zip_code_param)
-        stubbed_params = { "trial_filter" => { "zip_code" => zip_code_param } }
+        stubbed_params =
+          { "trial_filter_form" => { "zip_code" => zip_code_param } }
         allow(helper).to receive(:params).and_return(stubbed_params)
 
         expect(helper.zip_code_param).to eq zip_code_param
@@ -25,7 +26,7 @@ RSpec.describe TrialListHelper, type: :helper do
   describe "#filter_input_default" do
     context "default values is present in params" do
       it "sets default value" do
-        stubbed_params = { "trial_filter" => { "age" => 5 } }
+        stubbed_params = { "trial_filter_form" => { "age" => 5 } }
         allow(helper).to receive(:params).and_return(stubbed_params)
 
         input_default = helper.filter_input_default(:age)
@@ -49,7 +50,7 @@ RSpec.describe TrialListHelper, type: :helper do
   describe "#filter_radio_default" do
     context "default values is present in params" do
       it "sets default value" do
-        stubbed_params = { "trial_filter" => { "gender" => "Male" } }
+        stubbed_params = { "trial_filter_form" => { "gender" => "Male" } }
         allow(helper).to receive(:params).and_return(stubbed_params)
 
         input_default = helper.filter_radio_default(:gender)
@@ -119,7 +120,8 @@ RSpec.describe TrialListHelper, type: :helper do
 
     context "params are present" do
       it "returns distance radius from param as integer" do
-        stubbed_params = { "trial_filter" => { "distance_radius" => "50" } }
+        stubbed_params =
+          { "trial_filter_form" => { "distance_radius" => "50" } }
         allow(helper).to receive(:params).and_return(stubbed_params)
 
         expect(helper.distance_radius_selected_value).to eq 50

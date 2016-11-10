@@ -44,7 +44,7 @@ RSpec.feature "User views trial" do
 
     choose am_patient_field
     choose gender
-    fill_in("trial_filter[keyword]", with: keyword)
+    fill_in("trial_filter_form[keyword]", with: keyword)
     apply_search_filter
 
     expect(page).to have_content displaying_one_trial
@@ -55,7 +55,7 @@ RSpec.feature "User views trial" do
     expect(page).to have_content displaying_one_trial
     expect(find_field(am_patient_field)).to be_checked
     expect(find_field(gender)).to be_checked
-    expect(page).to have_field("trial_filter[keyword]", with: keyword)
+    expect(page).to have_field("trial_filter_form[keyword]", with: keyword)
   end
 
   scenario "User filters and navigates thru filtered results" do
@@ -79,8 +79,8 @@ RSpec.feature "User views trial" do
 
     expect(page).to have_content displaying_multiple_trials(3)
 
-    fill_in("trial_filter[age]", with: age)
-    fill_in("trial_filter[keyword]", with: keyword)
+    fill_in("trial_filter_form[age]", with: age)
+    fill_in("trial_filter_form[keyword]", with: keyword)
     choose am_patient_field
     choose gender
     apply_search_filter
@@ -109,8 +109,8 @@ RSpec.feature "User views trial" do
     expect(page).to have_content displaying_multiple_trials(2)
     expect(find_field(am_patient_field)).to be_checked
     expect(find_field(gender)).to be_checked
-    expect(page).to have_field("trial_filter[keyword]", with: keyword)
-    expect(page).to have_field("trial_filter[age]", with: age)
+    expect(page).to have_field("trial_filter_form[keyword]", with: keyword)
+    expect(page).to have_field("trial_filter_form[age]", with: age)
   end
 
   def return_to_search

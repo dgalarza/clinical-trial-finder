@@ -17,7 +17,7 @@ RSpec.feature "User filters trial list" do
     expect(page).to have_content first_trial_title
     expect(page).to have_content second_trial_title
 
-    fill_in("trial_filter[keyword]", with: "first")
+    fill_in("trial_filter_form[keyword]", with: "first")
     apply_search_filter
 
     expect(page).to have_content first_trial_title
@@ -61,7 +61,7 @@ RSpec.feature "User filters trial list" do
 
     expect(page).to have_content displaying_multiple_trials(3)
 
-    fill_in("trial_filter[age]", with: "30")
+    fill_in("trial_filter_form[age]", with: "30")
     apply_search_filter
 
     expect(page).to have_content displaying_one_trial
@@ -164,13 +164,14 @@ RSpec.feature "User filters trial list" do
     san_fransicso_site =
       build(:site, latitude: 37.7642093, longitude: -122.4571623)
     san_francisco_trial = create(:trial, sites: [san_fransicso_site])
+
     visit trials_path
 
     expect(page).to have_content displaying_multiple_trials(3)
     expect(page).not_to have_content new_york_site.facility
     expect(page).not_to have_content newark_site.facility
 
-    fill_in("trial_filter[zip_code]", with: new_york_zip_code)
+    fill_in("trial_filter_form[zip_code]", with: new_york_zip_code)
     apply_search_filter
 
     expect(page).to have_content displaying_multiple_trials(2)
@@ -189,7 +190,7 @@ RSpec.feature "User filters trial list" do
     apply_search_filter
 
     expect(page).to have_select(
-      "trial_filter[distance_radius]",
+      "trial_filter_form[distance_radius]",
       selected: distance_radius(50)
     )
     expect(page).to have_content displaying_one_trial
@@ -221,7 +222,7 @@ RSpec.feature "User filters trial list" do
 
     choose am_patient_field
     choose gender
-    fill_in("trial_filter[keyword]", with: keyword)
+    fill_in("trial_filter_form[keyword]", with: keyword)
     apply_search_filter
 
     expect(page).to have_content displaying_one_trial
@@ -232,17 +233,26 @@ RSpec.feature "User filters trial list" do
     expect(page).to have_content displaying_one_trial
     expect(find_field(am_patient_field)).to be_checked
     expect(find_field(gender)).to be_checked
-    expect(page).to have_field("trial_filter[keyword]", with: keyword)
+    expect(page).to have_field("trial_filter_form[keyword]", with: keyword)
   end
 
   scenario "User filters and gets 0 results" do
     create(:trial)
     visit trials_path
 
-    fill_in("trial_filter[keyword]", with: "does not exist")
+    fill_in("trial_filter_form[keyword]", with: "does not exist")
     apply_search_filter
 
     expect(page).to have_content no_trials_flash
+  end
+
+  scenario "User types in invalid zip code" do
+    visit trials_path
+
+    fill_in("trial_filter_form[zip_code]", with: "1234567890")
+    apply_search_filter
+
+    expect(page).to have_content t("trials.invalid_search.header")
   end
 
   def no_trials_flash
