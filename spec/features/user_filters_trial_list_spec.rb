@@ -3,10 +3,6 @@ require "rails_helper"
 RSpec.feature "User filters trial list" do
   include TrialListHelpers
 
-  before do
-    create(:import_log)
-  end
-
   scenario "User searches by keyword" do
     first_trial_title = "First Trial"
     create(:trial, title: first_trial_title)

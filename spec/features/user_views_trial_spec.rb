@@ -3,10 +3,6 @@ require "rails_helper"
 RSpec.feature "User views trial" do
   include TrialListHelpers
 
-  before do
-    create(:import_log)
-  end
-
   scenario "User views trial list and trial w/ site" do
     with_environment "GOOGLE_EMBED_KEY" => "ABC123" do
       trial_title = "Trial Title"
