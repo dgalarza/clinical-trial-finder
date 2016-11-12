@@ -1,14 +1,26 @@
-<table>
-  <tr>
-    <th><%= t(".imported_at") %></th>
-    <th><%= t(".trial_count") %></th>
-    <th><%= t(".site_count") %></th>
-  </tr>
-  <% @import_logs.each do |import_log| %>
+<div class="import-logs">
+  <%= render "import_log_stats", last_import: @import_logs.first %>
+
+  <table>
     <tr>
-      <td><%= import_log.created_at %></td>
-      <td><%= import_log.trial_count %></td>
-      <td><%= import_log.site_count %></td>
+      <th><%= t(".imported_at") %></th>
+      <th><%= t(".trial_count") %></th>
+      <th><%= t(".site_count") %></th>
     </tr>
+    <% @import_logs.each do |import_log| %>
+      <tr>
+        <td><%= import_log.created_at %></td>
+        <td><%= import_log.trial_count %></td>
+        <td><%= import_log.site_count %></td>
+      </tr>
+    <% end %>
+  </table>
+  <div style="clear:both;"></div>
+  <div>
+  <% if @import_logs.count > WillPaginate.per_page %>
+    <div class="pagination-panel apple-pagination">
+      <%= will_paginate @import_logs, container: false, inner_window: 3, outer_window: 0 %>
+    </div>
   <% end %>
-</table>
+  </div>
+</div>

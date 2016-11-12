@@ -12,6 +12,10 @@ en:
       interventional: "Interventional"
       observational: "Observational"
   import_logs:
+    import_log_stats:
+      last_import: "Last import run at: %{time}"
+      site_count: "%{count} Sites"
+      trial_count: "%{count} Trials"
     index:
       imported_at: "Imported At"
       site_count: "Site Count"

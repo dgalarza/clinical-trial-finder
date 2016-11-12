@@ -19,6 +19,7 @@ h1 a:hover {
     display: flex;
   }
 
+  .import-logs,
   .trial-results {
     @include padding($large-spacing);
     flex: 2;

@@ -1,0 +1,5 @@
+<div>
+  <p><%= t(".last_import", time: time_ago_in_words(last_import.created_at)) %></p>
+  <p><%= t(".trial_count", count: last_import.trial_count) %></p>
+  <p><%= t(".site_count", count: last_import.site_count) %></p>
+</div>
