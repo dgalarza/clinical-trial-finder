@@ -62,7 +62,7 @@
   </table>
   <% if trial.detailed_description.present? %>
     <div class="expander">
-      <div class="js-expander-trigger expander-trigger expander-hidden"><%= t(".additional_details") %></div>
+      <div class="js-expander-trigger expander-trigger expander-hidden" data-expand-item="Additional Details"><%= t(".additional_details") %></div>
       <div class="expander-content">
         <p><%= trial.detailed_description %></p>
       </div>

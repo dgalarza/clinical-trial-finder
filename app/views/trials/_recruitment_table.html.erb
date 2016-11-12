@@ -38,7 +38,7 @@
   </table>
   <% if trial.criteria.present? %>
     <div class="expander">
-      <div class="js-expander-trigger expander-trigger expander-hidden"><%= t(".more_criteria") %></div>
+      <div class="js-expander-trigger expander-trigger expander-hidden" data-expand-item="Additional Criteria"><%= t(".more_criteria") %></div>
       <div class="expander-content">
         <p><%= trial.criteria %></p>
       </div>
