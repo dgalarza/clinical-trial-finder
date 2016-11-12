@@ -70,6 +70,10 @@ class Trial < ActiveRecord::Base
     end
   end
 
+  def to_s
+    title
+  end
+
   private
 
   def self.build_site_pin_point(zip_code)

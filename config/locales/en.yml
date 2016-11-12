@@ -35,7 +35,8 @@ en:
   titles:
     application: "Clinical Trial Finder"
     trials:
-      index: "Filters"
+      index: "Clinical Trial Finder - National Brain Tumor Society"
+      show: "%{trial}"
   trials:
     contact_trial_team:
       contact_instructions: "If you are interested in learning more about this
