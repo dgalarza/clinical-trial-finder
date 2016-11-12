@@ -2,6 +2,10 @@
 
 @import "bourbon";
 
+h1 a:hover {
+  text-decoration: none;
+}
+
 #clinical-trial-finder {
   @import "base/base";
   @import "refills/tables";
