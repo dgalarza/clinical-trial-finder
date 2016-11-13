@@ -8,16 +8,22 @@ class TrialPresenter < SimpleDelegator
   end
 
   def criteria_as_markup
-    parse(criteria)
+    parse(criteria_with_header_tags)
   end
 
   private
 
+  def criteria_with_header_tags
+    if criteria.present?
+      criteria.gsub(/((?:Exclusion|Inclusion) Criteria:)/i, "<h2>\\1</h2>")
+    end
+  end
+
   def parse(value)
     if value.present?
       value.gsub(/\s#{start_of_item_regex}\s([^.]+\.)/, "<li>\\1</li>").
-        gsub(/[^<\/li>]<li>/, "<ul><li>").
-        gsub(/<\/li>[^<li>]/, "</li></ul>")
+        gsub(/<li>/, "<ul><li>").
+        gsub(/\s*<\/li>\s*/, "</li></ul>")
     end
   end
 

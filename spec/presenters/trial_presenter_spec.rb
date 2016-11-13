@@ -33,6 +33,32 @@ RSpec.describe TrialPresenter do
 
       expect(trial_presenter.criteria_as_markup).to eq expected_text
     end
+
+    it "wraps inclusion/exclusion with header tag" do
+      trial = build(:trial, criteria: original_criteria)
+
+      trial_presenter = TrialPresenter.new(trial)
+
+      expect(trial_presenter.criteria_as_markup).to eq expected_criteria
+    end
+  end
+
+  def original_criteria
+    <<-DESCRIPTION
+      Inclusion Criteria:
+      Item 1
+      Exclusion Criteria:
+      Item 1
+    DESCRIPTION
+  end
+
+  def expected_criteria
+    <<-DESCRIPTION
+      <h2>Inclusion Criteria:</h2>
+      Item 1
+      <h2>Exclusion Criteria:</h2>
+      Item 1
+    DESCRIPTION
   end
 
   def original_text
@@ -47,9 +73,9 @@ RSpec.describe TrialPresenter do
   def expected_text
     <<-DESCRIPTION
       Primary Objectives:
-    <ul><li>#{list_1}</li><li>#{list_2}</li></ul>Inbetween text.
-    <ul><li>#{list_3}</li><li>#{list_4}</li></ul>Inbetween text.
-    <ul><li>#{list_5}</li><li>#{list_6}</li><li>#{list_7}</li><li>#{list_8}</li><li>#{list_9}</li><li>#{list_10}</li><li>#{list_11}</li><li>#{list_12}</li><li>#{list_13}</li><li>#{list_14}</li></ul>Inbetween text.
+     <ul><li>#{list_1}</li></ul><ul><li>#{list_2}</li></ul>Inbetween text.
+     <ul><li>#{list_3}</li></ul><ul><li>#{list_4}</li></ul>Inbetween text.
+     <ul><li>#{list_5}</li></ul><ul><li>#{list_6}</li></ul><ul><li>#{list_7}</li></ul><ul><li>#{list_8}</li></ul><ul><li>#{list_9}</li></ul><ul><li>#{list_10}</li></ul><ul><li>#{list_11}</li></ul><ul><li>#{list_12}</li></ul><ul><li>#{list_13}</li></ul><ul><li>#{list_14}</li></ul>Inbetween text.
     DESCRIPTION
   end
 
