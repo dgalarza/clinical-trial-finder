@@ -5,6 +5,58 @@ RSpec.describe Site, type: :model do
     it { is_expected.to belong_to(:trial) }
   end
 
+  describe "#phone_to_call" do
+    context "extension exists" do
+      it "returns phone , extension" do
+        site = build(
+          :site,
+          contact_phone: "2345678901",
+          contact_phone_ext: "5076"
+        )
+
+        expect(site.phone_to_call).to eq "2345678901,5076"
+      end
+    end
+
+    context "extension does NOT exist" do
+      it "returns phone" do
+        site = build(
+          :site,
+          contact_phone: "2345678901",
+          contact_phone_ext: ""
+        )
+
+        expect(site.phone_to_call).to eq "2345678901"
+      end
+    end
+  end
+
+  describe "#phone_as_text" do
+    context "extension exists" do
+      it "returns phone , extension" do
+        site = build(
+          :site,
+          contact_phone: "2345678901",
+          contact_phone_ext: "5076"
+        )
+
+        expect(site.phone_as_text).to eq "2345678901 #5076"
+      end
+    end
+
+    context "extension does NOT exist" do
+      it "returns phone" do
+        site = build(
+          :site,
+          contact_phone: "2345678901",
+          contact_phone_ext: ""
+        )
+
+        expect(site.phone_as_text).to eq "2345678901"
+      end
+    end
+  end
+
   describe "#address" do
     context "address fields exist" do
       it "returns site's address" do

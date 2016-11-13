@@ -28,7 +28,6 @@ en:
   sites:
     site:
       address: "Address"
-      site_contact: "Site Contact"
       status: "Status:"
   time:
     formats:
@@ -42,6 +41,8 @@ en:
       index: "Clinical Trial Finder - National Brain Tumor Society"
       show: "%{trial}"
   trials:
+    site_contact:
+      site_contact: "Site Contact"
     contact_trial_team:
       contact_instructions: "If you are interested in learning more about this
         trial, find the trial site nearest to your location and contact the site

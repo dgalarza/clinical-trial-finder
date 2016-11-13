@@ -6,25 +6,12 @@
     <%= "#{site.display_location}" %>
   </div>
   <div class="expander-content site-details">
-    <p>
-      <b><%= t(".status") %></b>
-      <%=  "#{site.status}" %>
-    </p>
-    <p>
-      <b><%= t(".address") %></b>
-      <br>
-      <%= "#{site.facility}" %>
-      <br>
-      <%= "#{site.city}, #{site.state}, #{site.zip_code}" %>
-    </p>
-    <p>
-      <b><%= t(".site_contact") %></b>
-      <br>
-      <%= "#{site.contact_name}" %>
-      <br>
-      <a href="mailto:<%=  "#{site.contact_email}" %>">
-        <%=  "#{site.contact_email}" %></a>
-      <%=  "#{site.contact_phone} #{site.contact_phone_ext}" %>
-    </p>
+    <p><span class="bold"><%= t(".status") %></span><%= site.status %></p>
+    <div class="section">
+      <p class="bold"><%= t(".address") %></p>
+      <p><%= "#{site.facility}" %></p>
+      <p><%= "#{site.city}, #{site.state}, #{site.zip_code}" %></p>
+    </div>
+    <%= render "site_contact", site: site %>
   </div>
 </div>

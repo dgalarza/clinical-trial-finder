@@ -10,6 +10,22 @@ class Site < ActiveRecord::Base
     unless: :has_coordinates
   )
 
+  def phone_to_call
+    if contact_phone_ext.present?
+      "#{contact_phone},#{contact_phone_ext}"
+    else
+      contact_phone
+    end
+  end
+
+  def phone_as_text
+    if contact_phone_ext.present?
+      "#{contact_phone} ##{contact_phone_ext}"
+    else
+      contact_phone
+    end
+  end
+
   def facility_address
     "#{facility} #{address}"
   end

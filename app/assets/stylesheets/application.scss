@@ -37,10 +37,6 @@ h1 a:hover {
     @include margin($large-spacing null);
   }
 
-  .site-details p {
-    margin-bottom: $base-spacing;
-  }
-
   .pull-right {
     float: right;
   }
