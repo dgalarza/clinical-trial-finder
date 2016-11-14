@@ -47,6 +47,10 @@
     display: none;
   }
 
+  .expander-content h2 {
+    margin: $base-spacing 0;
+  }
+
   &.border {
     border: 1px solid $light-gray;
     padding: $base-spacing;
