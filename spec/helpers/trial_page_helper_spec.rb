@@ -83,4 +83,31 @@ RSpec.describe TrialPageHelper, type: :helper do
       expect(coordinates).to eq zip_code_coordinates
     end
   end
+
+  describe "load_resource_links" do
+    context "resource responds successfully" do
+      it "returns contents" do
+        url = "http://test.com"
+        with_environment "RESOURCE_LIST_URL" => url do
+          expected_contents = double(:expected_contents)
+          allow(RestClient).to receive(:get).with(url).
+            and_return(expected_contents)
+
+          expect(load_resource_links).to eq expected_contents
+        end
+      end
+    end
+
+    context "resource does NOT exist" do
+      it "returns nil" do
+        url = "http://test.com"
+        with_environment "RESOURCE_LIST_URL" => url do
+          allow(RestClient).to receive(:get).with(url).
+            and_raise(RestClient::NotFound)
+
+          expect(load_resource_links).to eq nil
+        end
+      end
+    end
+  end
 end

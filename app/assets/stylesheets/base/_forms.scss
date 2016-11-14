@@ -75,6 +75,10 @@ textarea {
   margin-right: $small-spacing;
 }
 
+form input {
+  float: none;
+}
+
 .radio {
   align-items: center;
   display: flex;

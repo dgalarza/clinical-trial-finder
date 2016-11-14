@@ -39,7 +39,7 @@
   <% if trial.criteria_as_markup.present? %>
     <div class="expander">
       <div class="js-expander-trigger expander-trigger expander-hidden" data-expand-item="Additional Criteria"><%= t(".more_criteria") %></div>
-      <div class="expander-content">
+      <div class="expander-content formatted-text">
         <p><%= raw(trial.criteria_as_markup) %></p>
       </div>
     </div>

@@ -1,21 +1,31 @@
 .trial-sidebar {
   background-color: $light-gray;
-  border: $base-border;
+  border-left: $base-border-width solid $medium-gray;
+  border-right: $base-border-width solid $medium-gray;
   flex: 1;
-  padding: $large-spacing;
 
   &::before {
     content: "";
     display: none;
   }
+
+  .section {
+    border-bottom: $base-border-width solid $medium-gray;
+    padding: $base-spacing $large-spacing;
+  }
 }
 
 .trial-sidebar-search-parameters {
   padding: 0;
+
+  .input {
+    margin-bottom: $small-spacing;
+  }
 }
 
 .google-map {
   border: 0;
   height: 200px;
   width: 100%;
+  margin-bottom: $base-spacing;
 }

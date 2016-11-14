@@ -4,7 +4,13 @@ RSpec.feature "User views trial" do
   include TrialListHelpers
 
   scenario "User views trial list and trial w/ site" do
-    with_environment "GOOGLE_EMBED_KEY" => "ABC123" do
+    url = "http://resource-site.com"
+    stub_resource_link_request(url)
+    environment = {
+      "GOOGLE_EMBED_KEY" => "ABC123",
+      "RESOURCE_LIST_URL" => url,
+    }
+    with_environment environment do
       trial_title = "Trial Title"
       trial_description = "Trial Description"
       site_facility = "Site Facility"
@@ -25,6 +31,7 @@ RSpec.feature "User views trial" do
       end
       within ".trial-sidebar" do
         expect(page).to have_css google_map_for_site(site)
+        expect(page).to have_content resource_link_text
       end
     end
   end
@@ -128,5 +135,16 @@ RSpec.feature "User views trial" do
 
   def google_map_for_site(site)
     "iframe[src='https://www.google.com/maps/embed/v1/place?key=#{ENV.fetch("GOOGLE_EMBED_KEY")}&q=#{site.facility_address}']"
+  end
+
+  def stub_resource_link_request(url)
+    stub_request(:get, url).to_return(
+      status: 200,
+      body: "<ul><li><a href='/'>#{resource_link_text}</a></li></ul>",
+    )
+  end
+
+  def resource_link_text
+    "Resource Link"
   end
 end

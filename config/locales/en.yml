@@ -91,3 +91,4 @@ en:
         other: "Displaying %{count} trials"
     trial_sidebar:
       nearest_location: "Nearest Location"
+      resources: "Resources"

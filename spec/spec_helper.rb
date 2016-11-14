@@ -24,6 +24,9 @@ RSpec.configure do |config|
 
   config.example_status_persistence_file_path = "tmp/rspec_examples.txt"
   config.order = :random
+  config.before do
+    stub_request(:get, ENV.fetch("RESOURCE_LIST_URL"))
+  end
 end
 
 WebMock.disable_net_connect!(allow_localhost: true)

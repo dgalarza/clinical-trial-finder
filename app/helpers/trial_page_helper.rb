@@ -14,4 +14,16 @@ module TrialPageHelper
   def coordinates
     session[:zip_code_coordinates]
   end
+
+  def load_resource_links
+    @load_resource_links ||= retrive_resource_links
+  end
+
+  private
+
+  def retrive_resource_links
+    RestClient.get(ENV.fetch("RESOURCE_LIST_URL"))
+  rescue RestClient::NotFound
+    nil
+  end
 end

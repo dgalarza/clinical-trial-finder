@@ -1,8 +1,17 @@
 <div class="trial-sidebar">
   <% if show_nearest_site?(count: trial.sites.count) %>
-    <h3><%= t(".nearest_location") %></h3>
-    <% nearest_site = trial.ordered_sites(coordinates: coordinates).first %>
-    <%= content_tag("iframe", '', class: "google-map", src: "https://www.google.com/maps/embed/v1/place?key=#{ENV.fetch("GOOGLE_EMBED_KEY")}&q=#{nearest_site.facility_address}") %>
-    <%= render "site_contact", site: nearest_site %>
+    <div class="section">
+      <h3><%= t(".nearest_location") %></h3>
+      <% nearest_site = trial.ordered_sites(coordinates: coordinates).first %>
+      <%= content_tag("iframe", '', class: "google-map", src: "https://www.google.com/maps/embed/v1/place?key=#{ENV.fetch("GOOGLE_EMBED_KEY")}&q=#{nearest_site.facility_address}") %>
+      <%= render "site_contact", site: nearest_site %>
+    </div>
+  <% end %>
+
+  <% if load_resource_links.present? %>
+    <div class="section">
+      <h3><%= t(".resources") %></h3>
+      <%= raw(load_resource_links) %>
+    </div>
   <% end %>
 </div>
