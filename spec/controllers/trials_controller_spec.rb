@@ -2,12 +2,44 @@ require "rails_helper"
 
 RSpec.describe TrialsController, type: :controller do
   describe "#index" do
-    it "caches all search params" do
-      search_params = { "trial_filter_form" => { "age" => "10", "gender" => "M" } }
+    context "form is valid" do
+      it "caches all search params" do
+        search_params = {
+          "trial_filter_form" => { "age" => "10", "gender" => "M" }
+        }
+        stub_filter_form(valid: true)
 
-      get :index, search_params
+        get :index, search_params
 
-      expect(session[:search_params]).to eq search_params
+        expect(session[:search_params]).to eq search_params
+      end
+
+      it "caches all search params" do
+        filter_form = stub_filter_form(valid: true)
+
+        get :index
+
+        expect(session[:search_results]).to eq filter_form.trial_ids
+      end
+    end
+
+    context "form is invalid" do
+      before do
+        stub_filter_form(valid: false)
+      end
+
+      it "does NOT cache search params" do
+        get :index
+
+        expect(session[:search_params]).to eq nil
+      end
+
+      it "caches all search params" do
+        get :index
+
+        expect(session[:search_results]).to eq nil
+      end
+
     end
 
     context "zip code is a search filter" do
@@ -36,5 +68,13 @@ RSpec.describe TrialsController, type: :controller do
         expect(session[:zip_code_coordinates]).to eq nil
       end
     end
+  end
+
+  def stub_filter_form(valid:)
+    trial_ids = double(:trial_ids)
+    filter_form = double(:filter_form, valid?: valid, trial_ids: trial_ids)
+    allow(TrialFilterForm).to receive(:new).and_return(filter_form)
+
+    filter_form
   end
 end

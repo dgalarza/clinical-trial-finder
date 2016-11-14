@@ -35,22 +35,28 @@ class TrialFilterForm
 
   def trials
     if valid?
-      trials = Trial
-        .sites_present
-        .search_for(keyword)
-        .age(age)
-        .control(control)
-        .gender(gender)
-        .study_type(study_type)
-        .close_to(close_to_arguments)
-
-      trials.paginate(page: page)
+      filtered_trials.paginate(page: page)
     else
       Trial.none
     end
   end
 
+  def trial_ids
+    filtered_trials.pluck(:id)
+  end
+
   private
+
+  def filtered_trials
+    Trial
+      .sites_present
+      .search_for(keyword)
+      .age(age)
+      .control(control)
+      .gender(gender)
+      .study_type(study_type)
+      .close_to(close_to_arguments)
+  end
 
   def close_to_arguments
     {

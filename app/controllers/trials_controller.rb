@@ -4,7 +4,7 @@ class TrialsController < ApplicationController
 
     if @trial_filter_form.valid?
       cache_filters
-      session[:search_results] = @trial_filter_form.trials.pluck(:id)
+      session[:search_results] = @trial_filter_form.trial_ids
     end
   end
 

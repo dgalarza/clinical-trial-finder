@@ -36,6 +36,16 @@ RSpec.describe TrialFilterForm, type: :model do
     end
   end
 
+  describe "#trial_ids" do
+    it "returns ids of all matching trials" do
+      trial = create(:trial)
+
+      trials = TrialFilterForm.new.trial_ids
+
+      expect(trials).to eq [trial.id]
+    end
+  end
+
   def invalid_zip
     "abcdef"
   end
