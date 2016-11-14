@@ -81,6 +81,7 @@ en:
       more_criteria: "More Inclusion & Exclusion Criteria"
       study_type: "Study Type"
     search_filter:
+      filters: "Filters"
       submit: "Search Trials"
     study_purpose:
       study_purpose: "Study Purpose"
