@@ -9,9 +9,8 @@ RSpec.describe "trials/_trial", type: :view do
   context "NOT filtered by zip code" do
     it "does NOT render closest site" do
       allow(view).to receive(:zip_code_param).and_return(nil)
-      trial = create(:trial)
       site = double(:site)
-      allow(trial).to receive(:closest_site)
+      trial = double(:trial, closest_site: site).as_null_object
 
       render "trials/trial", trial: trial
 
@@ -27,9 +26,8 @@ RSpec.describe "trials/_trial", type: :view do
     it "renders closest site template" do
       zip_code = "12345"
       allow(view).to receive(:zip_code_param).and_return(zip_code)
-      trial = create(:trial)
       site = double(:site)
-      allow(trial).to receive(:closest_site).with(zip_code).and_return(site)
+      trial = double(:trial, closest_site: site).as_null_object
 
       render "trials/trial", trial: trial
 

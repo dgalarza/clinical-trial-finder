@@ -1,4 +1,6 @@
 class TrialPresenter < SimpleDelegator
+  MAX_AGES = ["N/A", "120 Years", "100 Years", "99 Years"].freeze
+
   def description_as_markup
     parse(description)
   end
@@ -11,7 +13,19 @@ class TrialPresenter < SimpleDelegator
     parse(criteria_with_header_tags)
   end
 
+  def age_range
+    "#{minimum_age_original} #{max_age_value}"
+  end
+
   private
+
+  def max_age_value
+    if maximum_age_original.in? MAX_AGES
+      "and Over"
+    else
+      "- #{maximum_age_original}"
+    end
+  end
 
   def criteria_with_header_tags
     if criteria.present?
