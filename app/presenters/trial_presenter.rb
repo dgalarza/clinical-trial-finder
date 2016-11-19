@@ -1,5 +1,20 @@
 class TrialPresenter < SimpleDelegator
   MAX_AGES = ["N/A", "120 Years", "100 Years", "99 Years"].freeze
+  PERIOD_ASCII = "&#46;".freeze
+
+  VALID_USES_OF_PERIOD = [
+    ["St.", "St#{PERIOD_ASCII}"],
+    ["e.g.", "e#{PERIOD_ASCII}g#{PERIOD_ASCII}"],
+    ["i.e.", "i#{PERIOD_ASCII}e#{PERIOD_ASCII}"],
+    ["(ie.", "(ie#{PERIOD_ASCII}"],
+    [" ie.", " ie#{PERIOD_ASCII}"],
+    ["i.a.", "i#{PERIOD_ASCII}a#{PERIOD_ASCII}"],
+    ["i.v.", "i#{PERIOD_ASCII}v#{PERIOD_ASCII}"],
+    [/(\(|\s)vs./, "\\1vs#{PERIOD_ASCII}"],
+    [" etc.", " etc#{PERIOD_ASCII}"],
+    [" ver.", " ver#{PERIOD_ASCII}"],
+    [/(\d)\.(\d)/, "\\1#{PERIOD_ASCII}\\2"]
+  ].freeze
 
   def to_s
     title
@@ -49,10 +64,19 @@ class TrialPresenter < SimpleDelegator
 
   def parse(value)
     if value.present?
-      value.gsub(/\s#{start_of_item_regex}\s([^.]+\.)/, "<li>\\1</li>").
+      value_with_periods(value).
+        gsub(/\s(#{start_of_item_regex})\s([^.]+\.)/, "<li>\\1 \\2</li>").
         gsub(/<li>/, "<ul><li>").
         gsub(/\s*<\/li>\s*/, "</li></ul>")
     end
+  end
+
+  def value_with_periods(value)
+    VALID_USES_OF_PERIOD.each do |valid_use|
+      value.gsub!(valid_use[0], valid_use[1])
+    end
+
+    value
   end
 
   def start_of_item_regex

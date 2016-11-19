@@ -146,9 +146,9 @@ RSpec.describe TrialPresenter do
   def expected_text
     <<-DESCRIPTION
       Primary Objectives:
-     <ul><li>#{list_1}</li></ul><ul><li>#{list_2}</li></ul>Inbetween text.
-     <ul><li>#{list_3}</li></ul><ul><li>#{list_4}</li></ul>Inbetween text.
-     <ul><li>#{list_5}</li></ul><ul><li>#{list_6}</li></ul><ul><li>#{list_7}</li></ul><ul><li>#{list_8}</li></ul><ul><li>#{list_9}</li></ul><ul><li>#{list_10}</li></ul><ul><li>#{list_11}</li></ul><ul><li>#{list_12}</li></ul><ul><li>#{list_13}</li></ul><ul><li>#{list_14}</li></ul>Inbetween text.
+     <ul><li>- #{list_1_expected}</li></ul><ul><li>- #{list_2_expected}</li></ul>Inbetween text.
+     <ul><li>(1) #{list_3_expected}</li></ul><ul><li>(2) #{list_4_expected}</li></ul>Inbetween text.
+     <ul><li>I. #{list_5_expected}</li></ul><ul><li>II. #{list_6_expected}</li></ul><ul><li>III. #{list_7_expected}</li></ul><ul><li>IV. #{list_8_expected}</li></ul><ul><li>V. #{list_9_expected}</li></ul><ul><li>VI. #{list_10_expected}</li></ul><ul><li>VII. #{list_11_expected}</li></ul><ul><li>VIII. #{list_12_expected}</li></ul><ul><li>IX. #{list_13_expected}</li></ul><ul><li>X. #{list_14_expected}</li></ul>Inbetween text.
     DESCRIPTION
   end
 
@@ -157,7 +157,12 @@ RSpec.describe TrialPresenter do
       self.class.send(
         :define_method,
         "list_#{number}",
-        proc { "List Item Number #{number}." }
+        proc { "List vs. St. Jude e.g. 9.5 i.e. Item Number #{number}." }
+      )
+      self.class.send(
+        :define_method,
+        "list_#{number}_expected",
+        proc { "List vs&#46; St&#46; Jude e&#46;g&#46; 9&#46;5 i&#46;e&#46; Item Number #{number}." }
       )
     end
   end
