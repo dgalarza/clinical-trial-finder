@@ -6,7 +6,7 @@
         <%= t(".trial_id") %>
       </td>
       <td>
-        <%= trial.nct_id %>
+        <%= link_to trial.nct_id, "https://clinicaltrials.gov/ct2/show/#{trial.nct_id}" %>
       </td>
     </tr>
     <tr>
