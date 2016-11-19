@@ -45,22 +45,12 @@ class Trial < ActiveRecord::Base
   }
 
   scope :close_to, lambda { |zip_code:, radius:|
-    if zip_code.present?
-      site_pin_point = build_site_pin_point(zip_code)
-      nearby_sites = site_pin_point.nearbys(radius)
-      trial_ids = nearby_sites.map(&:trial_id).uniq
-      where(id: trial_ids).order_as_specified(id: trial_ids)
-    else
-      order(:title)
-    end
+    SiteDistanceCalculator.new(zip_code: zip_code, radius: radius).
+      nearby_trials(self)
   }
 
   def closest_site(zip_code)
-    zip_code = ZipCode.find_by(zip_code: zip_code)
-    site = Site.where(trial_id: id).near(zip_code.coordinates, 100).first
-    distance = site.distance_from(zip_code.coordinates).round
-
-    [site, distance]
+    SiteDistanceCalculator.new(zip_code: zip_code).closest_site(sites)
   end
 
   def ordered_sites(coordinates: nil, united_states: nil)
@@ -73,12 +63,6 @@ class Trial < ActiveRecord::Base
   end
 
   private
-
-  def self.build_site_pin_point(zip_code)
-    zip_code = ZipCode.find_by(zip_code: zip_code)
-    Site.new(latitude: zip_code.latitude, longitude: zip_code.longitude)
-  end
-  private_class_method :build_site_pin_point
 
   def filter_sites_by_country(united_states)
     if united_states.nil?
