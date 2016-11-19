@@ -8,12 +8,14 @@ class Trial < ActiveRecord::Base
   MINIMUM_AGE = 0
   MAXIMUM_AGE = 120
   NOT_APPLICABLE = "N/A".freeze
+  OBSERVATIONAL_STUDY_TYPES =
+    "('Observational', 'Observational [Patient Registry]')".freeze
 
   has_many :sites
   before_save :convert_ages
 
   scope :sites_present, lambda {
-    where("sites_count >= ?", 1 )
+    where("sites_count >= ?", 1)
   }
 
   scope :search_for, lambda { |query|
@@ -28,7 +30,7 @@ class Trial < ActiveRecord::Base
     if study_type == "Interventional"
       where("study_type = 'Interventional'")
     elsif study_type == "Observational"
-      where("study_type IN ('Observational', 'Observational [Patient Registry]')")
+      where("study_type IN #{OBSERVATIONAL_STUDY_TYPES}")
     end
   }
 
@@ -70,10 +72,6 @@ class Trial < ActiveRecord::Base
     end
   end
 
-  def to_s
-    title
-  end
-
   private
 
   def self.build_site_pin_point(zip_code)
@@ -84,10 +82,10 @@ class Trial < ActiveRecord::Base
 
   def filter_sites_by_country(united_states)
     if united_states.nil?
-      filtered_sites = sites
+      sites
     else
       filter_type = united_states ? "select" : "reject"
-      filtered_sites = sites.send(filter_type, &:in_united_states?)
+      sites.send(filter_type, &:in_united_states?)
     end
   end
 

@@ -1,6 +1,10 @@
 class TrialPresenter < SimpleDelegator
   MAX_AGES = ["N/A", "120 Years", "100 Years", "99 Years"].freeze
 
+  def to_s
+    title
+  end
+
   def description_as_markup
     parse(description)
   end

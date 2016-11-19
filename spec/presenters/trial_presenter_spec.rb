@@ -5,6 +5,17 @@ RSpec.describe TrialPresenter do
     define_description_list_items
   end
 
+  describe "#to_s" do
+    it "returns trial title" do
+      title = "Trial title"
+      trial = build(:trial, title: title)
+
+      trial_presenter = TrialPresenter.new(trial)
+
+      expect(trial_presenter.to_s). to eq title
+    end
+  end
+
   describe "description_as_markup" do
     it "identifies list item content and wraps <li>" do
       trial = build(:trial, description: original_text)

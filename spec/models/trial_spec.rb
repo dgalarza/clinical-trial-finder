@@ -441,14 +441,6 @@ RSpec.describe Trial, type: :model do
     end
   end
 
-  describe "#to_s" do
-    it "returns trial title" do
-      title = "Trial title"
-
-      expect(build(:trial, title: title).to_s). to eq title
-    end
-  end
-
   def seed_new_york_zip_code
     ZipCode.create(
       zip_code: new_york_zip_code,
