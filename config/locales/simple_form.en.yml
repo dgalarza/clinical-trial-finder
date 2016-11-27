@@ -10,5 +10,5 @@ en:
     labels:
       trials:
         index:
-          control: "Patient or control?"
+          control: "Patient or healthy volunteer?"
           study_type: "Type of trial?"

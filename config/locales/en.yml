@@ -6,7 +6,7 @@ en:
       with_weekday: "%a %m/%d/%y"
   helpers:
     search_filter:
-      am_control: "I am a control"
+      am_control: "I am a healthy volunteer"
       am_patient: "I have a brain tumor"
       distance_radius: "Will travel %{radius} miles"
       interventional: "Interventional"
@@ -24,7 +24,7 @@ en:
     labels:
       trials:
         index:
-          control: "Control"
+          control: "Healthy Volunteer"
   sites:
     site:
       address: "Address"
@@ -74,7 +74,7 @@ en:
       previous_trial: "Previous Trial"
       return_to_search: "Back to Search"
     recruitment_table:
-      accepts_controls: "Accepts Volunteers"
+      accepts_controls: "Accepts Healthy Volunteers"
       criteria: "Recuitment Criteria"
       eligible_ages: "Eligible Ages"
       gender: "Gender"

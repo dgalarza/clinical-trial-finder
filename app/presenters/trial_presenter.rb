@@ -21,6 +21,16 @@ class TrialPresenter < SimpleDelegator
     "#{minimum_age_original} #{max_age_value}"
   end
 
+  def healthy_volunteers_as_yes_no
+    if healthy_volunteers == "Accepts Healthy Volunteers"
+      "Yes"
+    elsif healthy_volunteers == "No"
+      "No"
+    else
+      "Unknown"
+    end
+  end
+
   private
 
   def max_age_value

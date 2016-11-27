@@ -84,6 +84,38 @@ RSpec.describe TrialPresenter do
     end
   end
 
+  describe "#healthy_volunteers_as_yes_no" do
+    context "healthy_volunteers is 'Accepts Healthy Volunteers'" do
+      it "returns 'Yes'" do
+        trial = build(:trial, healthy_volunteers: "Accepts Healthy Volunteers")
+
+        trial_presenter = TrialPresenter.new(trial)
+
+        expect(trial_presenter.healthy_volunteers_as_yes_no).to eq "Yes"
+      end
+    end
+
+    context "healthy_volunteers is 'No'" do
+      it "returns 'No'" do
+        trial = build(:trial, healthy_volunteers: "No")
+
+        trial_presenter = TrialPresenter.new(trial)
+
+        expect(trial_presenter.healthy_volunteers_as_yes_no).to eq "No"
+      end
+    end
+
+    context "healthy_volunteers is ''" do
+      it "returns 'Unknown'" do
+        trial = build(:trial, healthy_volunteers: "")
+
+        trial_presenter = TrialPresenter.new(trial)
+
+        expect(trial_presenter.healthy_volunteers_as_yes_no).to eq "Unknown"
+      end
+    end
+  end
+
   def original_criteria
     <<-DESCRIPTION
       Inclusion Criteria:
