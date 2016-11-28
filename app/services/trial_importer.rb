@@ -73,7 +73,7 @@ class TrialImporter
       [:conditions, "condition"],
       [:countries, "location_countries/country"],
       [:criteria, "//criteria/textblock"],
-      [:description, "detailed_description/textblock"],
+      [:description, "brief_summary/textblock"],
       [:detailed_description, "detailed_description/textblock"],
       [:first_received_date, "firstreceived_date"],
       [:gender, "//gender"],

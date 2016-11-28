@@ -14,7 +14,7 @@ RSpec.describe TrialImporter, type: :service do
         expect(trial.conditions).to eq ["Condition1", "Condition2"]
         expect(trial.countries).to eq ["Country"]
         expect(trial.criteria).to include "Criteria"
-        expect(trial.description).to include "Detailed Description"
+        expect(trial.description).to include "Brief Summary"
         expect(trial.detailed_description).to include "Detailed Description"
         expect(trial.first_received_date).to eq "First Received Date"
         expect(trial.gender).to eq "Gender"
