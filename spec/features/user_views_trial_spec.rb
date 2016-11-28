@@ -25,7 +25,7 @@ RSpec.feature "User views trial" do
 
       click_link trial_title
 
-      within ".trial-results" do
+      within ".trial-page" do
         expect(page).to have_content trial_description
         expect(page).to have_content site_facility
       end

@@ -18,10 +18,8 @@
 </head>
 <body class="<%= body_class %>">
   <%= render "site_html_top_half" %>
-  <div id="clinical-trial-finder" class="columns wrapper">
-    <div class="trial-base-container">
-      <%= yield %>
-    </div>
+  <div id="clinical-trial-finder" class="wrapper">
+    <%= yield %>
   </div>
   <%= render "site_html_bottom_half" %>
   <%= render "javascript" %>

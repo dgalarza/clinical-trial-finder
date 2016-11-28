@@ -20,9 +20,16 @@ h1 a:hover {
   }
 
   .import-logs,
-  .trial-results {
+  .trial-results,
+  .trial-page {
     @include padding($large-spacing);
     flex: 2;
+  }
+
+  .intro-text {
+    @include padding($large-spacing);
+    background-color: $light-gray;
+    border: $base-border-width solid $medium-gray;
   }
 
   .trial-count {
@@ -44,5 +51,4 @@ h1 a:hover {
   .formatted-text li {
     margin-left: 25px;
   }
-
 }

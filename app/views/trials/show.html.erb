@@ -1,15 +1,17 @@
-<div class="trial-results">
-  <%= render "navigation" %>
+<div class="trial-base-container">
+  <div class="trial-page">
+    <%= render "navigation" %>
 
-  <h1><%= @trial.title %></h1>
+    <h1><%= @trial.title %></h1>
 
-  <%= render "study_purpose", trial: @trial %>
+    <%= render "study_purpose", trial: @trial %>
 
-  <%= render "recruitment_table", trial: @trial %>
+    <%= render "recruitment_table", trial: @trial %>
 
-  <%= render "details_table", trial: @trial %>
+    <%= render "details_table", trial: @trial %>
 
-  <%= render "contact_trial_team", trial: @trial %>
+    <%= render "contact_trial_team", trial: @trial %>
+  </div>
+
+  <%= render "trial_sidebar", trial: @trial %>
 </div>
-
-<%= render "trial_sidebar", trial: @trial %>
