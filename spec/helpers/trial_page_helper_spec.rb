@@ -89,11 +89,12 @@ RSpec.describe TrialPageHelper, type: :helper do
       it "returns contents" do
         url = "http://test.com"
         with_environment "RESOURCE_LIST_URL" => url do
-          expected_contents = double(:expected_contents)
+          inner_contents = "<ul><li>Item1</li></ul>"
+          expected_contents = "<head></head><body><ul>#{inner_contents}"
           allow(RestClient).to receive(:get).with(url).
             and_return(expected_contents)
 
-          expect(load_resource_links).to eq expected_contents
+          expect(load_resource_links).to eq inner_contents
         end
       end
     end

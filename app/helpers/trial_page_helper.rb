@@ -22,8 +22,18 @@ module TrialPageHelper
   private
 
   def retrive_resource_links
-    RestClient.get(ENV.fetch("RESOURCE_LIST_URL"))
+    if inner_content.present?
+      inner_content.first.inner_html
+    end
   rescue RestClient::NotFound
     nil
+  end
+
+  def inner_content
+    Nokogiri::HTML(link_url_content).css('ul')
+  end
+
+  def link_url_content
+    RestClient.get ENV.fetch("RESOURCE_LIST_URL")
   end
 end
