@@ -1,5 +1,5 @@
 class TrialPresenter < SimpleDelegator
-  MAX_AGES = ["N/A", "120 Years", "100 Years", "99 Years"].freeze
+  MAX_AGE = 100
   PERIOD_ASCII = "&#46;".freeze
 
   VALID_USES_OF_PERIOD = [
@@ -49,7 +49,7 @@ class TrialPresenter < SimpleDelegator
   private
 
   def max_age_value
-    if maximum_age_original.in? MAX_AGES
+    if maximum_age >= MAX_AGE
       "and Over"
     else
       "- #{maximum_age_original}"

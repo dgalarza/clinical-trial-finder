@@ -55,26 +55,42 @@ RSpec.describe TrialPresenter do
   end
 
   describe "#age_range" do
-    context "max age is valid age" do
+    context "max age is less than MAX_AGE" do
       it "returns min and max age" do
         trial = build(
           :trial,
           minimum_age_original: "15 years",
-          maximum_age_original: "60 years"
+          maximum_age_original: "99 years",
+          maximum_age: 99
         )
 
         trial_presenter = TrialPresenter.new(trial)
 
-        expect(trial_presenter.age_range).to eq "15 years - 60 years"
+        expect(trial_presenter.age_range).to eq "15 years - 99 years"
       end
     end
 
-    context "max age is 'N/A'" do
+    context "max age is greater than MAX_AGE" do
       it "returns min and max age" do
         trial = build(
           :trial,
           minimum_age_original: "15 years",
-          maximum_age_original: "N/A"
+          maximum_age_original: "150 years",
+          maximum_age: 150
+        )
+
+        trial_presenter = TrialPresenter.new(trial)
+
+        expect(trial_presenter.age_range).to eq "15 years and Over"
+      end
+    end
+    context "max age is N/A" do
+      it "returns min and max age" do
+        trial = build(
+          :trial,
+          minimum_age_original: "15 years",
+          maximum_age_original: "N/A",
+          maximum_age: 120
         )
 
         trial_presenter = TrialPresenter.new(trial)
