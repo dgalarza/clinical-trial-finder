@@ -6,6 +6,10 @@ h1 a:hover {
   text-decoration: none;
 }
 
+.small-text-override {
+  font-size: 1em !important;
+}
+
 #clinical-trial-finder {
   @import "base/base";
   @import "refills/tables";
@@ -30,6 +34,10 @@ h1 a:hover {
     @include padding($large-spacing);
     background-color: $light-gray;
     border: $base-border-width solid $medium-gray;
+
+    h2 {
+      margin-top: $large-spacing;
+    }
   }
 
   .trial-count {
@@ -51,4 +59,5 @@ h1 a:hover {
   .formatted-text li {
     margin-left: 25px;
   }
+
 }
