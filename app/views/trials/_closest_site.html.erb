@@ -1,6 +1,8 @@
-<div class="infographic-group">
-  <span class="infographic-item icon-location">
-    <%= closest_site.first.facility %>
-    (<%= t("trials.miles_away", count: closest_site.second) %>)
-  </span>
-</div>
+<% if closest_site.present? %>
+  <div class="infographic-group">
+    <span class="infographic-item icon-location">
+      <%= closest_site.first.facility %>
+      (<%= t("trials.miles_away", count: closest_site.second) %>)
+    </span>
+  </div>
+<% end %>

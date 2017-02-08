@@ -14,10 +14,11 @@ class SiteDistanceCalculator
   end
 
   def closest_site(sites)
-    site = sites.near(zip_code.coordinates, radius).first
-    distance = site.distance_from(zip_code.coordinates).round
+    if site = sites.near(zip_code.coordinates, radius).first
+      distance = site.distance_from(zip_code.coordinates).round
 
-    [site, distance]
+      [site, distance]
+    end
   end
 
   private
