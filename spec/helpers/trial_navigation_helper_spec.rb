@@ -28,6 +28,17 @@ RSpec.describe TrialNavigationHelper, type: :helper do
         )
       end
     end
+
+    context "provided trial is not in list" do
+      it "returns nil" do
+        trial_id = 1
+        session[:search_results] = []
+
+        link = helper.previous_trial_link(trial_id)
+
+        expect(link).to eq nil
+      end
+    end
   end
 
   describe "#next_trial_link" do
@@ -55,6 +66,17 @@ RSpec.describe TrialNavigationHelper, type: :helper do
           trial_path(next_trial_id),
           class: "next-trial"
         )
+      end
+    end
+
+    context "provided trial is not in list" do
+      it "returns nil" do
+        trial_id = 1
+        session[:search_results] = []
+
+        link = helper.next_trial_link(trial_id)
+
+        expect(link).to eq nil
       end
     end
   end
