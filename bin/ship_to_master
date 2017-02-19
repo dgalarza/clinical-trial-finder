@@ -13,8 +13,8 @@ But seriously...  did you? (y/n)"
 read dev_ac_answer
 
 if [ "$dev_ac_answer" != "y" ]; then
-	echo "Tsk-tsk. Test your code!"
-	exit 1
+  echo "Tsk-tsk. Test your code!"
+  exit 1
 fi
 
 echo "Shipping now..."
@@ -23,10 +23,11 @@ git checkout master
 git pull origin master
 git merge --ff-only $branch
 
-if git push origin master; then
-	git delete-branch $branch
 
-	echo "$branch was shipped and deleted!\n"
+if git push origin master; then
+  git delete-branch $branch
+
+  echo "$branch was shipped and deleted!\n"
 else
-	echo "There was a conflict pushing master"
+  echo "There was a conflict pushing master"
 fi
