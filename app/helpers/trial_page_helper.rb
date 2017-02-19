@@ -16,12 +16,12 @@ module TrialPageHelper
   end
 
   def load_resource_links
-    @load_resource_links ||= retrive_resource_links
+    @load_resource_links ||= retrieve_resource_links
   end
 
   private
 
-  def retrive_resource_links
+  def retrieve_resource_links
     if inner_content.present?
       inner_content.first.inner_html
     end
