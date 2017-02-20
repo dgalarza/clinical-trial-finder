@@ -18,9 +18,11 @@ Style/Next:
 
 Style/TrailingCommaInLiteral:
   Enabled: true
+  EnforcedStyleForMultiline: comma
 
 Style/TrailingCommaInArguments:
   Enabled: true
+  EnforcedStyleForMultiline: comma
 
 Style/StringLiteralsInInterpolation:
   Enabled: false
@@ -29,4 +31,9 @@ Style/StringLiterals:
   Enabled: false
 
 Style/Documentation:
+  Enabled: false
+
+Style/WordArray:
+  Include:
+    - spec/*.rb
   Enabled: false
