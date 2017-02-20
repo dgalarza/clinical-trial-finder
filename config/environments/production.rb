@@ -23,5 +23,6 @@ Rails.application.configure do
   config.middleware.use Rack::Deflater
   config.static_cache_control = "public, max-age=31557600"
   config.action_mailer.default_url_options = { host: ENV.fetch("APPLICATION_HOST") }
+  config.assets.precompile += %w(analytics.js)
 end
 Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i

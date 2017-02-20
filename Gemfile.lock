@@ -85,6 +85,13 @@ GEM
       capybara (>= 2.3.0, < 2.8.0)
       json
     coderay (1.1.1)
+    coffee-rails (4.2.1)
+      coffee-script (>= 2.2.0)
+      railties (>= 4.0.0, < 5.2.x)
+    coffee-script (2.4.1)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.12.2)
     concurrent-ruby (1.0.2)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
@@ -145,6 +152,8 @@ GEM
     json (1.8.3)
     launchy (2.4.3)
       addressable (~> 2.3)
+    lodash-rails (4.17.4)
+      railties (>= 3.1)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -328,6 +337,7 @@ DEPENDENCIES
   bullet
   bundler-audit (>= 0.5.0)
   capybara-webkit
+  coffee-rails
   database_cleaner
   delayed_job_active_record
   dotenv-rails
@@ -339,6 +349,7 @@ DEPENDENCIES
   i18n-tasks
   jquery-rails
   launchy
+  lodash-rails
   neat (~> 1.7.0)
   normalize-rails (~> 3.0.0)
   order_as_specified
@@ -378,4 +389,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.12.5
+   1.14.4

@@ -121,6 +121,68 @@ RSpec.feature "User views trial" do
     expect(page).to have_field("trial_filter_form[age]", with: age)
   end
 
+  scenario "User expands sections of content", :js do
+    criteria = "This is the criteria"
+    description = "This is the description"
+    trial =
+      create(:trial, detailed_description: description, criteria: criteria)
+    site = trial.sites.first
+
+    visit trial_path(trial)
+
+    expect(page).not_to have_content criteria
+    expect(page).not_to have_content description
+    expect(page).not_to have_content site.zip_code
+
+    find('[data-expand-item="Additional Criteria"]').click
+
+    expect(page).to have_content criteria
+    expect(page).not_to have_content description
+    expect(page).not_to have_content site.zip_code
+    expect(last_javascript_event.name).to eq "Click Expand"
+    expect(last_javascript_event.properties["item"]).to eq "Additional Criteria"
+
+    find('[data-expand-item="Additional Criteria"]').click
+
+    expect(page).not_to have_content criteria
+    expect(page).not_to have_content description
+    expect(page).not_to have_content site.zip_code
+    expect(last_javascript_event.name).to eq "Click Collapse"
+    expect(last_javascript_event.properties["item"]).to eq "Additional Criteria"
+
+    find('[data-expand-item="Site"]').click
+
+    expect(page).not_to have_content criteria
+    expect(page).not_to have_content description
+    expect(page).to have_content site.zip_code
+    expect(last_javascript_event.name).to eq "Click Expand"
+    expect(last_javascript_event.properties["item"]).to eq "Site"
+
+    find('[data-expand-item="Site"]').click
+
+    expect(page).not_to have_content criteria
+    expect(page).not_to have_content description
+    expect(page).not_to have_content site.zip_code
+    expect(last_javascript_event.name).to eq "Click Collapse"
+    expect(last_javascript_event.properties["item"]).to eq "Site"
+
+    find('[data-expand-item="Additional Details"]').click
+
+    expect(page).not_to have_content criteria
+    expect(page).to have_content description
+    expect(page).not_to have_content site.zip_code
+    expect(last_javascript_event.name).to eq "Click Expand"
+    expect(last_javascript_event.properties["item"]).to eq "Additional Details"
+
+    find('[data-expand-item="Additional Details"]').click
+
+    expect(page).not_to have_content criteria
+    expect(page).not_to have_content description
+    expect(page).not_to have_content site.zip_code
+    expect(last_javascript_event.name).to eq "Click Collapse"
+    expect(last_javascript_event.properties["item"]).to eq "Additional Details"
+  end
+
   def return_to_search
     t("trials.navigation.return_to_search")
   end
@@ -146,5 +208,10 @@ RSpec.feature "User views trial" do
 
   def resource_link_text
     "Resource Link"
+  end
+
+  def last_javascript_event
+    event = page.evaluate_script("window.AnalyticsStub.lastEvent()")
+    OpenStruct.new(event)
   end
 end
