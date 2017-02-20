@@ -1,11 +1,14 @@
 $(document).ready(function() {
   $('.js-expander-trigger').click(function(){
     var clickType =
-      $(this).hasClass("expander-hidden") ? "Click Expand" : "Click Collapse";
+      $(this).hasClass("expander-hidden") ? "Expanded" : "Collapsed";
 
     analytics.track(
-      clickType,
-      { item: this.dataset.expandItem }
+      this.dataset.expandItem,
+      {
+        category: clickType,
+        label: location.pathname,
+      }
     );
 
     $(this).toggleClass("expander-hidden");

@@ -139,48 +139,50 @@ RSpec.feature "User views trial" do
     expect(page).to have_content criteria
     expect(page).not_to have_content description
     expect(page).not_to have_content site.zip_code
-    expect(last_javascript_event.name).to eq "Click Expand"
-    expect(last_javascript_event.properties["item"]).to eq "Additional Criteria"
+    expect_last_javascript_event("Additional Criteria", "Expanded", trial)
 
     find('[data-expand-item="Additional Criteria"]').click
 
     expect(page).not_to have_content criteria
     expect(page).not_to have_content description
     expect(page).not_to have_content site.zip_code
-    expect(last_javascript_event.name).to eq "Click Collapse"
-    expect(last_javascript_event.properties["item"]).to eq "Additional Criteria"
+    expect_last_javascript_event("Additional Criteria", "Collapsed", trial)
 
-    find('[data-expand-item="Site"]').click
+    find('[data-expand-item="Site Details"]').click
 
     expect(page).not_to have_content criteria
     expect(page).not_to have_content description
     expect(page).to have_content site.zip_code
-    expect(last_javascript_event.name).to eq "Click Expand"
-    expect(last_javascript_event.properties["item"]).to eq "Site"
+    expect_last_javascript_event("Site Details", "Expanded", trial)
 
-    find('[data-expand-item="Site"]').click
+    find('[data-expand-item="Site Details"]').click
 
     expect(page).not_to have_content criteria
     expect(page).not_to have_content description
     expect(page).not_to have_content site.zip_code
-    expect(last_javascript_event.name).to eq "Click Collapse"
-    expect(last_javascript_event.properties["item"]).to eq "Site"
+    expect_last_javascript_event("Site Details", "Collapsed", trial)
 
     find('[data-expand-item="Additional Details"]').click
 
     expect(page).not_to have_content criteria
     expect(page).to have_content description
     expect(page).not_to have_content site.zip_code
-    expect(last_javascript_event.name).to eq "Click Expand"
-    expect(last_javascript_event.properties["item"]).to eq "Additional Details"
+    expect_last_javascript_event("Additional Details", "Expanded", trial)
 
     find('[data-expand-item="Additional Details"]').click
 
     expect(page).not_to have_content criteria
     expect(page).not_to have_content description
     expect(page).not_to have_content site.zip_code
-    expect(last_javascript_event.name).to eq "Click Collapse"
-    expect(last_javascript_event.properties["item"]).to eq "Additional Details"
+    expect_last_javascript_event("Additional Details", "Collapsed", trial)
+  end
+
+  def expect_last_javascript_event(name, category, trial)
+    expect(last_javascript_event.name).to eq name
+    expect(last_javascript_event.properties).to include(
+      "category" => category,
+      "label" => "/trials/#{trial.id}",
+    )
   end
 
   def return_to_search
