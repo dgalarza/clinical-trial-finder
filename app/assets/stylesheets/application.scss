@@ -41,11 +41,13 @@ h1 a:hover {
   }
 
   .trial-count {
+    margin-bottom: $small-spacing;
     text-align: right;
   }
 
   .trial-list li {
-    @include margin($large-spacing null);
+    @include padding($large-spacing $small-spacing);
+    border-bottom: 1px solid $medium-gray;
   }
 
   .section {
@@ -60,4 +62,25 @@ h1 a:hover {
     margin-left: 25px;
   }
 
+  .multiple-element-link {
+    color: inherit;
+    transition: none;
+
+    &:hover {
+      background-color: $light-gray;
+      color: inherit;
+      display: block;
+    }
+  }
+
+  .more-link {
+    color: $action-color;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+
+    &::before {
+      content: "\25b8 \a0";
+    }
+  }
 }
