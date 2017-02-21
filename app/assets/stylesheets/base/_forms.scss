@@ -14,6 +14,7 @@ legend {
 label {
   display: block;
   margin-bottom: $small-spacing / 2;
+  padding: 0;
 }
 
 input,
@@ -28,7 +29,7 @@ textarea {
 #{$all-text-inputs},
 select[multiple] {
   background-color: $base-background-color;
-  border: $base-border;
+  border: $base-border-width solid $medium-gray;
   border-radius: $base-border-radius;
   box-shadow: $form-box-shadow;
   box-sizing: border-box;
@@ -83,6 +84,10 @@ form input {
   align-items: center;
   display: flex;
   margin-left: $small-spacing;
+
+  label {
+    margin-bottom: 0;
+  }
 }
 
 [type="file"] {

@@ -7,7 +7,7 @@ h1 a:hover {
 }
 
 .small-text-override {
-  font-size: 1em !important;
+  font-size: modular-scale(-1) !important;
 }
 
 #clinical-trial-finder {
@@ -30,10 +30,13 @@ h1 a:hover {
     flex: 2;
   }
 
+  .trial-results {
+    border-bottom: 0;
+  }
+
   .intro-text {
     @include padding($large-spacing);
-    background-color: $light-gray;
-    border: $base-border-width solid $medium-gray;
+    border-bottom: $base-border-width solid $medium-gray;
 
     h2 {
       margin-top: $large-spacing;
@@ -51,7 +54,7 @@ h1 a:hover {
   }
 
   .section {
-    @include margin($large-spacing null);
+    @include margin($base-spacing null);
   }
 
   .pull-right {
@@ -82,5 +85,9 @@ h1 a:hover {
     &::before {
       content: "\25b8 \a0";
     }
+  }
+
+  .center {
+    text-align: center;
   }
 }

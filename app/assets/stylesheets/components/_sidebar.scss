@@ -1,7 +1,7 @@
 .trial-sidebar {
-  background-color: $light-gray;
-  border-left: $base-border-width solid $medium-gray;
-  border-right: $base-border-width solid $medium-gray;
+  background-color: $sidebar-gray;
+  border-left: $base-border-width solid $sidebar-border;
+  border-right: $base-border-width solid $sidebar-border;
   flex: 1;
 
   &::before {
@@ -10,16 +10,16 @@
   }
 
   .section {
-    border-bottom: $base-border-width solid $medium-gray;
     padding: $base-spacing $large-spacing;
   }
 }
 
 .trial-sidebar-search-parameters {
-  padding: 0;
+  padding-bottom: $base-spacing;
+  border-bottom: $base-border-width solid $sidebar-border;
 
   .input {
-    margin-bottom: $small-spacing;
+    margin-bottom: $base-spacing;
   }
 }
 
