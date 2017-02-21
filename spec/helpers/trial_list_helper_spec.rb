@@ -166,4 +166,23 @@ RSpec.describe TrialListHelper, type: :helper do
       end
     end
   end
+
+  describe "show_intro?" do
+    context "search params are present" do
+      it "returns false" do
+        params["trial_filter_form"] = double(:filter)
+
+        expect(helper.show_intro?).to be false
+      end
+    end
+
+    context "search params are NOT present" do
+      it "returns true" do
+        params["controller"] = "trials"
+        params["action"] = "index"
+
+        expect(helper.show_intro?).to be true
+      end
+    end
+  end
 end

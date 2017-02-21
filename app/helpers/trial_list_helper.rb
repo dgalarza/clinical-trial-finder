@@ -43,6 +43,10 @@ module TrialListHelper
     end
   end
 
+  def show_intro?
+    params["trial_filter_form"].nil?
+  end
+
   private
 
   def distance_radius(radius)

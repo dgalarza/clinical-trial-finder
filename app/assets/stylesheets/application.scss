@@ -2,12 +2,15 @@
 
 @import "bourbon";
 
-h1 a:hover {
-  text-decoration: none;
-}
-
 .small-text-override {
   font-size: modular-scale(-1) !important;
+}
+
+.article-header h9 {
+  a, a:link, a:active, a:visited {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 #clinical-trial-finder {
