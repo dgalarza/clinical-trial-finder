@@ -14,3 +14,4 @@
 //= require jquery_ujs
 //= require lodash
 //= require refills/expander
+//= require track_event

@@ -126,6 +126,7 @@ RSpec.feature "User views trial" do
     description = "This is the description"
     trial =
       create(:trial, detailed_description: description, criteria: criteria)
+    trial_label = "/trials/#{trial.id}"
     site = trial.sites.first
 
     visit trial_path(trial)
@@ -139,49 +140,67 @@ RSpec.feature "User views trial" do
     expect(page).to have_content criteria
     expect(page).not_to have_content description
     expect(page).not_to have_content site.zip_code
-    expect_last_javascript_event("Additional Criteria", "Expanded", trial)
+    expect_last_js_event("Additional Criteria", "Expanded", trial_label)
 
     find('[data-expand-item="Additional Criteria"]').click
 
     expect(page).not_to have_content criteria
     expect(page).not_to have_content description
     expect(page).not_to have_content site.zip_code
-    expect_last_javascript_event("Additional Criteria", "Collapsed", trial)
+    expect_last_js_event("Additional Criteria", "Collapsed", trial_label)
 
     find('[data-expand-item="Site Details"]').click
 
     expect(page).not_to have_content criteria
     expect(page).not_to have_content description
     expect(page).to have_content site.zip_code
-    expect_last_javascript_event("Site Details", "Expanded", trial)
+    expect_last_js_event("Site Details", "Expanded", trial_label)
 
     find('[data-expand-item="Site Details"]').click
 
     expect(page).not_to have_content criteria
     expect(page).not_to have_content description
     expect(page).not_to have_content site.zip_code
-    expect_last_javascript_event("Site Details", "Collapsed", trial)
+    expect_last_js_event("Site Details", "Collapsed", trial_label)
 
     find('[data-expand-item="Additional Details"]').click
 
     expect(page).not_to have_content criteria
     expect(page).to have_content description
     expect(page).not_to have_content site.zip_code
-    expect_last_javascript_event("Additional Details", "Expanded", trial)
+    expect_last_js_event("Additional Details", "Expanded", trial_label)
 
     find('[data-expand-item="Additional Details"]').click
 
     expect(page).not_to have_content criteria
     expect(page).not_to have_content description
     expect(page).not_to have_content site.zip_code
-    expect_last_javascript_event("Additional Details", "Collapsed", trial)
+    expect_last_js_event("Additional Details", "Collapsed", trial_label)
   end
 
-  def expect_last_javascript_event(name, category, trial)
+  scenario "User clicks contact info", :js do
+    email = "user@example.com"
+    phone = "234-567-8901"
+    site = build(:site, contact_email: email, contact_phone: phone)
+    trial = create(:trial, sites: [site])
+
+    visit trial_path(trial)
+    stub_links_to_prevent_default_for_testing
+
+    click_link phone
+
+    expect_last_js_event("Phone", "Site Contact Info", phone)
+
+    click_link email
+
+    expect_last_js_event("Email", "Site Contact Info", email)
+  end
+
+  def expect_last_js_event(name, category, label)
     expect(last_javascript_event.name).to eq name
     expect(last_javascript_event.properties).to include(
       "category" => category,
-      "label" => "/trials/#{trial.id}",
+      "label" => label,
     )
   end
 
@@ -210,6 +229,10 @@ RSpec.feature "User views trial" do
 
   def resource_link_text
     "Resource Link"
+  end
+
+  def stub_links_to_prevent_default_for_testing
+    page.execute_script("$('a').attr('href', '#')")
   end
 
   def last_javascript_event
