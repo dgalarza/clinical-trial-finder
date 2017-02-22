@@ -3,6 +3,7 @@
   border-left: $base-border-width solid $sidebar-border;
   border-right: $base-border-width solid $sidebar-border;
   flex: 1;
+  padding-top: $large-spacing;
 
   &::before {
     content: "";
@@ -10,11 +11,11 @@
   }
 
   .section {
-    padding: $base-spacing $large-spacing;
+    padding: 0 $large-spacing;
   }
 }
 
-.trial-sidebar-search-parameters {
+.inner-section {
   padding-bottom: $base-spacing;
   border-bottom: $base-border-width solid $sidebar-border;
 

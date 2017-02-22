@@ -52,12 +52,12 @@
   }
 
   .trial-list li {
-    @include padding($large-spacing $small-spacing);
+    @include padding($base-spacing $small-spacing);
     border-bottom: 1px solid $medium-gray;
   }
 
   .section {
-    @include margin($base-spacing null);
+    @include margin($base-spacing null null);
   }
 
   .pull-right {
@@ -84,6 +84,7 @@
     font-family: "Open Sans", sans-serif;
     font-weight: 700 !important;
     text-transform: uppercase !important;
+    margin: $small-spacing null;
 
     &::before {
       content: "\25b8 \a0";
@@ -92,5 +93,9 @@
 
   .center {
     text-align: center;
+  }
+
+  .resource-links li {
+    margin-bottom: $base-spacing;
   }
 }

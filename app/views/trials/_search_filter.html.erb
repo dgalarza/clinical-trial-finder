@@ -1,6 +1,6 @@
 <div class="trial-sidebar">
   <section class="section">
-    <div class="trial-sidebar-search-parameters">
+    <div class="inner-section">
       <h2 style="color:#7BC143;"><%= t(".filters") %></h2>
       <%= simple_form_for @trial_filter_form, url: trials_path, method: :get do |f| %>
         <%= f.input :zip_code, filter_input_default(:zip_code) %>
