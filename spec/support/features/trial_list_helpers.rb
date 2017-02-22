@@ -1,6 +1,6 @@
 module TrialListHelpers
   def displaying_multiple_trials(count)
-    t("trials.trial_count.displaying.other", count: count)
+    t("will_paginate.page_entries_info.single_page_html.other", count: count)
   end
 
   def am_patient_field
@@ -12,6 +12,6 @@ module TrialListHelpers
   end
 
   def displaying_one_trial
-    t("trials.trial_count.displaying.one")
+    t("will_paginate.page_entries_info.single_page_html.one")
   end
 end

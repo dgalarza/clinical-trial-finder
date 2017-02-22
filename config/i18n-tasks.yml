@@ -8,6 +8,7 @@ ignore_unused:
  - 'simple_form.*'
  - 'time.*'
  - 'titles.*'
+ - 'will_paginate.page_entries_info.*'
 
 ignore_missing:
  - simple_form.*

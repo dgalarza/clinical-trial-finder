@@ -107,10 +107,18 @@ en:
       submit: "Search Trials"
     study_purpose:
       study_purpose: "Study Purpose"
-    trial_count:
-      displaying:
-        one: "Displaying 1 trial"
-        other: "Displaying %{count} trials"
     trial_sidebar:
       nearest_location: "Nearest Location"
       resources: "Resources"
+  will_paginate:
+    page_entries_info:
+      single_page:
+        zero:  "No Trials found"
+        one:   "1 Trial"
+        other: "%{count} Trials"
+      single_page_html:
+        zero:  "No Trials found"
+        one:   "1 Trial"
+        other: "%{count} Trials"
+      multi_page: "%{from} - %{to} of %{count} Trials"
+      multi_page_html: "<b>%{from}&nbsp;-&nbsp;%{to}</b> of <b>%{count}</b> Trials"
