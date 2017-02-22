@@ -49,6 +49,7 @@ class TrialsController < ApplicationController
     params.permit(
       :commit,
       :page,
+      :reset,
       :utf8,
       trial_filter_form: [
         :age,

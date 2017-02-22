@@ -65,6 +65,26 @@ en:
       no_results: "Your search returned no results."
       no_results_instructions: "To match to trials, widen your search or expand your
         travel distance."
+    intro:
+      find_trial: "Finding a Trial"
+      instructions: "To help you find clinical trials that may best suit your
+        particular needs, please fill out the filter questions below. As a result
+        of your search and after reviewing the details, if you are interested in
+        learning more about a trial, identify the trial site nearest to your
+        location and contact the site coordinator via email or phone. We also
+        strongly recommend that you consult with your healthcare provider about
+        the trials that may interest you."
+      purpose: "The purpose of a clinical trial is to determine the most
+        effective and safest treatment for a disease. Clinical trial evaluation
+        is a key step to translating research into new medicines that can provide
+        better outcomes for patients. The performance of clinical trials is a
+        vital component of U.S. Food and Drug Administration’s drug approval process,
+        without which advances in therapeutics for brain tumor patients would not
+        be possible. Often the lengthiest aspect of the drug approval process is
+        finding people to participate in trials. The NBTS Clinical Trial Finder
+        is intended to help raise awareness and increase participation in clinical
+        trials to facilitate brain tumor research and accelerate the development
+        of new drugs and treatments for patients."
     invalid_search:
       header: "Your search filters are invalid."
     miles_away:
@@ -82,6 +102,7 @@ en:
       more_criteria: "More Inclusion & Exclusion Criteria"
       study_type: "Study Type"
     search_filter:
+      clear_filter: "Reset"
       filters: "Filters"
       submit: "Search Trials"
     study_purpose:

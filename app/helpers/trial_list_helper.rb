@@ -44,7 +44,11 @@ module TrialListHelper
   end
 
   def show_intro?
-    params["trial_filter_form"].nil?
+    !filtered_results? && params["reset"].nil?
+  end
+
+  def filtered_results?
+    params["trial_filter_form"].present?
   end
 
   private

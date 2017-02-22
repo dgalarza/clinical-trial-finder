@@ -3,21 +3,29 @@ require "rails_helper"
 RSpec.feature "User filters trial list" do
   include TrialListHelpers
 
-  scenario "User searches by keyword" do
+  scenario "User searches by keyword and clears search" do
     first_trial_title = "First Trial"
     create(:trial, title: first_trial_title)
     second_trial_title = "Second Trial"
     create(:trial, title: second_trial_title)
     visit trials_path
 
+    expect(page).to have_content t("trials.intro.instructions")
     expect(page).to have_content first_trial_title
     expect(page).to have_content second_trial_title
+    expect(page).not_to have_content t("trials.search_filter.clear_filter")
 
     fill_in("trial_filter_form[keyword]", with: "first")
     apply_search_filter
 
     expect(page).to have_content first_trial_title
     expect(page).not_to have_content second_trial_title
+
+    click_on t("trials.search_filter.clear_filter")
+
+    expect(page).to have_content first_trial_title
+    expect(page).to have_content second_trial_title
+    expect(page).not_to have_content t("trials.intro.instructions")
   end
 
   scenario "User browses trials on second page of results" do
