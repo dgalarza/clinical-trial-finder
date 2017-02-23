@@ -93,7 +93,7 @@ en:
     navigation:
       next_trial: "Next Trial"
       previous_trial: "Previous Trial"
-      return_to_search: "Back to Search"
+      return_to_search: "Search Results"
     recruitment_table:
       accepts_controls: "Accepts Healthy Volunteers"
       criteria: "Recuitment Criteria"

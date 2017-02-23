@@ -27,6 +27,8 @@ $left-arrow: "data:image/svg+xml;charset=utf-8,<svg width='21' height='17' viewB
 
   &.icon-back::before {
     background: url($left-arrow) no-repeat center center;
-    background-color: $blue;
+    background-color: $teal-blue;
+    height: 1.7em;
+    width: 1.7em;
   }
 }
