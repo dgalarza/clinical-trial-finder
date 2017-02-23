@@ -4,11 +4,11 @@ module TrialPageHelper
   end
 
   def united_states_sites(trial)
-    trial.ordered_sites(coordinates: coordinates, united_states: true)
+    site_presenters(trial, united_states: true)
   end
 
   def non_united_states_sites(trial)
-    trial.ordered_sites(coordinates: coordinates, united_states: false)
+    site_presenters(trial, united_states: false)
   end
 
   def coordinates
@@ -22,6 +22,13 @@ module TrialPageHelper
   end
 
   private
+
+  def site_presenters(trial, united_states:)
+    trial.ordered_sites(coordinates: coordinates, united_states: united_states)
+      .map do |site|
+        SitePresenter.new(site)
+      end
+  end
 
   def retrieve_resource_links
     if inner_content.present?

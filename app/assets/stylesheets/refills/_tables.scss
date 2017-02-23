@@ -81,6 +81,7 @@
       border-left: 1px solid $table-border-color;
       border-top: 1px solid $table-border-color;
       padding: $table-padding;
+      word-wrap: break-word;
 
       &:first-child {
         border-left: none;

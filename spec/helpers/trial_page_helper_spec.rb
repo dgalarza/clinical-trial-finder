@@ -47,31 +47,47 @@ RSpec.describe TrialPageHelper, type: :helper do
     it "queries for ordered sites in the united states" do
       coordinates = double(:coordinates)
       trial = double(:trial)
-      expected_sites = double(:expected_sites)
       session[:zip_code_coordinates] = coordinates
-      allow(trial).to receive(:ordered_sites).
-        with(coordinates: coordinates, united_states: true).
-        and_return(expected_sites)
+      allow(trial).to receive(:ordered_sites).and_return([])
 
-      trials = united_states_sites(trial)
+      united_states_sites(trial)
 
-      expect(trials).to eq expected_sites
+      expect(trial).to have_received(:ordered_sites).
+        with(coordinates: coordinates, united_states: true)
+    end
+
+    it "wraps sites as presenters" do
+      trial = double(:trial)
+      site = build(:site)
+      allow(trial).to receive(:ordered_sites).and_return([site])
+
+      site_presenters = united_states_sites(trial)
+
+      expect(site_presenters.first).to be_a SitePresenter
     end
   end
 
   describe "non_united_states_sites" do
-    it "queries for ordered sites outside of the united states" do
+    it "returns presenters for ordered sites outside of the united states" do
       coordinates = double(:coordinates)
       trial = double(:trial)
-      expected_sites = double(:expected_sites)
       session[:zip_code_coordinates] = coordinates
-      allow(trial).to receive(:ordered_sites).
-        with(coordinates: coordinates, united_states: false).
-        and_return(expected_sites)
+      allow(trial).to receive(:ordered_sites).and_return([])
 
-      trials = non_united_states_sites(trial)
+      non_united_states_sites(trial)
 
-      expect(trials).to eq expected_sites
+      expect(trial).to have_received(:ordered_sites).
+        with(coordinates: coordinates, united_states: false)
+    end
+
+    it "wraps sites as presenters" do
+      trial = double(:trial)
+      site = build(:site)
+      allow(trial).to receive(:ordered_sites).and_return([site])
+
+      site_presenters = non_united_states_sites(trial)
+
+      expect(site_presenters.first).to be_a SitePresenter
     end
   end
 

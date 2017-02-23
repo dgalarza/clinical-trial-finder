@@ -3,7 +3,9 @@
     <span class="infographic-item icon-location pull-right">
       <%= distance_from_site(site) %>
     </span>
-    <%= "#{site.display_location}" %>
+    <span>
+      <%= "#{site.display_location}" %>
+    </span>
   </div>
   <div class="expander-content center">
     <p class="bold"><%= t(".status") %></p>
@@ -14,7 +16,7 @@
       <p><%= "#{site.city}, #{site.state}, #{site.zip_code}" %></p>
     </div>
     <div class="section">
-      <%= render "site_contact", site: site %>
+      <%= render "site_contact", site: SitePresenter.new(site) %>
     </div>
   </div>
 </div>

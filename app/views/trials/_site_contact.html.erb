@@ -1,28 +1,30 @@
-<div>
-  <p class="bold"><%= t(".site_contact") %></p>
-  <p><%= "#{site.contact_name}" %></p>
-  <p>
-    <%= link_to(
-      site.contact_email,
-      "mailto:#{site.contact_email}",
-      "track-event" => "",
-      data: {
-        subject: "Email",
-        category: "Site Contact Info",
-        label:  site.contact_email,
-      }
-    ) %>
-  </p>
-  <p>
-    <%= link_to(
-      site.phone_as_text,
-      "tel:#{site.phone_to_call}",
-      "track-event" => "",
-      data: {
-        subject: "Phone",
-        category: "Site Contact Info",
-        label:  site.phone_as_text,
-      }
-    ) %>
-  </p>
-</div>
+<% if site.contact_displayable? %>
+  <div>
+    <p class="bold"><%= t(".site_contact") %></p>
+    <p><%= "#{site.contact_name}" %></p>
+    <p>
+      <%= link_to(
+        site.contact_email,
+        "mailto:#{site.contact_email}",
+        "track-event" => "",
+        data: {
+          subject: "Email",
+          category: "Site Contact Info",
+          label:  site.contact_email,
+        }
+      ) %>
+    </p>
+    <p>
+      <%= link_to(
+        site.phone_as_text,
+        "tel:#{site.phone_to_call}",
+        "track-event" => "",
+        data: {
+          subject: "Phone",
+          category: "Site Contact Info",
+          label:  site.phone_as_text,
+        }
+      ) %>
+    </p>
+  </div>
+<% end %>

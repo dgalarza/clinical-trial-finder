@@ -3,7 +3,7 @@
     <div class="section">
       <div class="inner-section">
         <h3><%= t(".nearest_location") %></h3>
-        <% nearest_site = trial.ordered_sites(coordinates: coordinates).first %>
+        <% nearest_site = SitePresenter.new(trial.ordered_sites(coordinates: coordinates).first) %>
         <%= content_tag("iframe", '', class: "google-map", src: "https://www.google.com/maps/embed/v1/place?key=#{ENV.fetch("GOOGLE_EMBED_KEY")}&q=#{nearest_site.facility_address}") %>
         <%= render "site_contact", site: nearest_site %>
       </div>
