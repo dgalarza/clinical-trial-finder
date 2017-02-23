@@ -16,7 +16,9 @@ module TrialPageHelper
   end
 
   def load_resource_links
-    @load_resource_links ||= retrieve_resource_links
+    Rails.cache.fetch("resources", expires_in: 24.hours, cache_nils: false) do
+      retrieve_resource_links
+    end
   end
 
   private
@@ -30,7 +32,7 @@ module TrialPageHelper
   end
 
   def inner_content
-    Nokogiri::HTML(link_url_content).css('ul')
+    @inner_content ||= Nokogiri::HTML(link_url_content).css('ul')
   end
 
   def link_url_content
