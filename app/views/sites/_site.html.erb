@@ -5,13 +5,16 @@
     </span>
     <%= "#{site.display_location}" %>
   </div>
-  <div class="expander-content site-details">
-    <p><span class="bold"><%= t(".status") %></span><%= site.status %></p>
+  <div class="expander-content center">
+    <p class="bold"><%= t(".status") %></p>
+    <p><%= site.status %></p>
     <div class="section">
       <p class="bold"><%= t(".address") %></p>
       <p><%= "#{site.facility}" %></p>
       <p><%= "#{site.city}, #{site.state}, #{site.zip_code}" %></p>
     </div>
-    <%= render "site_contact", site: site %>
+    <div class="section">
+      <%= render "site_contact", site: site %>
+    </div>
   </div>
 </div>

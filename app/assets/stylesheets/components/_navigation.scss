@@ -12,7 +12,7 @@
 }
 
 .search-result-links {
-  @include margin($base-spacing null $large-spacing);
+  @include margin(null null $large-spacing);
 }
 
 .navigation-links {

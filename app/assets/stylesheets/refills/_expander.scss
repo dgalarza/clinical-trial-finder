@@ -4,7 +4,7 @@
   $base-line-height: 1.5em !default;
   $base-spacing: 1.5em !default;
   $base-accent-color: #477DCA !default;
-  $base-link-color: $base-accent-color !default;
+  $base-link-color: $teal-blue;
   $dark-gray: #333 !default;
   $light-gray: #DDD !default;
   $base-font-color: $dark-gray !default;
@@ -16,7 +16,7 @@
   //////////////////////////////////////////////////////////////////////////////////
 
   $expander-arrow-width: 0.7em;
-  $expander-toggle-size: 1em;
+  $expander-toggle-size: $base-spacing;
   $expander-toggle-arrow-size: $expander-toggle-size;
   $expander-toggle-margin: 1em;
 
@@ -26,17 +26,27 @@
     cursor: pointer;
     display: block;
     font-size: $expander-toggle-size;
-    margin-bottom: $expander-toggle-size;
-    padding-bottom: $expander-toggle-size / 4;
+    padding: $expander-toggle-size;
+    background-color: $light-gray;
 
     &:before {
       font-size: $expander-arrow-width;
       content: "\25BC";
       margin-right: 0.5em;
     }
+
+    &:hover {
+      background-color: $light-gray;
+    }
+
+    &:last-child {
+      border-bottom: 1px solid $light-gray;
+    }
   }
 
   .expander-hidden {
+    background-color: $white;
+
     &:before {
       font-size: $expander-arrow-width;
       content: "\25BA";
@@ -47,12 +57,26 @@
     display: none;
   }
 
-  .expander-content h2 {
-    margin: $base-spacing 0;
+  .expander-content {
+    padding: $base-spacing;
+
+    h2 {
+      margin: $base-spacing 0;
+    }
   }
 
   &.border {
-    border: 1px solid $light-gray;
-    padding: $base-spacing;
+    border: 1px solid $sidebar-border;
+    border-bottom: 0;
+
+    &:last-child {
+      border-bottom: 1px solid $sidebar-border;
+    }
+  }
+
+  .infographic-item {
+    &::before {
+      height: 1.2em;
+    }
   }
 }

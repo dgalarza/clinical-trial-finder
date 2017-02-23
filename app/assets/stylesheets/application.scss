@@ -31,6 +31,10 @@
   .trial-page {
     @include padding($large-spacing);
     flex: 2;
+
+    .section {
+      margin-top: $large-spacing;
+    }
   }
 
   .trial-results {
@@ -54,10 +58,6 @@
   .trial-list li {
     @include padding($base-spacing $small-spacing);
     border-bottom: 1px solid $medium-gray;
-  }
-
-  .section {
-    @include margin($base-spacing null null);
   }
 
   .pull-right {

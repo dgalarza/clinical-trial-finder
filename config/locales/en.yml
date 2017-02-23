@@ -28,7 +28,7 @@ en:
   sites:
     site:
       address: "Address"
-      status: "Status:"
+      status: "Status"
   time:
     formats:
       date: "%b %-d, %Y"
