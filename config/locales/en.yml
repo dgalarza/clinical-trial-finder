@@ -8,6 +8,7 @@ en:
     search_filter:
       am_control: "I am a healthy volunteer"
       am_patient: "I have a brain tumor"
+      any_distance: "Travel any distance"
       distance_radius: "Will travel %{radius} miles"
       interventional: "Interventional"
       observational: "Observational"

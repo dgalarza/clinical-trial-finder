@@ -102,7 +102,8 @@ RSpec.describe TrialListHelper, type: :helper do
         [t("helpers.search_filter.distance_radius", radius: 50), 50],
         [t("helpers.search_filter.distance_radius", radius: 100), 100],
         [t("helpers.search_filter.distance_radius", radius: 300), 300],
-        [t("helpers.search_filter.distance_radius", radius: 500), 500]
+        [t("helpers.search_filter.distance_radius", radius: 500), 500],
+        [t("helpers.search_filter.any_distance"), 20000],
       ]
     end
   end

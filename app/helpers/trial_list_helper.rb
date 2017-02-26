@@ -28,7 +28,7 @@ module TrialListHelper
   def distance_radius_options
     [25, 50, 100, 300, 500].map do |distance|
       [distance_radius(distance), distance]
-    end
+    end.push(any_distance_radius)
   end
 
   def distance_radius_selected_value
@@ -52,6 +52,10 @@ module TrialListHelper
   end
 
   private
+
+  def any_distance_radius
+    [t("helpers.search_filter.any_distance"), 20000]
+  end
 
   def distance_radius(radius)
     t("helpers.search_filter.distance_radius", radius: radius)
