@@ -17,21 +17,8 @@ class Trial < ActiveRecord::Base
 
   pg_search_scope(
     :search,
-    against: %i(
-      conditions
-      criteria
-      description
-      detailed_description
-      keywords
-      overall_contact_name
-      sponsor
-      title
-    ),
-    using: {
-      tsearch: {
-        dictionary: "english",
-      },
-    },
+    against: %i(tsv),
+    using: { tsearch: { dictionary: "english" } },
   )
 
   scope :sites_present, lambda {
