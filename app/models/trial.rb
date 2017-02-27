@@ -1,5 +1,6 @@
 class Trial < ActiveRecord::Base
   extend OrderAsSpecified
+  include PgSearch
 
   ALL_GENDERS = "Both".freeze
   CONTROL_NEEDED = "Accepts Healthy Volunteers".freeze
@@ -14,12 +15,31 @@ class Trial < ActiveRecord::Base
   has_many :sites
   before_save :convert_ages
 
+  pg_search_scope(
+    :search,
+    against: %i(
+      conditions
+      criteria
+      description
+      detailed_description
+      keywords
+      overall_contact_name
+      sponsor
+      title
+    ),
+    using: {
+      tsearch: {
+        dictionary: "english",
+      },
+    },
+  )
+
   scope :sites_present, lambda {
     where("sites_count >= ?", 1)
   }
 
   scope :search_for, lambda { |query|
-    where("title ILIKE :query OR description ILIKE :query", query: "%#{query}%")
+    search(query) unless query.blank?
   }
 
   scope :gender, lambda { |sex|
