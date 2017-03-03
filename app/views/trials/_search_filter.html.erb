@@ -46,7 +46,7 @@
           <%= f.submit t(".submit"), class: "donate-link btn btn-orange", name: nil %>
         </div>
         <% if filtered_results? %>
-          <div class="center">
+          <div class="reset-link center">
             <%= link_to t(".clear_filter"), filters_path, method: :delete %>
           </div>
         <% end %>

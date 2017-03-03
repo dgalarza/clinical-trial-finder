@@ -96,6 +96,11 @@
     text-align: center;
   }
 
+  .reset-link {
+    font-size: $large-font-size;
+    font-weight: bold;
+  }
+
   .resource-links li {
     margin-bottom: $base-spacing;
   }
