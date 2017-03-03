@@ -28,20 +28,6 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
---
--- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
-
-
---
--- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION pg_stat_statements IS 'track execution statistics of all SQL statements executed';
-
-
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -117,38 +103,6 @@ CREATE SEQUENCE import_logs_id_seq
 --
 
 ALTER SEQUENCE import_logs_id_seq OWNED BY import_logs.id;
-
-
---
--- Name: imports; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE imports (
-    id integer NOT NULL,
-    valid_trials integer,
-    valid_sites integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: imports_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE imports_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: imports_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE imports_id_seq OWNED BY imports.id;
 
 
 --
@@ -343,13 +297,6 @@ ALTER TABLE ONLY import_logs ALTER COLUMN id SET DEFAULT nextval('import_logs_id
 
 
 --
--- Name: imports id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY imports ALTER COLUMN id SET DEFAULT nextval('imports_id_seq'::regclass);
-
-
---
 -- Name: sessions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -391,14 +338,6 @@ ALTER TABLE ONLY delayed_jobs
 
 ALTER TABLE ONLY import_logs
     ADD CONSTRAINT import_logs_pkey PRIMARY KEY (id);
-
-
---
--- Name: imports imports_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY imports
-    ADD CONSTRAINT imports_pkey PRIMARY KEY (id);
 
 
 --
