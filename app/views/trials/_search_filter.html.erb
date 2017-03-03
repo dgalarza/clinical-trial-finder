@@ -3,7 +3,7 @@
     <div class="inner-section">
       <h2 style="color:#7BC143;"><%= t(".filters") %></h2>
       <%= simple_form_for @trial_filter_form, url: trials_path, method: :get do |f| %>
-        <%= f.input :zip_code, filter_input_default(:zip_code) %>
+        <%= f.input :zip_code, filter_input_default(:zip_code).merge(as: :integer) %>
 
         <%= f.input(
           :distance_radius,
@@ -12,7 +12,7 @@
           selected: distance_radius_selected_value
         ) %>
 
-        <%= f.input :age, filter_input_default(:age) %>
+        <%= f.input :age, filter_input_default(:age).merge(as: :integer) %>
 
         <%= f.input(
           :gender,
@@ -40,7 +40,9 @@
           )
         ) %>
 
-        <%= f.input :keyword, filter_input_default(:keyword) %>
+        <%= f.input :keyword, filter_input_default(:keyword).merge(
+          placeholder: "ex - Glioma, Metastasis"
+        ) %>
 
         <div class="form-actions center">
           <%= f.submit t(".submit"), class: "donate-link btn btn-orange", name: nil %>
