@@ -34,7 +34,7 @@ class TrialsController < ApplicationController
   end
 
   def filter_form_params
-    filter_params.merge(page_params)
+    filter_params.merge(page_params).merge(session_id: session.id)
   end
 
   def page_params

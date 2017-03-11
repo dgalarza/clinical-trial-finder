@@ -3,6 +3,7 @@ source "https://rubygems.org"
 ruby "2.3.1"
 
 gem "activerecord-session_store"
+gem "analytics-ruby", require: "segment/analytics"
 gem "autoprefixer-rails"
 gem "bourbon", "5.0.0.beta.5"
 gem "coffee-rails"

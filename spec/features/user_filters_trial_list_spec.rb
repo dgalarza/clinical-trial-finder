@@ -20,6 +20,9 @@ RSpec.feature "User filters trial list" do
 
     expect(page).to have_content first_trial_title
     expect(page).not_to have_content second_trial_title
+    last_event = analytics.events.last.first
+    expect(last_event[:event]).to eq TrialFilterForm::FILTER_APPLIED_EVENT
+    expect(last_event[:anonymous_id]).to be_present
 
     click_on t("trials.search_filter.clear_filter")
 

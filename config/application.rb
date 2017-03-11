@@ -25,5 +25,6 @@ module TrialMatch
     config.active_record.schema_format = :sql
     config.active_job.queue_adapter = :delayed_job
     config.time_zone = "Eastern Time (US & Canada)"
+    config.analytics_service = Segment::Analytics
   end
 end

@@ -19,6 +19,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
   config.after(:each) do
     Rails.cache.clear
+    MockAnalytics.reset
   end
 end
 

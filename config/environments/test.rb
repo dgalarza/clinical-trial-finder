@@ -1,3 +1,5 @@
+require "#{Rails.root}/spec/support/mock_analytics"
+
 Rails.application.configure do
   config.cache_classes = true
   config.eager_load = false
@@ -15,4 +17,5 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: "www.example.com" }
   config.active_job.queue_adapter = :inline
   config.assets.precompile += %w(mock_analytics.js)
+  config.analytics_service = MockAnalytics
 end

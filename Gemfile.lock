@@ -44,6 +44,8 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
+    analytics-ruby (2.2.2)
+      commander (~> 4.4)
     arel (6.0.3)
     ast (2.3.0)
     autoprefixer-rails (6.5.2)
@@ -92,6 +94,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
+    commander (4.4.3)
+      highline (~> 1.7.2)
     concurrent-ruby (1.0.2)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
@@ -333,6 +337,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-session_store
+  analytics-ruby
   autoprefixer-rails
   awesome_print
   better_errors
@@ -394,4 +399,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.14.4
+   1.14.5
