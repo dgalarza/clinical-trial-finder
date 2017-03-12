@@ -2,15 +2,37 @@ require "rails_helper"
 
 RSpec.describe TrialFilterForm, type: :model do
   describe "validations" do
-    it { is_expected.to allow_value(23456).for(:zip_code) }
-    it { is_expected.to allow_value(23456-3456).for(:zip_code) }
-    it { is_expected.not_to allow_value(2346).for(:zip_code) }
-    it { is_expected.not_to allow_value(invalid_zip).for(:zip_code) }
-
     it do
       is_expected.to validate_numericality_of(:age).
         only_integer.is_greater_than_or_equal_to(1).
         is_less_than_or_equal_to(120).allow_nil
+    end
+
+    context "zip code is not provided" do
+      it "is valid" do
+        form = TrialFilterForm.new
+
+        expect(form).to be_valid
+      end
+    end
+
+    context "zip code is provided" do
+      context "zip code record exists" do
+        it "is valid" do
+          create(:zip_code, zip_code: 11111)
+          form = TrialFilterForm.new(zip_code: 11111)
+
+          expect(form).to be_valid
+        end
+      end
+
+      context "zip code record does not exist" do
+        it "is not valid" do
+          form = TrialFilterForm.new(zip_code: 11111)
+
+          expect(form).to be_invalid
+        end
+      end
     end
   end
 
@@ -131,6 +153,35 @@ RSpec.describe TrialFilterForm, type: :model do
       trials = TrialFilterForm.new.trial_ids
 
       expect(trials).to eq [trial.id]
+    end
+  end
+
+  describe "#coordinates" do
+    context "zip code record is present" do
+      it "delegates to zip code record" do
+        expected_coordinates = double(:coordinates)
+        zip_code = double(
+          :zip_code,
+          present?: true,
+          coordinates: expected_coordinates,
+        ).as_null_object
+        allow(ZipCode).to receive(:find_by).with(zip_code: zip_code).
+          and_return(zip_code)
+
+        coordinates = TrialFilterForm.new(zip_code: zip_code).coordinates
+
+        expect(coordinates).to eq expected_coordinates
+      end
+    end
+
+    context "zip code record is NOT present" do
+      it "returns nil" do
+        zip_code = 11111
+
+        coordinates = TrialFilterForm.new(zip_code: zip_code).coordinates
+
+        expect(coordinates).to eq nil
+      end
     end
   end
 

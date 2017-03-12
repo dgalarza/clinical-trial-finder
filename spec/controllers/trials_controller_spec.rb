@@ -44,15 +44,10 @@ RSpec.describe TrialsController, type: :controller do
 
     context "zip code is a search filter" do
       it "caches zip code coordinates" do
-        zip_code = "12345"
         coordinates = double(:coordinates)
-        search_params = { "trial_filter_form" => { "zip_code" => zip_code } }
-        zip_code_object =
-          double(:zip_code_object, coordinates: coordinates).as_null_object
-        allow(ZipCode).to receive(:find_by).with(zip_code: zip_code).
-          and_return(zip_code_object)
+        stub_filter_form(coordinates: coordinates)
 
-        get :index, search_params
+        get :index
 
         expect(session[:zip_code_coordinates]).to eq coordinates
       end
@@ -70,9 +65,14 @@ RSpec.describe TrialsController, type: :controller do
     end
   end
 
-  def stub_filter_form(valid:)
+  def stub_filter_form(valid: true, coordinates: nil)
     trial_ids = double(:trial_ids)
-    filter_form = double(:filter_form, valid?: valid, trial_ids: trial_ids)
+    filter_form = double(
+      :filter_form,
+      valid?: valid,
+      trial_ids: trial_ids,
+      coordinates: coordinates,
+    )
     allow(TrialFilterForm).to receive(:new).and_return(filter_form)
 
     filter_form

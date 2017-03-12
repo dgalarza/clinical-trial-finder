@@ -255,7 +255,7 @@ RSpec.feature "User filters trial list" do
   scenario "User types in invalid zip code" do
     visit trials_path
 
-    fill_in("trial_filter_form[zip_code]", with: "1234567890")
+    fill_in("trial_filter_form[zip_code]", with: "10000")
     apply_search_filter
 
     expect(page).to have_content t("trials.invalid_search.header")

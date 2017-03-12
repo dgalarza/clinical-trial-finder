@@ -3,7 +3,7 @@ class TrialsController < ApplicationController
     @trial_filter_form = TrialFilterForm.new(filter_form_params)
 
     if @trial_filter_form.valid?
-      cache_filters
+      cache_filters(@trial_filter_form)
       session[:search_results] = @trial_filter_form.trial_ids
     end
   end
@@ -18,19 +18,9 @@ class TrialsController < ApplicationController
     Trial.find(trial_id)
   end
 
-  def cache_filters
+  def cache_filters(filter)
     session[:search_params] = all_params
-    set_zip_code_coordinates
-  end
-
-  def set_zip_code_coordinates
-    if zip_code_filter.present?
-      coordinates = ZipCode.find_by(zip_code: zip_code_filter).coordinates
-    else
-      coordinates = nil
-    end
-
-    session[:zip_code_coordinates] = coordinates
+    session[:zip_code_coordinates] = filter.coordinates
   end
 
   def filter_form_params

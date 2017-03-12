@@ -20,15 +20,6 @@ class TrialFilterForm
   )
 
   validates(
-    :zip_code,
-    format: {
-      with: ZIP_CODE_MATCH,
-      message: "not a valid zip code",
-      allow_blank: true,
-    }
-  )
-
-  validates(
     :age,
     numericality: {
       only_integer: true,
@@ -37,6 +28,13 @@ class TrialFilterForm
       greater_than_or_equal_to: 1
     }
   )
+  validate :valid_zip_code
+
+  def valid_zip_code
+    if zip_code.present? && zip_code_record.nil?
+      errors.add(:zip_code, "is not a valid 5-digit zip")
+    end
+  end
 
   def initialize(*args)
     super(*args)
@@ -55,7 +53,17 @@ class TrialFilterForm
     filtered_trials.pluck(:id)
   end
 
+  def coordinates
+    if zip_code_record.present?
+      zip_code_record.coordinates
+    end
+  end
+
   private
+
+  def zip_code_record
+    ZipCode.find_by(zip_code: zip_code)
+  end
 
   def filtered_trials
     Trial
