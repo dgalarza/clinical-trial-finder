@@ -1,6 +1,7 @@
 // Breakpoints
-$medium-screen: 600px;
-$large-screen: 900px;
+$medium-screen: 768px;
+$medium-up: $medium-screen;
+$large-screen: 1024px;
 
 // Typography
 $base-font-family: "Open Sans", sans-serif;

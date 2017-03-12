@@ -1,6 +1,7 @@
 @charset "utf-8";
 
 @import "bourbon";
+@import "neat";
 
 .small-text-override {
   font-size: modular-scale(-1) !important;
@@ -23,7 +24,9 @@
   @import "components/infographic";
 
   .trial-base-container {
-    display: flex;
+    @include media($medium-up) {
+      display: flex;
+    }
   }
 
   .import-logs,
