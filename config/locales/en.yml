@@ -14,7 +14,9 @@ en:
       observational: "Observational"
   import_logs:
     import_log_stats:
+      current_status: "Current State of Database"
       last_import: "Last import run at: %{time}"
+      most_recent_import_html: "Trial %{trial} was created %{date}"
       site_count: "%{count} Sites"
       trial_count: "%{count} Trials"
     index:

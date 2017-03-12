@@ -1,20 +1,22 @@
 <div class="import-logs">
-  <%= render "import_log_stats", last_import: @import_logs.first %>
+  <%= render "import_log_stats", last_import: @import_logs.first, newest_trial: @newest_trial %>
 
-  <table>
-    <tr>
-      <th><%= t(".imported_at") %></th>
-      <th><%= t(".trial_count") %></th>
-      <th><%= t(".site_count") %></th>
-    </tr>
-    <% @import_logs.each do |import_log| %>
+  <div class="section">
+    <table>
       <tr>
-        <td><%= import_log.created_at %></td>
-        <td><%= import_log.trial_count %></td>
-        <td><%= import_log.site_count %></td>
+        <th><%= t(".imported_at") %></th>
+        <th><%= t(".trial_count") %></th>
+        <th><%= t(".site_count") %></th>
       </tr>
-    <% end %>
-  </table>
+      <% @import_logs.each do |import_log| %>
+        <tr>
+          <td><%= import_log.created_at %></td>
+          <td><%= import_log.trial_count %></td>
+          <td><%= import_log.site_count %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
   <div style="clear:both;"></div>
   <div>
   <% if @import_logs.count > WillPaginate.per_page %>
