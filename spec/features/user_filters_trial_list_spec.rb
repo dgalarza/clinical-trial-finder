@@ -20,15 +20,14 @@ RSpec.feature "User filters trial list" do
 
     expect(page).to have_content first_trial_title
     expect(page).not_to have_content second_trial_title
-    last_event = analytics.events.last.first
-    expect(last_event[:event]).to eq TrialFilterForm::FILTER_APPLIED_EVENT
-    expect(last_event[:anonymous_id]).to be_present
+    expect_last_event(TrialFilterForm::FILTER_APPLIED_EVENT)
 
     click_on t("trials.search_filter.clear_filter")
 
     expect(page).to have_content first_trial_title
     expect(page).to have_content second_trial_title
     expect(page).not_to have_content t("trials.intro.instructions")
+    expect_last_event(FiltersController::RESET_EVENT)
   end
 
   scenario "User browses trials on second page of results" do
@@ -288,5 +287,14 @@ RSpec.feature "User filters trial list" do
 
   def am_control_field
     t("helpers.search_filter.am_control")
+  end
+
+  def last_event
+    analytics.events.last.first
+  end
+
+  def expect_last_event(event)
+    expect(last_event[:event]).to eq event
+    expect(last_event[:anonymous_id]).to be_present
   end
 end
