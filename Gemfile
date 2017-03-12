@@ -40,6 +40,7 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
   gem "quiet_assets"
+  gem "meta_request"
   gem "spring"
   gem "spring-commands-rspec"
   gem "web-console"

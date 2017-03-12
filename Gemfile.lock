@@ -76,6 +76,7 @@ GEM
       bundler (~> 1.2)
       thor (~> 0.18)
     byebug (9.0.6)
+    callsite (0.0.11)
     capybara (2.7.1)
       addressable
       mime-types (>= 1.16)
@@ -131,6 +132,7 @@ GEM
       capybara
       i18n
     geocoder (1.4.0)
+    git-version-bump (0.15.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     hashdiff (0.3.0)
@@ -162,6 +164,10 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    meta_request (0.4.0)
+      callsite (~> 0.0, >= 0.0.11)
+      rack-contrib (~> 1.1)
+      railties (>= 3.0.0, < 5.1.0)
     method_source (0.8.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
@@ -202,6 +208,9 @@ GEM
     rack-canonical-host (0.2.2)
       addressable (> 0, < 3)
       rack (>= 1.0.0, < 3)
+    rack-contrib (1.4.0)
+      git-version-bump (~> 0.15)
+      rack (~> 1.4)
     rack-mini-profiler (0.10.1)
       rack (>= 1.2.0)
     rack-test (0.6.3)
@@ -359,6 +368,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   lodash-rails
+  meta_request
   neat (~> 1.7.0)
   normalize-rails (~> 3.0.0)
   order_as_specified
@@ -399,4 +409,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.14.5
+   1.14.6
