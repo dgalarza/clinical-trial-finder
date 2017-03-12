@@ -1,3 +1,0 @@
-dependencies:
-  pre:
-    - cp .sample.env .env

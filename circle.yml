@@ -1,6 +1,7 @@
 database:
   override:
     - bin/setup
+    - bundle exec rake tmp:create
 dependencies:
   pre:
     - cp .sample.env .env
