@@ -36,6 +36,14 @@ RSpec.feature "User views trial" do
     end
   end
 
+  scenario "User views trial with no sites" do
+    trial = create(:trial, :without_sites, overall_contact_name: "John Smith")
+
+    visit trial_path(trial)
+
+    expect(page).to have_content trial.overall_contact_name
+  end
+
   scenario "User filters, views trial, and returns back to filtered list" do
     _non_filtered_trial = create(:trial)
     keyword = "special word"

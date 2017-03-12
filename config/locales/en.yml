@@ -51,6 +51,13 @@ en:
         with your healthcare provider about the trials that may interest you."
       contact_trial_team: "Contact a Trial Team"
       international_sites: "International Sites"
+    contact_overall_contact:
+      contact_instructions: "This trial has no sites locations listed at this time.
+      If you are interested in learning more, you can contact the trial's
+      primary contact:"
+      header: "Contact Information"
+      nct_website_html: "For additional contact information, you can also visit
+        the <a href='%{site}'>trial on clinicaltrials.gov</a>."
     details_table:
       additional_details: "Additional Details"
       agency: "Agency Class"

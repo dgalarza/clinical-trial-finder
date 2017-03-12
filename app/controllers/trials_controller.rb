@@ -9,13 +9,13 @@ class TrialsController < ApplicationController
   end
 
   def show
-    @trial = TrialPresenter.new(trial_with_sites)
+    @trial = TrialPresenter.new(trial)
   end
 
   private
 
-  def trial_with_sites
-    Trial.joins(:sites).find(trial_id)
+  def trial
+    Trial.find(trial_id)
   end
 
   def cache_filters

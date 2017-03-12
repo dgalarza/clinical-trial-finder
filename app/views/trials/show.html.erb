@@ -10,7 +10,11 @@
 
     <%= render "details_table", trial: @trial %>
 
-    <%= render "contact_trial_team", trial: @trial %>
+    <% if @trial.sites.any? %>
+      <%= render "contact_trial_team", trial: @trial %>
+    <% else %>
+      <%= render "contact_overall_contact", trial: @trial %>
+    <% end %>
   </div>
 
   <%= render "trial_sidebar", trial: @trial %>

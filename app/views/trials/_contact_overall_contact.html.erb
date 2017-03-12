@@ -1,0 +1,39 @@
+<div class="section">
+  <h2><%= t(".header") %></h2>
+  <p><%= t(".contact_instructions") %></p>
+
+  <% if trial.overall_contact_name.present? %>
+    <p>
+      <%= trial.overall_contact_name %>
+    </p>
+  <% end %>
+  <% if trial.overall_contact_email.present? %>
+    <p>
+      <%= link_to(
+        trial.overall_contact_email,
+        "mailto:#{trial.overall_contact_email}",
+        "track-event" => "",
+        data: {
+          subject: "Email",
+          category: "Overall Contact Info",
+          label:  trial.overall_contact_email,
+        }
+      ) %>
+    </p>
+  <% end %>
+  <% if trial.overall_contact_phone.present? %>
+    <p>
+      <%= link_to(
+        trial.overall_contact_phone,
+        "tel:#{trial.overall_contact_phone}",
+        "track-event" => "",
+        data: {
+          subject: "Phone",
+          category: "Overall Contact Info",
+          label:  trial.overall_contact_phone,
+        }
+      ) %>
+    </p>
+  <% end %>
+  <p><%= t(".nct_website_html", site: trial.nct_website) %>
+</div>

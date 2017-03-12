@@ -32,6 +32,10 @@ class TrialPresenter < SimpleDelegator
     parse(criteria_with_header_tags)
   end
 
+  def nct_website
+    "https://clinicaltrials.gov/ct2/show/#{nct_id}"
+  end
+
   def age_range
     "#{minimum_age_original} #{max_age_value}"
   end
