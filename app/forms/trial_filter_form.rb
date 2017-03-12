@@ -59,7 +59,6 @@ class TrialFilterForm
 
   def filtered_trials
     Trial
-      .sites_present
       .search_for(keyword)
       .age(age)
       .control(control)

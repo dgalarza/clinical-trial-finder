@@ -21,10 +21,6 @@ class Trial < ActiveRecord::Base
     using: { tsearch: { dictionary: "english" } },
   )
 
-  scope :sites_present, lambda {
-    where("sites_count >= ?", 1)
-  }
-
   scope :search_for, lambda { |query|
     search(query) unless query.blank?
   }
