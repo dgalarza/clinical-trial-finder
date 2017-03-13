@@ -16,13 +16,13 @@ RSpec.describe TrialImporter, type: :service do
         expect(trial.criteria).to include "Criteria"
         expect(trial.description).to include "Brief Summary"
         expect(trial.detailed_description).to include "Detailed Description"
-        expect(trial.first_received_date).to eq "First Received Date"
+        expect(trial.first_received_date).to eq Date.new(2015, 3, 1)
         expect(trial.gender).to eq "Gender"
         expect(trial.has_expanded_access).to eq "Has Expanded Access"
         expect(trial.healthy_volunteers).to eq "Healthy Volunteers"
         expect(trial.is_fda_regulated).to eq "Is Fda Regulated"
         expect(trial.keywords).to eq ["Keyword1", "Keyword2"]
-        expect(trial.last_changed_date).to eq "May 13, 2016"
+        expect(trial.last_changed_date).to eq Date.new(2016, 5, 13)
         expect(trial.link_description).to eq "Link Description"
         expect(trial.link_url).to eq "Link Url"
         expect(trial.maximum_age_original).to eq "Maximum Age"

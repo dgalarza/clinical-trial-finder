@@ -28,20 +28,6 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
---
--- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
-
-
---
--- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION pg_stat_statements IS 'track execution statistics of all SQL statements executed';
-
-
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -235,8 +221,8 @@ CREATE TABLE trials (
     overall_contact_email character varying,
     link_url character varying,
     link_description character varying,
-    first_received_date character varying,
-    last_changed_date character varying,
+    first_received_date date,
+    last_changed_date date,
     verification_date character varying,
     keywords character varying[] DEFAULT '{}'::character varying[],
     is_fda_regulated character varying,
@@ -483,4 +469,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160829041507');
 INSERT INTO schema_migrations (version) VALUES ('20170227020708');
 
 INSERT INTO schema_migrations (version) VALUES ('20170303021818');
+
+INSERT INTO schema_migrations (version) VALUES ('20170313011922');
 
