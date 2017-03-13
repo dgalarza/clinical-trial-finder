@@ -2,7 +2,7 @@ class Trial < ActiveRecord::Base
   extend OrderAsSpecified
   include PgSearch
 
-  ALL_GENDERS = "Both".freeze
+  ALL_GENDERS = ["Both", "All"].freeze
   CONTROL_NEEDED = "Accepts Healthy Volunteers".freeze
   CONTROL_NOT_SPECIFIED = "".freeze
   DEFAULT_DISTANCE_RADIUS = 100
@@ -26,7 +26,7 @@ class Trial < ActiveRecord::Base
   }
 
   scope :gender, lambda { |sex|
-    where("gender IN (?)", [sex, ALL_GENDERS]) unless sex.blank?
+    where("gender IN (?)", [sex, *ALL_GENDERS]) unless sex.blank?
   }
 
   scope :study_type, lambda { |study_type|

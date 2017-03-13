@@ -69,25 +69,35 @@ RSpec.describe Trial, type: :model do
     describe ".gender" do
       context "gender is filtered by male" do
         it "returns male and both" do
-          trial_for_everyone = create(:trial, gender: "Both")
+          legacy_trial_for_everyone = create(:trial, gender: "Both")
+          new_trial_for_everyone = create(:trial, gender: "All")
           trial_for_men = create(:trial, gender: "Male")
           _trial_for_women = create(:trial, gender: "Female")
 
           trials = Trial.gender("Male")
 
-          expect(trials).to match_array [trial_for_everyone, trial_for_men]
+          expect(trials).to match_array [
+            legacy_trial_for_everyone,
+            new_trial_for_everyone,
+            trial_for_men,
+          ]
         end
       end
 
       context "gender is filtered by female" do
         it "returns female and both" do
-          trial_for_everyone = create(:trial, gender: "Both")
+          legacy_trial_for_everyone = create(:trial, gender: "Both")
+          new_trial_for_everyone = create(:trial, gender: "All")
           trial_for_women = create(:trial, gender: "Female")
           _trial_for_men = create(:trial, gender: "Male")
 
           trials = Trial.gender("Female")
 
-          expect(trials).to match_array [trial_for_everyone, trial_for_women]
+          expect(trials).to match_array [
+            legacy_trial_for_everyone,
+            new_trial_for_everyone,
+            trial_for_women,
+          ]
         end
       end
 
