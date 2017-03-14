@@ -17,6 +17,7 @@ fi
 
 # Set up database and add any development seed data
 bin/rake dev:prime
+bin/rake database:seed_zip_codes
 
 # Add binstubs to PATH via export PATH=".git/safe/../../bin:$PATH" in ~/.zshenv
 mkdir -p .git/safe
