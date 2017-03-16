@@ -82,6 +82,10 @@ en:
         travel distance."
     intro:
       find_trial: "Finding a Trial"
+      clinical_trials: "The information returned from your search has been obtained from
+        ClinicalTrials.gov, a service of the U.S. National Institutes of Health,
+        providing information on publicly and privately supported clinical studies
+        of human participants with locations in all 50 States and in 196 countries."
       instructions: "To help you find clinical trials that may best suit your
         particular needs, please fill out the filter questions below. As a result
         of your search and after reviewing the details, if you are interested in
