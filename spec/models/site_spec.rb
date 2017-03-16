@@ -5,6 +5,34 @@ RSpec.describe Site, type: :model do
     it { is_expected.to belong_to(:trial) }
   end
 
+  describe ".without_coordinates" do
+    context "site has coordinates" do
+      it "is not included" do
+        create(:site, trial: create(:trial))
+
+        expect(Site.without_coordinates).to eq []
+      end
+    end
+
+    context "site has NO coordinates" do
+      it "is included" do
+        trial = create(:trial)
+        site = create(:site, :without_lat_long, trial: trial)
+
+        expect(Site.without_coordinates).to eq [site]
+      end
+    end
+
+    context "site has partial coordinates" do
+      it "is included" do
+        trial = create(:trial)
+        site = create(:site, :without_lat_long, latitude: 12.345, trial: trial)
+
+        expect(Site.without_coordinates).to eq [site]
+      end
+    end
+  end
+
   describe "#address" do
     context "address fields exist" do
       it "returns site's address" do

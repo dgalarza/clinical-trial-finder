@@ -1,7 +1,7 @@
 require "rails_helper"
 
-RSpec.feature "User visits import logs" do
-  scenario "user visits import logs" do
+RSpec.feature "admin visits import logs" do
+  scenario "admin visits import logs" do
     create(:trial)
     trial_count = 5
     site_count = 15

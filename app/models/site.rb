@@ -10,6 +10,10 @@ class Site < ActiveRecord::Base
     unless: :has_coordinates
   )
 
+  def self.without_coordinates
+    where("latitude IS NULL or longitude IS NULL")
+  end
+
   def facility_address
     "#{facility} #{address}"
   end

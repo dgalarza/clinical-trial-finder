@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :import_logs, only: [:index]
+    resource :dashboard, only: [:show]
   end
   resources :trials, only: [:index, :show]
   resource :filters, only: [:destroy]

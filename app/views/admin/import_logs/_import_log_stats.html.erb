@@ -1,7 +1,0 @@
-<div class="section">
-  <h2><%= t(".current_status") %></h2>
-  <p><%= t(".last_import", time: time_ago_in_words(last_import.created_at)) %></p>
-  <p><%= t(".trial_count", count: last_import.trial_count) %></p>
-  <p><%= t(".site_count", count: last_import.site_count) %></p>
-  <p><%= t(".most_recent_import_html", date: newest_trial.created_at, trial: newest_trial.id) %></p>
-</div>

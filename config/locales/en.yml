@@ -1,13 +1,17 @@
 ---
 en:
   admin:
-    import_logs:
-      import_log_stats:
-        current_status: "Current State of Database"
+    dashboards:
+      show:
+        current_counts: "Current State of Import Database"
         last_import: "Last import run at: %{time}"
+        import_logs: "Import Logs"
+        import_status: "Import Status"
         most_recent_import_html: "Trial %{trial} was created %{date}"
         site_count: "%{count} Sites"
+        sites_without_coordinates: "%{count} sites without coordinates"
         trial_count: "%{count} Trials"
+    import_logs:
       index:
         imported_at: "Imported At"
         site_count: "Site Count"
