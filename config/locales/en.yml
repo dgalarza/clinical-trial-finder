@@ -1,5 +1,17 @@
 ---
 en:
+  admin:
+    import_logs:
+      import_log_stats:
+        current_status: "Current State of Database"
+        last_import: "Last import run at: %{time}"
+        most_recent_import_html: "Trial %{trial} was created %{date}"
+        site_count: "%{count} Sites"
+        trial_count: "%{count} Trials"
+      index:
+        imported_at: "Imported At"
+        site_count: "Site Count"
+        trial_count: "Trial Count"
   date:
     formats:
       default: "%m/%d/%Y"
@@ -12,17 +24,6 @@ en:
       distance_radius: "Will travel %{radius} miles"
       interventional: "Interventional"
       observational: "Observational"
-  import_logs:
-    import_log_stats:
-      current_status: "Current State of Database"
-      last_import: "Last import run at: %{time}"
-      most_recent_import_html: "Trial %{trial} was created %{date}"
-      site_count: "%{count} Sites"
-      trial_count: "%{count} Trials"
-    index:
-      imported_at: "Imported At"
-      site_count: "Site Count"
-      trial_count: "Trial Count"
   simple_form:
     labels:
       trials:

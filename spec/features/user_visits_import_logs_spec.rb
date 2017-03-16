@@ -11,7 +11,7 @@ RSpec.feature "User visits import logs" do
       site_count: site_count
     )
 
-    visit import_logs_path
+    visit admin_import_logs_path
 
     expect(page).to have_content import_log.created_at
     expect(page).to have_content import_log.site_count
