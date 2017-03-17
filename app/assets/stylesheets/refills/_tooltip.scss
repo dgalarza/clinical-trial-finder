@@ -19,7 +19,7 @@ $question-mark-icon: "data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3
   display: inline-block;
   padding: 0.5em 1em;
   position: relative;
-  text-align: center;
+  text-align: left;
   float: right;
 
   &:focus,
@@ -40,7 +40,7 @@ $question-mark-icon: "data:image/svg+xml;charset=utf-8,<svg xmlns='http://www.w3
     width: $tooltip-width;
     opacity: 0;
     padding: 1em;
-    text-align: center;
+    text-align: left;
     transition: all 0.2s ease-in-out;
     visibility: hidden;
     z-index: 10;
