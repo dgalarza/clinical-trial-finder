@@ -1,4 +1,6 @@
 module TrialListHelper
+  MANY_TRIALS_COUNT = 30
+
   def zip_code_param
     filter_params["zip_code"]
   end
@@ -45,6 +47,20 @@ module TrialListHelper
 
   def show_intro?
     !filtered_results? && params["reset"].nil?
+  end
+
+  def show_many_trials?(trials)
+    filtered_results? && trials.count > MANY_TRIALS_COUNT
+  end
+
+  def append_params(keyword)
+    return unless filtered_results?
+    appended_params = params.deep_dup
+    trial_filter_form = appended_params["trial_filter_form"]
+    trial_filter_form["keyword"] =
+      [trial_filter_form["keyword"], keyword].compact.join(" ")
+
+    appended_params.symbolize_keys
   end
 
   def filtered_results?

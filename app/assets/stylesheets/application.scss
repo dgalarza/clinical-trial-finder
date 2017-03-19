@@ -19,6 +19,7 @@
   @import "refills/tables";
   @import "refills/expander";
   @import "refills/tooltip";
+  @import "refills/flashes";
 
   @import "components/sidebar";
   @import "components/navigation";
@@ -107,5 +108,10 @@
 
   .resource-links li {
     margin-bottom: $base-spacing;
+  }
+
+  .inline-list li {
+    display: inline-block;
+    margin: 0 $small-spacing;
   }
 }

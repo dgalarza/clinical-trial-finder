@@ -66,6 +66,10 @@ class TrialFilterForm
   end
 
   def filtered_trials
+    @_filtered_trials ||= filter_trial_query
+  end
+
+  def filter_trial_query
     Trial
       .search_for(keyword)
       .age(age)

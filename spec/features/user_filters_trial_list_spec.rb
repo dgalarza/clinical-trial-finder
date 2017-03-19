@@ -18,6 +18,7 @@ RSpec.feature "User filters trial list" do
     fill_in("trial_filter_form[keyword]", with: "first")
     apply_search_filter
 
+    expect(page).not_to have_content t("trials.many_trials_notice.many_trials")
     expect(page).to have_content first_trial_title
     expect(page).not_to have_content second_trial_title
     expect_last_event(TrialFilterForm::FILTER_APPLIED_EVENT)
@@ -259,6 +260,33 @@ RSpec.feature "User filters trial list" do
     apply_search_filter
 
     expect(page).to have_content t("trials.invalid_search.header")
+  end
+
+  scenario "User has too many trials after filtering" do
+    keyword = "glioma"
+    second_keyword = "Metastatic"
+    trial_title = "My Trial #{keyword}"
+    create(:trial, title: trial_title, description: second_keyword)
+    TrialListHelper::MANY_TRIALS_COUNT.times { create(:trial, title: keyword) }
+
+    visit trials_path
+
+    expect(page).not_to have_content t("trials.many_trials_notice.many_trials")
+
+    fill_in("trial_filter_form[keyword]", with: keyword)
+    apply_search_filter
+
+    expect(page).to have_content t("trials.many_trials_notice.many_trials")
+    expect(page).to have_content trial_title
+    expect(page).to have_content displaying_multiple_trials(31)
+
+    within ".many-trials-section" do
+      click_link second_keyword
+    end
+
+    expect(page).not_to have_content t("trials.many_trials_notice.many_trials")
+    expect(page).to have_content trial_title
+    expect(page).not_to have_content displaying_multiple_trials(31)
   end
 
   def no_trials_flash

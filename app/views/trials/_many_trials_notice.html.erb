@@ -1,0 +1,10 @@
+<div class="many-trials-section flash-notice">
+  <p><%= t(".many_trials") %></p>
+
+  <ul class="inline-list">
+    <li><%= link_to "Glioblastoma (GBM)", trials_path(append_params("glioblastoma")) %></li>
+    <li><%= link_to "Metastatic", trials_path(append_params("metastatic")) %></li>
+    <li><%= link_to "First Occurrence", trials_path(append_params("first occurrence")) %></li>
+    <li><%= link_to "Recurrent", trials_path(append_params("recurrent")) %></li>
+  </ul>
+</div>

@@ -140,6 +140,8 @@ en:
       submit: "Search Trials"
     study_purpose:
       study_purpose: "Study Purpose"
+    many_trials_notice:
+      many_trials: "You matched to many trials. To narrow down your results, consider a keyword filter. Common options are:"
     trial_sidebar:
       nearest_location: "Nearest Location"
       resources: "Resources"

@@ -199,6 +199,76 @@ RSpec.describe TrialListHelper, type: :helper do
     end
   end
 
+  describe "show_many_trials?" do
+    context "search params are present" do
+      context "there are NOT a lot of trials" do
+        it "returns false" do
+          params["trial_filter_form"] = double(:filter)
+          trials =
+            double(:trials, count: TrialListHelper::MANY_TRIALS_COUNT - 1)
+
+          show_trials = helper.show_many_trials?(trials)
+
+          expect(show_trials).to eq false
+        end
+      end
+
+      context "there are a lot of trials" do
+        it "returns true" do
+          params["trial_filter_form"] = double(:filter)
+          trials =
+            double(:trials, count: TrialListHelper::MANY_TRIALS_COUNT + 1)
+
+          show_trials = helper.show_many_trials?(trials)
+
+          expect(show_trials).to eq true
+        end
+      end
+    end
+
+    context "search params are NOT present" do
+      it "returns false" do
+        params["trial_filter_form"] = nil
+        trials = double(:trials)
+        expect(helper.show_many_trials?(trials)).to eq false
+      end
+    end
+  end
+
+  describe "append_params" do
+    context "new keyword exists" do
+      it "appends keyword to keyword params" do
+        params["trial_filter_form"] = { "keyword" => "glioma" }
+
+        appended_params = helper.append_params("metastatic")
+
+        expect(appended_params).to eq(
+          trial_filter_form: { "keyword" => "glioma metastatic" },
+        )
+      end
+
+      it "does NOT modify existing params" do
+        params["trial_filter_form"] = { "keyword" => "glioma" }
+
+        appended_params = helper.append_params("metastatic")
+
+        expect(appended_params).not_to eq params
+      end
+    end
+
+    context "new keyword does NOT exist" do
+      it "returns original params" do
+        params["trial_filter_form"] = { "keyword" => nil }
+
+        appended_params = helper.append_params("glioma")
+
+        expect(appended_params).to eq(
+          trial_filter_form: { "keyword" => "glioma" },
+        )
+      end
+    end
+  end
+
   describe "filtered_results?" do
     context "search params are present" do
       it "returns false" do
