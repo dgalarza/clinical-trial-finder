@@ -28,11 +28,7 @@
           )
         ) %>
 
-        <div class="tooltip-item">
-          <div class="tooltip">
-            <p><b>Healthy volunteers</b> are participants who do not have a disease or condition, or related conditions or symptoms</p>
-          </div>
-        </div>
+        <%= render "tooltip", html: t("trials.recruitment_table.accepts_controls_tooltip_html") %>
         <%= f.input(
           :control,
           filter_radio_default(:control).merge(
@@ -42,12 +38,7 @@
           )
         ) %>
 
-        <div class="tooltip-item">
-          <div class="tooltip">
-            <p>An <b>interventional clinical study</b> is where participants are assigned to receive one or more interventions (or no intervention) so that researchers can evaluate the effects of the interventions on biomedical or health-related outcomes.</p>
-            <p>An <b>observational clinical study</b> is where participants identified as belonging to study groups are assessed for biomedical or health outcomes.</p>
-          </div>
-        </div>
+        <%= render "tooltip", html: t("trials.recruitment_table.study_type_tooltip_html") %>
         <%= f.input(
           :study_type,
           filter_radio_default(:study_type).merge(

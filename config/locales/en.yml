@@ -68,11 +68,22 @@ en:
     details_table:
       additional_details: "Additional Details"
       agency: "Agency Class"
+      agency_tooltip_html: "<p>Category of organization(s) involved as sponsor (and collaborator) supporting the trial.</p>"
       countries: "Countries"
       phase: "Phase"
+      phase_tooltip_html: "<p><b>Phase 0:</b> Exploratory study involving very limited human exposure to the drug to determine whether a drug is modulating its target.</p>
+            <p><b>Phase 1:</b> Studies that emphasize safety and how the drug is metabolized and excreted in humans.</p>
+            <p><b>Phase 2:</b> Studies that gather preliminary data on effectiveness (whether the drug works in people who have a certain disease or condition) and additional safety data.</p>
+            <p><b>Phase 3:</b> Studies that gather more information about safety and effectiveness by studying different populations and different dosages and by using the drug in combination with other drugs.</p>
+            <p><b>Phase 4:</b> Studies occurring after FDA has approved a drug for marketing, efficacy, or optimal use.</p>"
       sponsor: "Lead Sponsor"
+      sponsor_tooltip_html: "<p>The <b>sponsor</b> is the organization or person who oversees the clinical study and is responsible for analyzing the study data.</p>"
       status: "Overall Status"
       trial_id: "Trial ID:"
+      trial_id_tooltip_html: "<p>This <b>trial id</b> was obtained from
+      ClinicalTrials.gov, a service of the U.S. National Institutes of Health,
+      providing information on publicly and privately supported clinical studies
+      of human participants with locations in all 50 States and in 196 countries.</p>"
       trial_details: "Trial Details"
       view_website: "View Trial Website"
       website: "Study Website:"
@@ -115,11 +126,14 @@ en:
       return_to_search: "Search Results"
     recruitment_table:
       accepts_controls: "Accepts Healthy Volunteers"
+      accepts_controls_tooltip_html: "<p><b>Healthy volunteers</b> are participants who do not have a disease or condition, or related conditions or symptoms</p>"
       criteria: "Recuitment Criteria"
       eligible_ages: "Eligible Ages"
       gender: "Gender"
       more_criteria: "More Inclusion & Exclusion Criteria"
       study_type: "Study Type"
+      study_type_tooltip_html: "<p>An <b>interventional clinical study</b> is where participants are assigned to receive one or more interventions (or no intervention) so that researchers can evaluate the effects of the interventions on biomedical or health-related outcomes.</p>
+        <p>An <b>observational clinical study</b> is where participants identified as belonging to study groups are assessed for biomedical or health outcomes.</p>"
     search_filter:
       clear_filter: "Reset"
       filters: "Filters"
