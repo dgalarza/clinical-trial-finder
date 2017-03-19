@@ -1,0 +1,12 @@
+<li>
+  <%= link_to(
+    keyword.titleize,
+    trials_path(append_params(keyword)),
+    "track-event" => "",
+    data: {
+      subject: "Many Trials Notice",
+      category: "Recommended Keywords",
+      label: keyword,
+    }
+  ) %>
+</li>
