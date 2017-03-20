@@ -10,7 +10,7 @@ RSpec.feature "User filters trial list" do
     create(:trial, title: second_trial_title)
     visit trials_path
 
-    expect(page).to have_content t("trials.intro.instructions")
+    expect(page).to have_content t("trials.intro.clinical_trials")
     expect(page).to have_content first_trial_title
     expect(page).to have_content second_trial_title
     expect(page).not_to have_content t("trials.search_filter.clear_filter")
@@ -27,7 +27,7 @@ RSpec.feature "User filters trial list" do
 
     expect(page).to have_content first_trial_title
     expect(page).to have_content second_trial_title
-    expect(page).not_to have_content t("trials.intro.instructions")
+    expect(page).not_to have_content t("trials.intro.clinical_trials")
     expect_last_event(FiltersController::RESET_EVENT)
   end
 
