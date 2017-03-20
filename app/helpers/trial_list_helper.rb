@@ -46,7 +46,7 @@ module TrialListHelper
   end
 
   def show_intro?
-    !filtered_results? && params["reset"].nil?
+    !filtered_results? && params["reset"].nil? && params["page"].nil?
   end
 
   def show_many_trials?(trials)

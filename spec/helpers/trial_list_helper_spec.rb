@@ -196,6 +196,16 @@ RSpec.describe TrialListHelper, type: :helper do
           expect(helper.show_intro?).to be false
         end
       end
+
+      context "page params are present" do
+        it "returns false" do
+          params["controller"] = "trials"
+          params["action"] = "index"
+          params["page"] = 2
+
+          expect(helper.show_intro?).to be false
+        end
+      end
     end
   end
 
