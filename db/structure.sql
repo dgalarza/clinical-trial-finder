@@ -28,6 +28,20 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
+--
+-- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pg_stat_statements IS 'track execution statistics of all SQL statements executed';
+
+
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -227,8 +241,7 @@ CREATE TABLE trials (
     keywords character varying[] DEFAULT '{}'::character varying[],
     is_fda_regulated character varying,
     has_expanded_access character varying,
-    sites_count integer,
-    tsv tsvector
+    sites_count integer
 );
 
 
@@ -408,24 +421,10 @@ CREATE UNIQUE INDEX index_trials_on_nct_id ON trials USING btree (nct_id);
 
 
 --
--- Name: index_trials_on_tsv; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX index_trials_on_tsv ON trials USING gin (tsv);
-
-
---
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
-
-
---
--- Name: trials tsvectorupdate; Type: TRIGGER; Schema: public; Owner: -
---
-
-CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON trials FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('tsv', 'pg_catalog.english', 'criteria', 'description', 'detailed_description', 'overall_contact_name', 'sponsor', 'title', 'nct_id');
 
 
 --
@@ -471,4 +470,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170227020708');
 INSERT INTO schema_migrations (version) VALUES ('20170303021818');
 
 INSERT INTO schema_migrations (version) VALUES ('20170313011922');
+
+INSERT INTO schema_migrations (version) VALUES ('20170320003711');
 

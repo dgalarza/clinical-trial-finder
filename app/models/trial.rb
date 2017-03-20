@@ -17,7 +17,17 @@ class Trial < ActiveRecord::Base
 
   pg_search_scope(
     :search,
-    against: %i(tsv),
+    against: %i(
+      conditions
+      criteria
+      description
+      detailed_description
+      keywords
+      nct_id
+      overall_contact_name
+      sponsor
+      title
+    ),
     using: { tsearch: { dictionary: "english" } },
   )
 
