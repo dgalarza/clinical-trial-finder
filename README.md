@@ -3,7 +3,7 @@
 [![CircleCI](https://circleci.com/gh/mwenger1/clinical-trial-finder/tree/master.svg?style=svg)](https://circleci.com/gh/mwenger1/clinical-trial-finder/tree/master)
 [![Code Climate](https://codeclimate.com/repos/580ce59aefbc1b5742003dfd/badges/bd0e46bb5202ab1376bf/gpa.svg)](https://codeclimate.com/repos/580ce59aefbc1b5742003dfd/feed)
 
-### Project Goal
+## Project Goal
 
 Clinical trials are a key part of advancing medical knowledge but they face
 challenges:
@@ -49,8 +49,19 @@ communities.
 
 To make sure the trials displayed are accurate, the platform downloads and syncs
 with ClinicalTrials.gov multiple times per day via a scheduled
-[rake task](https://github.com/mwenger1/clinical-trial-finder/blob/master/lib/tasks/scheduler.rake)
-that [logs changes](http://clinical-trial-finder-staging.herokuapp.com/import_logs).
+[rake task](https://github.com/mwenger1/clinical-trial-finder/blob/master/lib/tasks/scheduler.rake).
+
+
+## Supporting the Project
+
+There are many ways to help.
+
+* Introduce us (michaelwenger27 (at) gmail.com) to organizations that would be
+  interested in using the platform
+* Help us improve the platform by sharing feedback and ideas for new
+  functionality
+* Spread the word
+* [Contribute and help us work on new features](#contributing)
 
 
 ## Contributing
