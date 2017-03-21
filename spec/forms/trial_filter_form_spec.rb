@@ -122,6 +122,21 @@ RSpec.describe TrialFilterForm, type: :model do
         expect(last_event[:anonymous_id]).to eq session_id
       end
     end
+
+    context "initialized without a session_id" do
+      it "does NOT error" do
+        unset_params = {
+          "age" => "",
+          "distance_radius" => "100",
+          "keyword" => "",
+          "zip_code" => "",
+          "session_id" => nil,
+        }
+        TrialFilterForm.new(unset_params).trials
+
+        expect(last_event[:anonymous_id]).to be_present
+      end
+    end
   end
 
   describe "#trials" do

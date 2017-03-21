@@ -3,6 +3,7 @@ class TrialFilterForm
   FILTER_APPLIED_EVENT = "Filter Applied".freeze
   FILTER_WITH_VALUE_ALWAYS_SET = "distance_radius".freeze
   NON_FILTER = "session_id".freeze
+  USER_WITHOUT_SESSION = "123456".freeze
   ZIP_CODE_MATCH = /\A\d{5}(-\d{4})?\z/
 
   include ActiveModel::Model
@@ -112,7 +113,11 @@ class TrialFilterForm
   end
 
   def analytics_event
-    { anonymous_id: session_id }
+    { anonymous_id: anonymous_id }
+  end
+
+  def anonymous_id
+    session_id || USER_WITHOUT_SESSION
   end
 
   def fetch_filters_with_value(filters)
