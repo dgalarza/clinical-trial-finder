@@ -15,7 +15,7 @@ class Site < ActiveRecord::Base
   end
 
   def facility_address
-    "#{facility} #{address}"
+    "#{facility} #{address}".gsub("&", "and")
   end
 
   def address

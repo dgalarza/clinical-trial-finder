@@ -33,6 +33,21 @@ RSpec.describe Site, type: :model do
     end
   end
 
+  describe "#facility_address" do
+    it "removes '&' characters" do
+      site = build(
+        :site,
+        facility: "Location & Site",
+        city: "City",
+        state: "State",
+        country: "Country",
+        zip_code: "Zip Code",
+      )
+
+      expect(site.facility_address).not_to include "&"
+    end
+  end
+
   describe "#address" do
     context "address fields exist" do
       it "returns site's address" do
@@ -41,7 +56,7 @@ RSpec.describe Site, type: :model do
           city: "City",
           state: "State",
           country: "Country",
-          zip_code: "Zip Code"
+          zip_code: "Zip Code",
         )
 
         expect(site.address).to eq "City, State, Country, Zip Code"
