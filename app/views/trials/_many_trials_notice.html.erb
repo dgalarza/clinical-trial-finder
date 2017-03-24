@@ -2,9 +2,10 @@
   <p><%= t(".many_trials") %></p>
 
   <ul class="inline-list">
+    <%= render "recommended_keyword_link", keyword: "first occurrence" %>
     <%= render "recommended_keyword_link", keyword: "glioblastoma" %>
     <%= render "recommended_keyword_link", keyword: "metastatic" %>
-    <%= render "recommended_keyword_link", keyword: "first occurrence" %>
+    <%= render "recommended_keyword_link", keyword: "newly diagnosed" %>
     <%= render "recommended_keyword_link", keyword: "recurrent" %>
   </ul>
 </div>
