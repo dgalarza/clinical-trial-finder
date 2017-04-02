@@ -36,7 +36,11 @@ class TrialsController < ApplicationController
   end
 
   def all_params
-    params.permit(
+    params.permit(application_parameters + google_parameters)
+  end
+
+  def application_parameters
+    [
       :commit,
       :page,
       :reset,
@@ -50,7 +54,11 @@ class TrialsController < ApplicationController
         :study_type,
         :zip_code
       ]
-    )
+    ]
+  end
+
+  def google_parameters
+    %i(utm_source utm_content utm_medium utm_campaign)
   end
 
   def zip_code_filter

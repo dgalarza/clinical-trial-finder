@@ -63,6 +63,41 @@ RSpec.describe TrialsController, type: :controller do
         expect(session[:zip_code_coordinates]).to eq nil
       end
     end
+
+    context "google utm parameters are included in url" do
+      it "does NOT raise an error" do
+        url_params = {
+          "utm_source" => "source",
+          "utm_content" => "content",
+          "utm_medium" => "medium",
+          "utm_campaign" => "campaign",
+          "trial_filter_form" => {},
+        }
+
+        expect {
+          get :index, url_params
+        }.not_to raise_error
+      end
+    end
+  end
+
+  describe "#show" do
+    context "google utm parameters are included in url" do
+      it "does NOT raise an error" do
+        @trial = create(:trial)
+        url_params = {
+          "utm_source" => "source",
+          "utm_content" => "content",
+          "utm_medium" => "medium",
+          "utm_campaign" => "campaign",
+          "id" => @trial.id,
+        }
+
+        expect {
+          get :show, url_params
+        }.not_to raise_error
+      end
+    end
   end
 
   def stub_filter_form(valid: true, coordinates: nil)
