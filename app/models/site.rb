@@ -6,8 +6,7 @@ class Site < ActiveRecord::Base
   geocoded_by :address
   after_validation(
     :geocode,
-    if: ->(site) { site.address.present? },
-    unless: :has_coordinates
+    if: :should_be_geocoded?,
   )
 
   def self.without_coordinates
@@ -40,8 +39,16 @@ class Site < ActiveRecord::Base
     locations_to_include.select(&:present?).join(", ")
   end
 
-  def has_coordinates
-    latitude.present? && longitude.present?
+  def should_be_geocoded?
+    no_coordinates? && address.present? && geocoding_enabled?
+  end
+
+  def no_coordinates?
+    latitude.nil? && longitude.nil?
+  end
+
+  def geocoding_enabled?
+    ENV["DISABLE_SITE_GEOCODING"] != "true"
   end
 
   private

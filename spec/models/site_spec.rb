@@ -5,6 +5,69 @@ RSpec.describe Site, type: :model do
     it { is_expected.to belong_to(:trial) }
   end
 
+  describe ".geocode" do
+    context "latitude and longitude are NOT present" do
+      it "will make external call to geocode site" do
+        with_environment "DISABLE_SITE_GEOCODING" => nil do
+          site = build(
+            :site,
+            latitude: nil,
+            longitude: nil,
+            trial: create(:trial),
+          )
+
+          expect { site.save }.
+            to raise_error(WebMock::NetConnectNotAllowedError)
+        end
+      end
+    end
+
+    context "DISABLE_SITE_GEOCODING is set to true" do
+      it "will NOT make external call to geocode site" do
+        with_environment "DISABLE_SITE_GEOCODING" => "true" do
+          site = build(
+            :site,
+            latitude: nil,
+            longitude: nil,
+            trial: create(:trial),
+          )
+
+          expect { site.save }.not_to raise_error
+        end
+      end
+    end
+
+    context "latitude and longitude are present" do
+      it "will NOT make external call to geocode site" do
+        site = build(
+          :site,
+          latitude: 12.345,
+          longitude: 34.567,
+          trial: create(:trial),
+        )
+
+        expect { site.save }.not_to raise_error
+      end
+    end
+
+    context "site address is NOT present" do
+      it "will NOT make external call to geocode site" do
+        site = build(
+          :site,
+          latitude: nil,
+          longitude: nil,
+          city: nil,
+          state: nil,
+          country: nil,
+          zip_code: nil,
+          trial: create(:trial),
+        )
+
+        expect { site.save }.not_to raise_error
+      end
+    end
+  end
+
   describe ".without_coordinates" do
     context "site has coordinates" do
       it "is not included" do
