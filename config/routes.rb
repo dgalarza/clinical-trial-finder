@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   end
   resources :trials, only: [:index, :show]
   resource :filters, only: [:destroy]
+  get "/robots.txt" => "robots_txts#show"
 end
