@@ -24,10 +24,10 @@ RSpec.describe TrialsImporter do
   describe "#import" do
     it "gets zip folder from clinicaltrials.gov using config variables" do
       stub_zip_file
-      condition = "brain tumor"
+      create(:organization_configuration, conditions_filter: "some condition")
       remove_unknown = "Y"
-      encoded_condition = "brain%20tumor"
-      with_environment "CONDITION" => condition, "REMOVE_UNKNOWN" => remove_unknown do
+      encoded_condition = "some%20condition"
+      with_environment "REMOVE_UNKNOWN" => remove_unknown do
         allow(RestClient).to receive(:get)
 
         TrialsImporter.new.import

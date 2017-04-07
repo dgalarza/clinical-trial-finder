@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     root to: "dashboards#show"
     resources :import_logs, only: [:index]
     resource :dashboard, only: [:show]
+    resource :configuration, only: [:edit, :update]
   end
   resources :trials, only: [:index, :show]
   resource :filters, only: [:destroy]

@@ -11,6 +11,7 @@ en:
         site_count: "%{count} Sites"
         sites_without_coordinates: "%{count} sites without coordinates"
         trial_count: "%{count} Trials"
+        configure_filters: "Configure Filters"
     import_logs:
       index:
         imported_at: "Imported At"

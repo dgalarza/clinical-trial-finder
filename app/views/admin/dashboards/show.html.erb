@@ -11,5 +11,7 @@
   <p><%= t(".most_recent_import_html", date: @newest_trial.created_at, trial: @newest_trial.id) %></p>
 </div>
 
-
-<%= link_to t(".import_logs"), admin_import_logs_path %>
+<ul>
+	<li><%= link_to t(".import_logs"), admin_import_logs_path %></li>
+	<li><%= link_to t(".configure_filters"), edit_admin_configuration_path %></li>
+</ul>

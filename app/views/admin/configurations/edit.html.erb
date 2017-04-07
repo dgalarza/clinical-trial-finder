@@ -1,0 +1,9 @@
+<% if flash[:notice] %>
+  <p class="welcome"><%= flash[:notice] %></p>
+<% end %>
+
+<%= form_for @organization_configuration, url: {action: "update"} do |f| %>
+  <%= f.label :conditions_filter, "Condition filter" %>
+  <%= f.text_area :conditions_filter, rows: 5 %>
+  <%= submit_tag("Save Configuration") %>
+<% end %>

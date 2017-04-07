@@ -56,14 +56,15 @@ class TrialsImporter
   end
 
   def clinical_trials_gov_url
-    "http://clinicaltrials.gov/ct2/results/download?down_stds=all&down_typ=study&recr=Open&cond=#{encoded_condition}&show_down=Y&no_unk=#{remove_unknown}"
+    "http://clinicaltrials.gov/ct2/results/download?down_stds=all&down_typ=study&recr=Open&cond=#{encoded_conditions}&show_down=Y&no_unk=#{remove_unknown}"
   end
 
   def remove_unknown
     ENV.fetch("REMOVE_UNKNOWN")
   end
 
-  def encoded_condition
-    URI.encode ENV.fetch("CONDITION")
+  def encoded_conditions
+    organization_configuration = OrganizationConfiguration.get
+    ConditionsQueryBuilder.transform organization_configuration.conditions_filter
   end
 end

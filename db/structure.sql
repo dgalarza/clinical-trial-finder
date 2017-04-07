@@ -106,6 +106,37 @@ ALTER SEQUENCE import_logs_id_seq OWNED BY import_logs.id;
 
 
 --
+-- Name: organization_configurations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE organization_configurations (
+    id integer NOT NULL,
+    conditions_filter text,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: organization_configurations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE organization_configurations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: organization_configurations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE organization_configurations_id_seq OWNED BY organization_configurations.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -296,6 +327,13 @@ ALTER TABLE ONLY import_logs ALTER COLUMN id SET DEFAULT nextval('import_logs_id
 
 
 --
+-- Name: organization_configurations id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY organization_configurations ALTER COLUMN id SET DEFAULT nextval('organization_configurations_id_seq'::regclass);
+
+
+--
 -- Name: sessions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -337,6 +375,14 @@ ALTER TABLE ONLY delayed_jobs
 
 ALTER TABLE ONLY import_logs
     ADD CONSTRAINT import_logs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: organization_configurations organization_configurations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY organization_configurations
+    ADD CONSTRAINT organization_configurations_pkey PRIMARY KEY (id);
 
 
 --
@@ -458,4 +504,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170303021818');
 INSERT INTO schema_migrations (version) VALUES ('20170313011922');
 
 INSERT INTO schema_migrations (version) VALUES ('20170320003711');
+
+INSERT INTO schema_migrations (version) VALUES ('20170407183906');
 
